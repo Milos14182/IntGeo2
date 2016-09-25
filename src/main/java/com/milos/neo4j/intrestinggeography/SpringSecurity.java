@@ -30,13 +30,13 @@ public class SpringSecurity extends WebSecurityConfigurerAdapter {
 				.antMatchers("/play/**").access("hasRole('ROLE_USER')")
 				.antMatchers("/game/**").access("hasRole('ROLE_USER')")
 				.antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
+				.antMatchers("/points/**").access("hasRole('ROLE_USER')")
 				.and().formLogin()
 				.successHandler(intgeoAuthenticationSuccessHandler);
 	}
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		// TODO Auto-generated method stub
 		auth.userDetailsService(customUserDetails);
 	}
 }

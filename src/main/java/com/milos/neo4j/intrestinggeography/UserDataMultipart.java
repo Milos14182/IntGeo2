@@ -25,25 +25,21 @@ public class UserDataMultipart implements MultipartFile {
 
 	@Override
 	public String getContentType() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public InputStream getInputStream() throws IOException {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public String getOriginalFilename() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
