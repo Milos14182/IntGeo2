@@ -8,7 +8,7 @@
 
 		<!-- Three columns of text below the carousel -->
 		<div class="row">
-			<div class="col-lg-4">
+			<div class="col-md-4">
 				<h2>
 					<a href="<c:url value="/game" />"> <img class="img-circle"
 						src="<c:url value="/resources/images/play.png" />"
@@ -18,7 +18,7 @@
 				</h2>
 			</div>
 			<!-- /.col-lg-4 -->
-			<div class="col-lg-4">
+			<div class="col-md-4">
 				<h2>
 					<a href="<c:url value="/points" />"> <img class="img-circle"
 						src="<c:url value="/resources/images/coin.png" />"
@@ -28,7 +28,7 @@
 				</h2>
 			</div>
 			<!-- /.col-lg-4 -->
-			<div class="col-lg-4">
+			<div class="col-md-4">
 				<h2>
 					<a href="<c:url value="/how_to" />"> <img class="img-circle"
 						src="<c:url value="/resources/images/how_to.png" />"

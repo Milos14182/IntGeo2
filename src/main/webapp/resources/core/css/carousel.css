@@ -1,6 +1,9 @@
 /* GLOBAL STYLES
 -------------------------------------------------- */
 /* Padding below the footer and lighter body text */
+.djordje {
+	
+}
 body {
 	padding-bottom: 40px;
 	color: #5a5a5a;
@@ -69,7 +72,7 @@ body {
 -------------------------------------------------- */
 
 /* Center align the text within the three columns below the carousel */
-.marketing .col-lg-4 {
+.marketing .col-md-4 {
 	margin-bottom: 20px;
 	text-align: center;
 }
@@ -78,7 +81,7 @@ body {
 	font-weight: normal;
 }
 
-.marketing .col-lg-4 p {
+.marketing .col-md-4 p {
 	margin-right: 10px;
 	margin-left: 10px;
 }
@@ -126,15 +129,17 @@ body {
 	.featurette-heading {
 		font-size: 50px;
 	}
+	
 }
 
-@media ( max-width : 768) {
+@media (max-width: 992px) {
 	.marketing h2 {
 		font-weight: normal;
 		margin-left: 28vw;
 	}
-	.marketing .col-lg-4 {
+	.marketing .col-md-4 {
 		margin-bottom: 20px;
+		text-align: left;
 	}
 }
 
