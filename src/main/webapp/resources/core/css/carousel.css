@@ -126,9 +126,15 @@ body {
 	.featurette-heading {
 		font-size: 50px;
 	}
+}
+
+@media ( max-width : 768) {
 	.marketing h2 {
 		font-weight: normal;
-		margin-left: 33vw;
+		margin-left: 28vw;
+	}
+	.marketing .col-lg-4 {
+		margin-bottom: 20px;
 	}
 }
 
