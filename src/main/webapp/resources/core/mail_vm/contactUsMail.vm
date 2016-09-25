@@ -1,0 +1,12 @@
+<html>
+	<body>
+		<h2>User Details:</h2>
+		<div>Firstname: ${contactData.firstname}</div>
+		<div>Lastname: ${contactData.lastname}</div>
+		<div>Age: ${contactData.age}</div>
+		<div>Gender: ${contactData.gender}</div>
+		<div>Email: ${contactData.email}</div>
+		<div>Message:</div>
+		<div>${contactData.message}</div>
+	</body>
+</html>

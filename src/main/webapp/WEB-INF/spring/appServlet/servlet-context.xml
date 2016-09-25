@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+	
+	<context:component-scan base-package="com.milos.neo4j.intrestinggeography" />
+	
+	<beans:bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">  
+  			<beans:property name="host" value="smtp.gmail.com" />  
+    		<beans:property name="username" value="stojanovic.milos14182@gmail.com" />  
+    		<beans:property name="password" value="Milos14182@" />  			
+    		<beans:property name="javaMailProperties">  
+      			 <beans:props>   
+      			 	<beans:prop key="mail.smtp.auth">true</beans:prop> 
+      			 	<beans:prop key="mail.smtp.socketFactory.port">465</beans:prop>  
+              		<beans:prop key="mail.smtp.socketFactory.class">javax.net.ssl.SSLSocketFactory</beans:prop>
+              		<beans:prop key="mail.smtp.port">465</beans:prop>  
+        		</beans:props>  
+    		</beans:property> 
+	</beans:bean> 
+	
+	<beans:bean id="velocityEngine" class="org.springframework.ui.velocity.VelocityEngineFactoryBean">
+        <beans:property name="resourceLoaderPath" value="/resources/core/mail_vm/"/>
+    </beans:bean>
+</beans:beans>
