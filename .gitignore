@@ -4,3 +4,4 @@ target/
 RemoteSystemsTempFiles
 .recommenders/
 Servers/
+.settings/
