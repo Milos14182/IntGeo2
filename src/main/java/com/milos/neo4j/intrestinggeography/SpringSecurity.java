@@ -30,7 +30,6 @@ public class SpringSecurity extends WebSecurityConfigurerAdapter {
 				.antMatchers("/play/**").access("hasRole('ROLE_USER')")
 				.antMatchers("/game/**").access("hasRole('ROLE_USER')")
 				.antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
-				.antMatchers("/points/**").access("hasRole('ROLE_USER')")
 				.and().formLogin()
 				.successHandler(intgeoAuthenticationSuccessHandler);
 	}
