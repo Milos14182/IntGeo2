@@ -1,4 +1,4 @@
-@CHARSET "ISO-8859-1";
+@CHARSET "ISO-8859-2";
 
 html {
 	position: relative;
@@ -55,4 +55,8 @@ body {
 }
 .answersSend{
 	display: none;
+}
+.body-content {
+	max-width:70vw;
+    margin: auto;
 }

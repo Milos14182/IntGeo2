@@ -12,7 +12,9 @@ import org.springframework.stereotype.Controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.milos.neo4j.data.SubmitAnswersTmp;
 import com.milos.neo4j.data.UserData;
+import com.milos.neo4j.data.UserGameData;
 import com.milos.neo4j.roundbroker.RoundBroker;
+import com.milos.neo4j.services.GameService;
 import com.milos.neo4j.services.UserService;
 
 @Controller
@@ -25,6 +27,9 @@ public class RoundController {
 
 	@Autowired
 	RoundBroker roundBroker;
+	
+	@Autowired
+	GameService gameService;
 
 	private HashMap<String, List<SubmitAnswersTmp>> gamesContainer = null;
 
@@ -61,6 +66,9 @@ public class RoundController {
 			games.add(answersTmp);
 			gamesContainer.put(answersTmp.getGameId(), games);
 		}
+		UserGameData userGameData = gameService.getUserGameData(answersTmp.getUsername(), Long.valueOf(gameId.longValue()));
+		Long userScore =  userGameData.getScore()!=null ?  userData.getGameScore() : 0l;
+		gameService.updateUserGame(answersTmp.getUsername(), Long.valueOf(gameId.longValue()), userScore+scorePerRound);
 		if (!roundBroker.waitForAllUsersToAnswer(games, Long.valueOf(gameId.longValue()))) {
 			return objectMapper.writeValueAsString(false);
 		}

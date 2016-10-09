@@ -8,12 +8,16 @@ import org.springframework.stereotype.Service;
 
 import com.milos.neo4j.converter.GameConverter;
 import com.milos.neo4j.converter.UserConverter;
+import com.milos.neo4j.converter.UserGameConverter;
 import com.milos.neo4j.data.GameData;
 import com.milos.neo4j.data.UserData;
+import com.milos.neo4j.data.UserGameData;
 import com.milos.neo4j.domain.nodes.Game;
 import com.milos.neo4j.domain.nodes.User;
+import com.milos.neo4j.domain.nodes.UserGameScores;
 import com.milos.neo4j.domain.relations.GameRelation;
 import com.milos.neo4j.repository.GameRepository;
+import com.milos.neo4j.repository.UserGameScoresRepository;
 import com.milos.neo4j.repository.UserRepository;
 import com.milos.neo4j.repository.relations.GameRelationRepository;
 import com.milos.neo4j.services.GameService;
@@ -28,6 +32,9 @@ public class GameServiceImpl implements GameService {
 	GameRelationRepository gameRelationRepository;
 
 	@Autowired
+	UserGameScoresRepository userGameScoresRepository;
+
+	@Autowired
 	GameConverter gameConverter;
 
 	@Autowired
@@ -35,9 +42,12 @@ public class GameServiceImpl implements GameService {
 
 	@Autowired
 	UserConverter userConverter;
-	
+
 	@Autowired
 	PlayService playService;
+
+	@Autowired
+	UserGameConverter userGameConverter;
 
 	@Override
 	public GameData getGameById(Long id) {
@@ -83,7 +93,7 @@ public class GameServiceImpl implements GameService {
 		Set<User> players = game.getPlayers();
 		boolean isInSet = false;
 		for (User player : players) {
-			if(player.getUsername().equals(userData.getUsername())) {
+			if (player.getUsername().equals(userData.getUsername())) {
 				isInSet = true;
 			}
 		}
@@ -98,6 +108,49 @@ public class GameServiceImpl implements GameService {
 		return gameData;
 	}
 
-	
+	@Override
+	public Set<UserGameData> getAllGamesForPlayer(UserData userData) {
+		Set<UserGameData> userGameDatas = new HashSet<>();
+		if (userData != null) {
+			Set<Game> games = gameRelationRepository.findGamesForUser(userData.getUsername());
+			if (!games.isEmpty()) {
+				for (Game game : games) {
+					UserGameScores userGameScores = userGameScoresRepository.getUserGameScore(userData.getUsername(),
+							game.getId());
+					if (userGameScores != null) {
+						UserGameData userGameData = new UserGameData();
+						userGameConverter.copyFromEntityToData(userGameScores, userGameData);
+						userGameDatas.add(userGameData);
+					}
+				}
+			}
+		}
+		return userGameDatas;
+	}
+
+	@Override
+	public void createNewUserGame(UserData userData, GameData game) {
+		UserGameScores gameScores = new UserGameScores();
+		gameScores.setGameId(game.getId());
+		gameScores.setScore(userData.getGameScore());
+		gameScores.setUsername(userData.getUsername());
+		userGameScoresRepository.save(gameScores);
+	}
+
+	@Override
+	public UserGameData getUserGameData(String username, Long gameId) {
+		UserGameScores gameScores = userGameScoresRepository.getUserGameScore(username, gameId);
+		if (gameScores != null) {
+			UserGameData userGameData = new UserGameData();
+			userGameConverter.copyFromEntityToData(gameScores, userGameData);
+			return userGameData;
+		}
+		return null;
+	}
+
+	@Override
+	public void updateUserGame(String username, Long gameId, Long score) {
+		userGameScoresRepository.updateUserGameScore(username, gameId, score);
+	}
 
 }
