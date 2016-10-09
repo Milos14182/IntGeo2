@@ -11,31 +11,31 @@ import org.neo4j.ogm.annotation.Relationship;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @NodeEntity
-@JsonIgnoreProperties
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class Animal {
 	private @GraphId Long id;
-	
+
 	@Property(name = "name")
 	private String name;
-	
+
 	@Property(name = "description")
 	private String description;
-	
+
 	@Property(name = "active")
 	private boolean active;
-	
+
 	@Relationship(type = "ANIMAL_IS_IN_STATE", direction = Relationship.OUTGOING)
 	private Set<State> states = new HashSet<State>();
-	
+
 	@Relationship(type = "ANIMAL_IS_ON_MOUNTAIN", direction = Relationship.OUTGOING)
 	private Set<Mountain> mountains = new HashSet<Mountain>();
-	
+
 	@Relationship(type = "ANIMAL_IS_IN_CITY", direction = Relationship.OUTGOING)
 	private Set<City> cities;
-	
+
 	@Relationship(type = "ANIMAL_IS_IN_RIVER", direction = Relationship.OUTGOING)
 	private Set<River> rivers;
-	
+
 	@Relationship(type = "ANIMAL_IS_IN_LAKE", direction = Relationship.OUTGOING)
 	private Set<Lake> lakes;
 

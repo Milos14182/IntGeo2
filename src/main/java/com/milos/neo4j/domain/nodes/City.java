@@ -11,7 +11,7 @@ import org.neo4j.ogm.annotation.Relationship;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @NodeEntity
-@JsonIgnoreProperties
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class City {
 	private @GraphId Long id;
 

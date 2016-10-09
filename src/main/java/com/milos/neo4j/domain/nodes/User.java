@@ -10,8 +10,10 @@ import org.neo4j.ogm.annotation.Relationship;
 import org.springframework.format.annotation.NumberFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @NodeEntity
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class User {
 	private @GraphId Long id;
 
