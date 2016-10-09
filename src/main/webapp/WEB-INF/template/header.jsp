@@ -25,15 +25,15 @@
 
 					<ul class="nav navbar-nav">
 						<sec:authorize access="hasRole('ROLE_USER')">
-							<li><a href='<c:url value ="profile"/>'><spring:message
+							<li><a href='<c:url value ="/profile"/>'><spring:message
 										code="header.label.profile" /></a></li>
 						</sec:authorize>
-						<li><a href='<c:url value ="about"/>'><spring:message
+						<li><a href='<c:url value ="/about"/>'><spring:message
 									code="header.label.about" /></a></li>
-						<li><a href='<c:url value ="contact"/>'><spring:message
+						<li><a href='<c:url value ="/contact"/>'><spring:message
 									code="header.label.contact" /></a></li>
 						<sec:authorize access="hasRole('ROLE_USER')">
-							<li><a href='<c:url value ="game"/>'><spring:message
+							<li><a href='<c:url value ="/game"/>'><spring:message
 										code="home.label.play" /></a></li>
 						</sec:authorize>
 						<sec:authorize access="hasRole('ROLE_ADMIN')">

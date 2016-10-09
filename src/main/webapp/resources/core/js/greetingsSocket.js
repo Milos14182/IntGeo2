@@ -23,12 +23,12 @@ function disconnect(stompClient) {
 }
 function sendNum(stompClient) {
 	var pathnames = window.location.pathname.split('/');
-	stompClient.send("/intgeo/play/answers/" + pathnames[3], {},
+	stompClient.send("/play/answers/" + pathnames[3], {},
 			getInputValuesJSON());
 }
 
 function createStompClient() {
-	var socket = new SockJS('/intgeo/greetingEndpoint');
+	var socket = new SockJS('/greetingEndpoint');
 	return Stomp.over(socket);
 }
 
