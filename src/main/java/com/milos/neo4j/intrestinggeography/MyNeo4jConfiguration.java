@@ -12,27 +12,26 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableNeo4jRepositories(basePackages = "com.milos.neo4j.repository")
 @EnableTransactionManagement
 public class MyNeo4jConfiguration extends Neo4jConfiguration {
-	
-	@Bean
-	public org.neo4j.ogm.config.Configuration getConfiguration() {
-		org.neo4j.ogm.config.Configuration config = new org.neo4j.ogm.config.Configuration();
-		config.driverConfiguration()
-				.setDriverClassName
-						("org.neo4j.ogm.drivers.http.driver.HttpDriver")
-				.setURI("http://intgeo:0EbuUIXFA7i20bHS5nMP@hobby-cjpmkomjfhocgbkeddbolenl.dbs.graphenedb.com:24789");
-		return config;
-	}
 
-	@Override
-	public SessionFactory getSessionFactory() {
-		return new SessionFactory(getConfiguration(), "com.milos.neo4j.domain" );
-	}		
-	
-	@Override
-	@Bean
-	public Session getSession() throws Exception {
-		return super.getSession();
-	}
+    @Bean
+    public org.neo4j.ogm.config.Configuration getConfiguration() {
+        org.neo4j.ogm.config.Configuration config = new org.neo4j.ogm.config.Configuration();
+        config.driverConfiguration()
+                .setDriverClassName("org.neo4j.ogm.drivers.http.driver.HttpDriver")
+                .setURI("http://intgeo:0EbuUIXFA7i20bHS5nMP@hobby-cjpmkomjfhocgbkeddbolenl.dbs.graphenedb.com:24789");
+        return config;
+    }
+
+    @Override
+    public SessionFactory getSessionFactory() {
+        return new SessionFactory(getConfiguration(), "com.milos.neo4j.domain");
+    }
+
+    @Override
+    @Bean
+    public Session getSession() throws Exception {
+        return super.getSession();
+    }
 //	@Bean
 //	public SessionFactory getSessionFactory() {
 //		 return new SessionFactory("com.milos.neo4j.domain");
@@ -47,7 +46,5 @@ public class MyNeo4jConfiguration extends Neo4jConfiguration {
 //    public Session getSession() throws Exception {
 //        return super.getSession();
 //    }
-	
-	
 
 }

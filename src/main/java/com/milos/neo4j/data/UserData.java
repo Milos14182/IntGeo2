@@ -2,9 +2,8 @@ package com.milos.neo4j.data;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-@JsonIgnoreProperties("meta")
+//@JsonIgnoreProperties("meta")
 public class UserData {
 	private Long id;
 	private String firstname;

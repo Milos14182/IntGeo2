@@ -5,3 +5,4 @@ RemoteSystemsTempFiles
 .recommenders/
 Servers/
 .settings/
+nb-configuration.xml

@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=Windows-1250"
+	pageEncoding="Windows-1250"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <div class="body-content">
 	<h1>

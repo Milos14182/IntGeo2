@@ -18,46 +18,48 @@ import com.milos.neo4j.data.UserData;
 import com.milos.neo4j.services.CityService;
 import com.milos.neo4j.services.UserService;
 import com.milos.neo4j.validators.RegistrationValidator;
+import java.io.UnsupportedEncodingException;
 
 @Controller
 public class RegistrationController {
-	@Autowired
-	UserService userService;
-	
-	@Autowired
-	CityService cityService;
-	
-	@Autowired
-	RegistrationValidator registrationValidator;
-	
-	@InitBinder
-	protected void initBinder(WebDataBinder binder) {
-		binder.setValidator(registrationValidator);
-	}
-	
-	@RequestMapping(value = "/register", method = RequestMethod.GET)
-	public String register(final Model m) {
-		Iterable<CityData> citys = cityService.findAllCitys();
-		m.addAttribute("citys", citys);
-		UserData user = new UserData();
-		user.setCity(new CityData());
-		m.addAttribute("userData", user);
-		return "register";
-	}
-	
-	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public String register(@ModelAttribute("userData") UserData user, final HttpServletRequest request,
-					final HttpServletResponse response, final BindingResult errors, final Model model) {
-		registrationValidator.validate(user, errors);
-		if (errors.hasErrors()) {
-			Iterable<CityData> citys = cityService.findAllCitys();
-			model.addAttribute("citys", citys);
-			return "register";
-		} else {
-			user.setAdmin(Boolean.FALSE);
-			user = userService.save(user);
-			request.getSession().setAttribute("userDetails", user);
-			return "redirect:/";
-		}
-	}
+
+    @Autowired
+    UserService userService;
+
+    @Autowired
+    CityService cityService;
+
+    @Autowired
+    RegistrationValidator registrationValidator;
+
+    @InitBinder
+    protected void initBinder(WebDataBinder binder) {
+        binder.setValidator(registrationValidator);
+    }
+
+    @RequestMapping(value = "/register", method = RequestMethod.GET)
+    public String register(final Model m) {
+        Iterable<CityData> citys = cityService.findAllCitys();
+        m.addAttribute("citys", citys);
+        UserData user = new UserData();
+        user.setCity(new CityData());
+        m.addAttribute("userData", user);
+        return "register";
+    }
+
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public String register(@ModelAttribute("userData") UserData user, final HttpServletRequest request,
+            final HttpServletResponse response, final BindingResult errors, final Model model) throws UnsupportedEncodingException {
+        registrationValidator.validate(user, errors);
+        if (errors.hasErrors()) {
+            Iterable<CityData> citys = cityService.findAllCitys();
+            model.addAttribute("citys", citys);
+            return "register";
+        } else {
+            user.setAdmin(Boolean.FALSE);
+            user = userService.save(user);
+            request.getSession().setAttribute("userDetails", user);
+            return "redirect:/";
+        }
+    }
 }

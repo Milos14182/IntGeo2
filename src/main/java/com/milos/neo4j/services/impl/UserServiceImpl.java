@@ -18,53 +18,55 @@ import com.milos.neo4j.services.UserService;
 
 @Service("userService")
 public class UserServiceImpl implements UserService {
-	@Autowired
-	private UserRepository userRepository;
 
-	@Autowired
-	private LivesInCityRepository livesInCityRepository;
+    @Autowired
+    private UserRepository userRepository;
 
-	@Autowired
-	private CityRepository cityRepository;
+    @Autowired
+    private LivesInCityRepository livesInCityRepository;
 
-	@Autowired
-	private UserConverter userConverter;
+    @Autowired
+    private CityRepository cityRepository;
 
-	public UserData save(UserData userData) {
-		City city = cityRepository.getCityByName(userData.getCity().getName());
-		userData.setCity(new CityData());
-		User user = new User();
-		userConverter.copyFromDataToEntity(userData, user);
-		user.setCity(city);
-		userRepository.save(user);
-		userConverter.copyFromEntityToData(user, userData);
-		return userData;
-	}
+    @Autowired
+    private UserConverter userConverter;
 
-	public UserData getUser(String username) {
-		LivesInCity livesInCity = livesInCityRepository.getUserByUsername(username);
-		UserData userData = null;
-		if (livesInCity != null) {
-			User user = livesInCity.getUser();
-			user.setCity(livesInCity.getCity());
-			userData = new UserData();
-			userData.setCity(new CityData());
-			userConverter.copyFromEntityToData(user, userData);
-		}
-		return userData;
-	}
+    public UserData save(UserData userData) {
+        City city = cityRepository.getCityByName(userData.getCity().getName());
+        userData.setCity(new CityData());
+        User user = new User();
+        userConverter.copyFromDataToEntity(userData, user);
+        user.setCity(city);
+        userRepository.save(user);
+        userConverter.copyFromEntityToData(user, userData);
+        return userData;
+    }
 
-	public UserData updateUser(UserData userData) {
-		User user = userRepository.getUserByUsername(userData.getUsername());
-		User dataUser = new User();
-		userConverter.copyFromDataToEntity(userData, dataUser);
-		String image = StringUtils.newStringUtf8(Base64.encodeBase64(dataUser.getUserImage(), false));
-		if (image == null)
-			image = "NULL";
-		user = userRepository.updateUser(dataUser.getUsername(), dataUser.getFirstname(), dataUser.getLastname(),
-				dataUser.getPassword(), dataUser.getAge(), dataUser.getGender(), image,
-				dataUser.getEmail());
-		userConverter.copyFromEntityToData(user, userData);
-		return userData;
-	}
+    public UserData getUser(String username) {
+        LivesInCity livesInCity = livesInCityRepository.getUserByUsername(username);
+        UserData userData = null;
+        if (livesInCity != null) {
+            User user = livesInCity.getUser();
+            user.setCity(livesInCity.getCity());
+            userData = new UserData();
+            userData.setCity(new CityData());
+            userConverter.copyFromEntityToData(user, userData);
+        }
+        return userData;
+    }
+
+    public UserData updateUser(UserData userData) {
+        User user = userRepository.getUserByUsername(userData.getUsername());
+        User dataUser = new User();
+        userConverter.copyFromDataToEntity(userData, dataUser);
+        String image = StringUtils.newStringUtf8(Base64.encodeBase64(dataUser.getUserImage(), false));
+        if (image == null) {
+            image = "NULL";
+        }
+        user = userRepository.updateUser(dataUser.getUsername(), dataUser.getFirstname(), dataUser.getLastname(),
+                dataUser.getPassword(), dataUser.getAge(), dataUser.getGender(), image,
+                dataUser.getEmail());
+        userConverter.copyFromEntityToData(user, userData);
+        return userData;
+    }
 }

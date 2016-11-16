@@ -1,12 +1,18 @@
+<%@ page language="java" contentType="text/html; charset=Windows-1250"
+	pageEncoding="Windows-1250"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+</head>
 <body>
 	<div class="container">
 		<c:url value="/register?${_csrf.parameterName}=${_csrf.token}"
 			var="register" />
 		<form:form modelAttribute="userData" method="POST"
-			action="${register}" enctype="multipart/form-data">
+			action="${register}" enctype="multipart/form-data" accept-charset="Windows-1250">
 			<h2 class="form-signin-heading">
 				<spring:message code="register.label.header" />
 			</h2>

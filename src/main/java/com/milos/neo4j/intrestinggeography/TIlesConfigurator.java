@@ -7,17 +7,18 @@ import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 
 @Configuration
 public class TIlesConfigurator {
-	@Bean
-    TilesViewResolver viewResolver(){
+
+    @Bean
+    TilesViewResolver viewResolver() {
         TilesViewResolver viewResolver = new TilesViewResolver();
         return viewResolver;
     }
-	
-	@Bean
-    TilesConfigurer tilesConfigurer(){
+
+    @Bean
+    TilesConfigurer tilesConfigurer() {
         TilesConfigurer tilesConfigurer = new TilesConfigurer();
-        tilesConfigurer.setDefinitions("WEB-INF/tile-defs/templates.xml","WEB-INF/tile-defs/tiles-definitions.xml");
+        tilesConfigurer.setDefinitions("WEB-INF/tile-defs/templates.xml", "WEB-INF/tile-defs/tiles-definitions.xml");
         tilesConfigurer.setPreparerFactoryClass(org.springframework.web.servlet.view.tiles3.SpringBeanPreparerFactory.class);
-        return tilesConfigurer;    
+        return tilesConfigurer;
     }
 }
