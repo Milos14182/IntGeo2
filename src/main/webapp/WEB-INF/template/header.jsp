@@ -62,9 +62,9 @@
 						</form>
 					</sec:authorize>
 					<sec:authorize access="hasRole('ROLE_USER')">
-						<div class="navbar-right">
+						<div class="navbar-right sign-out-button">
 							<div class="row">
-								<div class="col-md-6">${userDetails.firstname}
+								<div class="col-md-6 user-name">${userDetails.firstname}
 									${userDetails.lastname}</div>
 								<div class="col-md-1">
 									<a href='<c:url value="/logout"/>' class="btn btn-success"><spring:message

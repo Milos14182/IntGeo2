@@ -40,7 +40,7 @@ public class RegistrationValidator implements Validator {
 
 		UserData userFromDatabase = userService.getUser(userData.getUsername());
 		if (userFromDatabase != null) {
-			errors.rejectValue("username", "register.label.username.error");
+			errors.rejectValue("username", "register.label.username.error.unique");
 		}
 		if (!(userData.getEmail() != null && userData.getEmail().isEmpty())) {
 			pattern = Pattern.compile(EMAIL_PATTERN);
@@ -56,5 +56,8 @@ public class RegistrationValidator implements Validator {
 				errors.rejectValue("age", "register.label.age.error");
 			}
 		}
+                if (userData.getBase64Image().getBytes().length > 5000000) {
+                    errors.rejectValue("base64Image", "register.label.base64Image.error");
+                }
 	}
 }

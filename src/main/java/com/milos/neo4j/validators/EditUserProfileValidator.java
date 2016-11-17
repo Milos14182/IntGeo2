@@ -59,5 +59,8 @@ public class EditUserProfileValidator implements Validator {
 				errors.rejectValue("userImage", "registration.error.userImage");
 			}
 		}
+                if (userData.getBase64Image()!=null && userData.getBase64Image().getBytes().length > 5000000) {
+                    errors.rejectValue("base64Image", "register.label.base64Image.error");
+                }
 	}
 }

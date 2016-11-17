@@ -21,9 +21,7 @@
                         <spring:message code="register.label.email" />
                     </form:label>
                     <form:input path="email" id="inputEmail" class="form-control" />
-                    <form:errors path="email" cssClass="error">
-                        <spring:message code="register.label.email.error" />
-                    </form:errors>
+                    <form:errors path="email" cssClass="error" />
                 </div>
 
                 <div class="form-group">
@@ -31,9 +29,7 @@
                         <spring:message code="register.label.username" />
                     </form:label>
                     <form:input path="username" id="inputUsername" class="form-control" />
-                    <form:errors path="username" cssClass="error">
-                        <spring:message code="register.label.username.error" />
-                    </form:errors>
+                    <form:errors path="username" cssClass="error" />
                 </div>
                 <div class="form-group">
                     <form:label path="password">
@@ -41,9 +37,7 @@
                     </form:label>
                     <form:password path="password" id="inputPassword"
                                    class="form-control" />
-                    <form:errors path="password" cssClass="error">
-                        <spring:message code="register.label.password.error" />
-                    </form:errors>
+                    <form:errors path="password" cssClass="error" />
                 </div>
                 <div class="form-group">
                     <form:label path="firstname">
@@ -51,27 +45,21 @@
                     </form:label>
                     <form:input path="firstname" id="inputFirstname"
                                 class="form-control" />
-                    <form:errors path="firstname" cssClass="error">
-                        <spring:message code="register.label.firstname.error" />
-                    </form:errors>
+                    <form:errors path="firstname" cssClass="error" />
                 </div>
                 <div class="form-group">
                     <form:label path="lastname">
                         <spring:message code="register.label.lastname" />
                     </form:label>
                     <form:input path="lastname" id="inputLastname" class="form-control" />
-                    <form:errors path="lastname" cssClass="error">
-                        <spring:message code="register.label.lastname.error" />
-                    </form:errors>
+                    <form:errors path="lastname" cssClass="error" />
                 </div>
                 <div class="form-group">
                     <form:label path="age">
                         <spring:message code="register.label.age" />
                     </form:label>
                     <form:input path="age" id="inputAge" class="form-control" />
-                    <form:errors path="age" cssClass="error">
-                        <spring:message code="register.label.age.error" />
-                    </form:errors>
+                    <form:errors path="age" cssClass="error" />
                 </div>
                 <div class="form-group">
                     <form:label path="gender">
