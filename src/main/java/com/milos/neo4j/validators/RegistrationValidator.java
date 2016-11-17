@@ -56,7 +56,7 @@ public class RegistrationValidator implements Validator {
 				errors.rejectValue("age", "register.label.age.error");
 			}
 		}
-                if (userData.getBase64Image().getBytes().length > 5000000) {
+                if (userData.getBase64Image()!=null && userData.getBase64Image().getBytes().length > 5000000) {
                     errors.rejectValue("base64Image", "register.label.base64Image.error");
                 }
 	}
