@@ -108,7 +108,8 @@
 			<div class="container">
 				<div class="carousel-caption">
 					<p>
-						<a class="btn btn-lg btn-primary" href="#" role="button"><spring:message
+                                                <c:url value="/how_to" var="howTo" />
+						<a class="btn btn-lg btn-primary" href="${howTo}" role="button"><spring:message
 								code="home.label.learnMore" /></a>
 					</p>
 				</div>
@@ -118,14 +119,6 @@
 			<img class="third-slide"
 				src="<c:url value="/resources/images/slide3.jpg" />"
 				alt="Third slide">
-			<div class="container">
-				<div class="carousel-caption">
-					<p>
-						<a class="btn btn-lg btn-primary" href="#" role="button"><spring:message
-								code="home.label.browseGalery" /></a>
-					</p>
-				</div>
-			</div>
 		</div>
 	</div>
 	<a class="left carousel-control" href="#myCarousel" role="button"
