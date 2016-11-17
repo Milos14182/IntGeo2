@@ -33,7 +33,7 @@
 				</form:label>
 				<form:input path="email" id="inputEmail" class="form-control" />
 				<form:errors path="email" cssClass="error">
-					<spring:message code="registration.error.email" />
+					<spring:message code="register.label.email.error" />
 				</form:errors>
 			</div>
 
@@ -46,7 +46,7 @@
 				<form:password path="password" id="inputPassword"
 					class="form-control" />
 				<form:errors path="password" cssClass="error">
-					<spring:message code="registration.error.password" />
+					<spring:message code="register.label.password.error" />
 				</form:errors>
 			</div>
 			<div class="form-group">
@@ -56,7 +56,7 @@
 				<form:input path="firstname" id="inputFirstname"
 					class="form-control" />
 				<form:errors path="firstname" cssClass="error">
-					<spring:message code="registration.error.firstname" />
+					<spring:message code="register.label.firstname.error" />
 				</form:errors>
 			</div>
 			<div class="form-group">
@@ -65,7 +65,7 @@
 				</form:label>
 				<form:input path="lastname" id="inputLastname" class="form-control" />
 				<form:errors path="lastname" cssClass="error">
-					<spring:message code="registration.error.lastname" />
+					<spring:message code="register.label.lastname.error" />
 				</form:errors>
 			</div>
 			<div class="form-group">
@@ -74,7 +74,7 @@
 				</form:label>
 				<form:input path="age" id="inputAge" class="form-control" />
 				<form:errors path="age" cssClass="error">
-					<spring:message code="registration.error.age" />
+					<spring:message code="register.label.age.error" />
 				</form:errors>
 			</div>
 			<div class="form-group">

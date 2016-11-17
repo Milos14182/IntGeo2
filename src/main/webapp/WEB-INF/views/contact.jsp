@@ -54,8 +54,9 @@
 				<form:label path="message">
 					<spring:message code="contact.label.message" />
 				</form:label>
-				<form:textarea rows="5" id="inputMessage" path="message"
+                                <form:textarea rows="5" id="inputMessage" path="message"
 					class="form-control" />
+                                <form:errors path="message" cssClass="error" />
 			</div>
 			<button class="btn btn-lg btn-primary btn-block" type="submit">
 				<spring:message code="contact.label.button" />

@@ -27,16 +27,17 @@ public class ContactValidator implements Validator {
 	@Override
 	public void validate(Object target, Errors errors) {
 		ContactData contactData = (ContactData) target;
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "firstname", "registration.error.firstname");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "lastname", "registration.error.lastname");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "age", "registration.error.age");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "registration.error.email");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "firstname", "register.label.firstname.error");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "lastname", "register.label.lastname.error");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "age", "register.label.age.error");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "register.label.email.error");
+                ValidationUtils.rejectIfEmptyOrWhitespace(errors, "message", "register.label.message.error");
 		
 		if (!(contactData.getEmail() != null && contactData.getEmail().isEmpty())) {
 			pattern = Pattern.compile(EMAIL_PATTERN);
 			matcher = pattern.matcher(contactData.getEmail());
 			if (!matcher.matches()) {
-				errors.rejectValue("email", "registration.error.email");
+				errors.rejectValue("email", "register.label.email.error");
 			}
 		}
 	}

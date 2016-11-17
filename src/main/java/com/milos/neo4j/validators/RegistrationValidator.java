@@ -31,29 +31,29 @@ public class RegistrationValidator implements Validator {
 	public void validate(Object target, Errors errors) {
 		UserData userData = (UserData) target;
 
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "firstname", "registration.error.firstname");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", "registration.error.username");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "lastname", "registration.error.lastname");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "age", "registration.error.age");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "registration.error.password");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "registration.error.email");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "firstname", "register.label.firstname.error");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", "register.label.username.error");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "lastname", "register.label.lastname.error");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "age", "register.label.age.error");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "register.label.password.error");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "register.label.email.error");
 
 		UserData userFromDatabase = userService.getUser(userData.getUsername());
 		if (userFromDatabase != null) {
-			errors.rejectValue("username", "registration.error.username");
+			errors.rejectValue("username", "register.label.username.error");
 		}
 		if (!(userData.getEmail() != null && userData.getEmail().isEmpty())) {
 			pattern = Pattern.compile(EMAIL_PATTERN);
 			matcher = pattern.matcher(userData.getEmail());
 			if (!matcher.matches()) {
-				errors.rejectValue("email", "registration.error.email");
+				errors.rejectValue("email", "register.label.email.error");
 			}
 		}
 		if (!(userData.getAge() != null && userData.getAge().isEmpty())) {
 			pattern = Pattern.compile(ID_PATTERN);
 			matcher = pattern.matcher(userData.getAge());
 			if (!matcher.matches()) {
-				errors.rejectValue("age", "registration.error.age");
+				errors.rejectValue("age", "register.label.age.error");
 			}
 		}
 	}

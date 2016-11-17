@@ -8,6 +8,7 @@ html {
 body {
 	/* Margin bottom by footer height */
 	margin-bottom: 45px;
+        background-color: #f4f9f9;
 }
 
 .footer {
@@ -59,4 +60,8 @@ body {
 .body-content {
 	max-width:70vw;
     margin: auto;
+}
+.error {
+    color:#960f13;
+    font-weight: bold;
 }
