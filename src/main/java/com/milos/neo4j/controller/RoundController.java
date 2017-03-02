@@ -72,6 +72,7 @@ public class RoundController {
 		if (!roundBroker.waitForAllUsersToAnswer(games, Long.valueOf(gameId.longValue()), answersTmp.isCollectAll())) {
 			return objectMapper.writeValueAsString(false);
 		}
+                System.out.println("executed succesfful");
 		return objectMapper.writeValueAsString(games);
 	}
 	private void setNewAnswers(SubmitAnswersTmp submitAnswersTmp, SubmitAnswersTmp answersTmp, Long score) {
