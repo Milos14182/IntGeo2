@@ -77,7 +77,7 @@ function showAllResults(calResult) {
             answersAlreadySend = false;
             $(".answersSend").hide();
             if (answers[i].username == $('#input_username').val()) {
-                setMyAnswers(answers[i]);
+                setMyAnswers(answers[i]); 
             } else {
                 setIUserAnswers(answers[i], i)
             }
