@@ -15,7 +15,7 @@ function connect(stompClient) {
     stompClient.connect({}, function (frame) {
         roundTimer();
         console.log('Connected: ' + frame);
-        stompClient.subscribe('/topic/play/answers/' + pathnames[3], function (
+        stompClient.subscribe('/topic/play/answers/' + pathnames[pathnames.length - 1], function (
                 calResult) {
             
             showAllResults(calResult);
@@ -29,7 +29,8 @@ function disconnect(stompClient) {
 }
 function sendNum(stompClient) {
     var pathnames = window.location.pathname.split('/');
-    stompClient.send("/intgeo/play/answers/" + pathnames[3], {},
+    
+    stompClient.send("/intgeo/play/answers/" + pathnames[pathnames.length - 1], {},
             getInputValuesJSON());
 }
 
