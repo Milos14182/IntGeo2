@@ -11,6 +11,7 @@
 		<input id="input_username" type="hidden" value="${userDetails.username}"/>
 		<div id="character" class="pull-left character">${character}</div>
 		<div id="scorePerRound" class="pull-right character">${scorePerRound}</div>
+                <div id="roundTimer" class="pull-right character"></div>
 		<div class="playTable">
 			<c:forEach var="i" begin="0" end="5">
 				<div id="user-${i}" style="margin-left: ${i*21}px; width: 20px">

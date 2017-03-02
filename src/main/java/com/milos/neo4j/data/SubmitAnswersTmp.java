@@ -4,125 +4,135 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties("meta")
 public class SubmitAnswersTmp {
-	@Override
-	public String toString() {
-		return "{'state' : '" + state + "', 'city' : '" + city + "', 'mountain' : '" + mountain + "', 'river' : '"
-				+ river + "', 'lake' : '" + lake + "', 'plant' : '" + plant + "', 'animal' : '" + animal
-				+ "', 'character' : '" + character + "', 'score' : '" + score + "', 'username' : '" + username + "'}";
-	}
 
-	private String state;
-	private String city;
-	private String mountain;
-	private String river;
-	private String lake;
-	private String plant;
-	private String animal;
+    @Override
+    public String toString() {
+        return "{'state' : '" + state + "', 'city' : '" + city + "', 'mountain' : '" + mountain + "', 'river' : '"
+                + river + "', 'lake' : '" + lake + "', 'plant' : '" + plant + "', 'animal' : '" + animal
+                + "', 'character' : '" + character + "', 'score' : '" + score + "', 'username' : '" + username + "'}";
+    }
 
-	private String character;
-	private Long score;
-	private String username;
-	private String gameId;
-	private Boolean submitet;
-	
-	public SubmitAnswersTmp() {
-		super();
-	}
+    private String state;
+    private String city;
+    private String mountain;
+    private String river;
+    private String lake;
+    private String plant;
+    private String animal;
 
-	public Boolean getSubmitet() {
-		return submitet;
-	}
+    private String character;
+    private Long score;
+    private String username;
+    private String gameId;
+    private Boolean submitet;
+    private boolean collectAll;
 
-	public void setSubmitet(Boolean submitet) {
-		this.submitet = submitet;
-	}
+    public SubmitAnswersTmp() {
+        super();
+    }
 
-	public String getCharacter() {
-		return character;
-	}
+    public Boolean getSubmitet() {
+        return submitet;
+    }
 
-	public void setCharacter(String character) {
-		this.character = character;
-	}
+    public void setSubmitet(Boolean submitet) {
+        this.submitet = submitet;
+    }
 
-	public Long getScore() {
-		return score;
-	}
+    public String getCharacter() {
+        return character;
+    }
 
-	public void setScore(Long score) {
-		this.score = score;
-	}
+    public void setCharacter(String character) {
+        this.character = character;
+    }
 
-	public String getUsername() {
-		return username;
-	}
+    public Long getScore() {
+        return score;
+    }
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    public void setScore(Long score) {
+        this.score = score;
+    }
 
-	public String getState() {
-		return state;
-	}
+    public String getUsername() {
+        return username;
+    }
 
-	public void setState(String state) {
-		this.state = state;
-	}
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-	public String getCity() {
-		return city;
-	}
+    public String getState() {
+        return state;
+    }
 
-	public void setCity(String city) {
-		this.city = city;
-	}
+    public void setState(String state) {
+        this.state = state;
+    }
 
-	public String getMountain() {
-		return mountain;
-	}
+    public String getCity() {
+        return city;
+    }
 
-	public void setMountain(String mountain) {
-		this.mountain = mountain;
-	}
+    public void setCity(String city) {
+        this.city = city;
+    }
 
-	public String getRiver() {
-		return river;
-	}
+    public String getMountain() {
+        return mountain;
+    }
 
-	public void setRiver(String river) {
-		this.river = river;
-	}
+    public void setMountain(String mountain) {
+        this.mountain = mountain;
+    }
 
-	public String getLake() {
-		return lake;
-	}
+    public String getRiver() {
+        return river;
+    }
 
-	public void setLake(String lake) {
-		this.lake = lake;
-	}
+    public void setRiver(String river) {
+        this.river = river;
+    }
 
-	public String getPlant() {
-		return plant;
-	}
+    public String getLake() {
+        return lake;
+    }
 
-	public void setPlant(String plant) {
-		this.plant = plant;
-	}
+    public void setLake(String lake) {
+        this.lake = lake;
+    }
 
-	public String getAnimal() {
-		return animal;
-	}
+    public String getPlant() {
+        return plant;
+    }
 
-	public void setAnimal(String animal) {
-		this.animal = animal;
-	}
+    public void setPlant(String plant) {
+        this.plant = plant;
+    }
 
-	public String getGameId() {
-		return gameId;
-	}
+    public String getAnimal() {
+        return animal;
+    }
 
-	public void setGameId(String gameId) {
-		this.gameId = gameId;
-	}
+    public void setAnimal(String animal) {
+        this.animal = animal;
+    }
+
+    public String getGameId() {
+        return gameId;
+    }
+
+    public void setGameId(String gameId) {
+        this.gameId = gameId;
+    }
+
+    public boolean isCollectAll() {
+        return collectAll;
+    }
+
+    public void setCollectAll(boolean collectAll) {
+        this.collectAll = collectAll;
+    }
 
 }

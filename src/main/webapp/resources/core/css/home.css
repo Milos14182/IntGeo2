@@ -71,3 +71,28 @@ body {
 }
 .user-name {
 }
+
+#roundTimer {
+    position: absolute;
+    margin-left: 75%;
+    margin-top: 8.5%;
+    font-size: 120px;
+}
+
+#character {
+    position: absolute;
+    margin-top: 8.5%;
+    font-size: 120px;
+    margin-left: 6%;
+}
+
+#scorePerRound {
+    border: solid 2px;
+    border-color: black;
+    border-radius: 20px;
+    position: absolute;
+    margin-left: 75%;
+    font-size: 60px;
+    width: 130px;
+    text-align: center;
+}

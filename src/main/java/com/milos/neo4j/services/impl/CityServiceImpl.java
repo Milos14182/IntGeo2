@@ -17,7 +17,10 @@ import com.milos.neo4j.repository.CityRepository;
 import com.milos.neo4j.repository.StateRepository;
 import com.milos.neo4j.repository.relations.CityIsInStateRepository;
 import com.milos.neo4j.services.CityService;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
+@Transactional(propagation = Propagation.MANDATORY)
 @Service("cityService")
 public class CityServiceImpl implements CityService {
 	@Autowired
@@ -32,9 +35,11 @@ public class CityServiceImpl implements CityService {
 	@Autowired
 	CityConverter cityConverter;
 	
+        @Transactional(readOnly = true)
+        @Override
 	public Iterable<CityData> findAllCitys() {
 		Set<City> citys = cityRepository.getAllCities();
-		Set<CityData> cityDatas = new HashSet<CityData>();
+		Set<CityData> cityDatas = new HashSet<>();
 		CityData cityData = new CityData();
 		cityConverter.copyFromEntitySetToDataSet(citys, cityDatas, cityData);
 		List<CityData> sortedCityes = new ArrayList<>(cityDatas);
@@ -42,6 +47,8 @@ public class CityServiceImpl implements CityService {
 		return sortedCityes;
 	}
 
+        @Transactional(readOnly = true)
+        @Override
 	public CityData getCityByName(String name) {
 		CityData cityData = null;
 		City city = cityRepository.getCityByName(name);
@@ -52,6 +59,7 @@ public class CityServiceImpl implements CityService {
 		return cityData;
 	}
 
+        @Transactional(readOnly = false)
 	@Override
 	public void saveCity(CityData cityData) {
 		City city = new City();

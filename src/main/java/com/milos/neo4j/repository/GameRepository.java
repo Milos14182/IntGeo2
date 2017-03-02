@@ -8,6 +8,10 @@ import org.springframework.data.neo4j.repository.GraphRepository;
 import com.milos.neo4j.domain.nodes.Game;
 
 public interface GameRepository extends GraphRepository<Game> {
-	@Query("MATCH (n:Game) WHERE n.activeGame = {0} RETURN n")
-	public Set<Game> findAllInactiveGames(Boolean flag);
+
+    @Query("MATCH (n:Game) WHERE n.activeGame = {0} RETURN n")
+    public Set<Game> findAllInactiveGames(Boolean flag);
+
+    @Query("MATCH (n:Game) WHERE n.id = {1} SET n.firstLetter = {0} RETURN n")
+    public Game updateGameLetter(String letter, Long id);
 }

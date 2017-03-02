@@ -69,7 +69,7 @@ public class RoundController {
 		UserGameData userGameData = gameService.getUserGameData(answersTmp.getUsername(), Long.valueOf(gameId.longValue()));
 		Long userScore =  userGameData.getScore()!=null ?  userGameData.getScore() : 0l;
 		gameService.updateUserGame(answersTmp.getUsername(), Long.valueOf(gameId.longValue()), userScore+scorePerRound);
-		if (!roundBroker.waitForAllUsersToAnswer(games, Long.valueOf(gameId.longValue()))) {
+		if (!roundBroker.waitForAllUsersToAnswer(games, Long.valueOf(gameId.longValue()), answersTmp.isCollectAll())) {
 			return objectMapper.writeValueAsString(false);
 		}
 		return objectMapper.writeValueAsString(games);

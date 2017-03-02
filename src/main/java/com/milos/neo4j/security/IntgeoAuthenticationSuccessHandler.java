@@ -17,18 +17,21 @@ import com.milos.neo4j.data.UserData;
 import com.milos.neo4j.services.UserService;
 
 @Service
-public class IntgeoAuthenticationSuccessHandler implements AuthenticationSuccessHandler{
-	@Autowired
-	UserService userService;
-	
-	private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
-	
-	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
-			Authentication authentication) throws IOException, ServletException {
-		String username = authentication.getName();
-		UserData user = userService.getUser(username);
-		request.getSession().setAttribute("userDetails", user);
-		redirectStrategy.sendRedirect(request, response, "/");
-	}
+//@Transactional(propagation = Propagation.MANDATORY)
+public class IntgeoAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
+
+    @Autowired
+    UserService userService;
+
+    private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
+
+//    @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
+    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
+            Authentication authentication) throws IOException, ServletException {
+        String username = authentication.getName();
+        UserData user = userService.getUser(username);
+        request.getSession().setAttribute("userDetails", user);
+        redirectStrategy.sendRedirect(request, response, "/");
+    }
 
 }

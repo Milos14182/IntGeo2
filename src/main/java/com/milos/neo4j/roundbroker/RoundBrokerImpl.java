@@ -30,17 +30,19 @@ public class RoundBrokerImpl implements RoundBroker {
 	}
 
 	@Override
-	public boolean waitForAllUsersToAnswer(List<SubmitAnswersTmp> answers, Long gameId) {
+	public boolean waitForAllUsersToAnswer(List<SubmitAnswersTmp> answers, Long gameId, boolean collectAll) {
 		GameData gameData = gameService.getGameById(gameId);
 		for (SubmitAnswersTmp submitAnswersTmp : answers) {
-			if (!submitAnswersTmp.getSubmitet() || answers.size()!=gameData.getNumberOfPlayers().intValue()) {
+			if ((!submitAnswersTmp.getSubmitet() || answers.size()!=gameData.getNumberOfPlayers().intValue())
+                                 && !collectAll) {
 				return false;
 			}
 		}
 		for (SubmitAnswersTmp submitAnswersTmp : answers) {
 			submitAnswersTmp.setSubmitet(false);
 		}
-		letter = playService.choseLetter();
+		letter = playService.choseLetter();                
+                gameService.updateGameLetter(letter, gameId);
 		return true;
 	}
 

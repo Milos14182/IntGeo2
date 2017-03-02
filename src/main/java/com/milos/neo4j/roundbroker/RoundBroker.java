@@ -7,10 +7,16 @@ import com.milos.neo4j.data.SubmitAnswersTmp;
 import com.milos.neo4j.data.UserData;
 
 public interface RoundBroker {
-	public String createLetterForGameRound();
-	public boolean waitForAllUsersToAnswer(List<SubmitAnswersTmp> answers, Long gameId);
-	public boolean checkTime(Date roundStartTime);
-	public String getLetter();
-	public Boolean getInitalLetter();
-	public Long countScore(SubmitAnswersTmp submitAnswersTmp, UserData userData);
+
+    public String createLetterForGameRound();
+
+    public boolean waitForAllUsersToAnswer(List<SubmitAnswersTmp> answers, Long gameId, boolean collectAll);
+
+    public boolean checkTime(Date roundStartTime);
+
+    public String getLetter();
+
+    public Boolean getInitalLetter();
+
+    public Long countScore(SubmitAnswersTmp submitAnswersTmp, UserData userData);
 }

@@ -31,6 +31,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserConverter userConverter;
 
+    @Override
     public UserData save(UserData userData) {
         City city = cityRepository.getCityByName(userData.getCity().getName());
         userData.setCity(new CityData());
@@ -42,6 +43,7 @@ public class UserServiceImpl implements UserService {
         return userData;
     }
 
+    @Override
     public UserData getUser(String username) {
         LivesInCity livesInCity = livesInCityRepository.getUserByUsername(username);
         UserData userData = null;
@@ -55,15 +57,15 @@ public class UserServiceImpl implements UserService {
         return userData;
     }
 
+    @Override
     public UserData updateUser(UserData userData) {
-        User user = userRepository.getUserByUsername(userData.getUsername());
         User dataUser = new User();
         userConverter.copyFromDataToEntity(userData, dataUser);
         String image = StringUtils.newStringUtf8(Base64.encodeBase64(dataUser.getUserImage(), false));
         if (image == null) {
             image = "NULL";
         }
-        user = userRepository.updateUser(dataUser.getUsername(), dataUser.getFirstname(), dataUser.getLastname(),
+        User user = userRepository.updateUser(dataUser.getUsername(), dataUser.getFirstname(), dataUser.getLastname(),
                 dataUser.getPassword(), dataUser.getAge(), dataUser.getGender(), image,
                 dataUser.getEmail());
         userConverter.copyFromEntityToData(user, userData);

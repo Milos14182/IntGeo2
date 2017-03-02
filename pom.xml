@@ -10,12 +10,9 @@
     <properties>
         <project.build.sourceEncoding>ISO-8859-2</project.build.sourceEncoding>
         <java-version>1.8</java-version>
-        <org.springframework-version>4.2.8.RELEASE</org.springframework-version>
-        <!-- <org.aspectj-version>1.8.7</org.aspectj-version> -->
-        <!-- <org.slf4j-version>1.7.13</org.slf4j-version> -->
-        <!-- <log4j-version>2.4.1</log4j-version> -->
-        <org.apache.tiles>3.0.5</org.apache.tiles>
-        <org.springframework.security>4.1.0.RELEASE</org.springframework.security>
+        <org.springframework-version>4.3.6.RELEASE</org.springframework-version>
+        <org.apache.tiles>3.0.7</org.apache.tiles>
+        <org.springframework.security>4.2.1.RELEASE</org.springframework.security>
     </properties>
     <dependencies>
         <!-- Spring -->
@@ -23,13 +20,6 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
             <version>${org.springframework-version}</version>
-            <!-- <exclusions> -->
-            <!-- Exclude Commons Logging in favor of SLF4j -->
-            <!-- <exclusion> -->
-            <!-- <groupId>commons-logging</groupId> -->
-            <!-- <artifactId>commons-logging</artifactId> -->
-            <!-- </exclusion> -->
-            <!-- </exclusions> -->
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
@@ -41,64 +31,6 @@
             <artifactId>spring-context-support</artifactId>
             <version>${org.springframework-version}</version>
         </dependency>
-
-        <!-- AspectJ -->
-        <!-- <dependency> -->
-        <!-- <groupId>org.aspectj</groupId> -->
-        <!-- <artifactId>aspectjrt</artifactId> -->
-        <!-- <version>${org.aspectj-version}</version> -->
-        <!-- </dependency> -->
-
-        <!-- Logging -->
-        <!-- <dependency> -->
-        <!-- <groupId>org.slf4j</groupId> -->
-        <!-- <artifactId>slf4j-api</artifactId> -->
-        <!-- <version>${org.slf4j-version}</version> -->
-        <!-- </dependency> -->
-        <!-- <dependency> -->
-        <!-- <groupId>org.slf4j</groupId> -->
-        <!-- <artifactId>jcl-over-slf4j</artifactId> -->
-        <!-- <version>${org.slf4j-version}</version> -->
-        <!-- <scope>runtime</scope> -->
-        <!-- </dependency> -->
-        <!-- <dependency> -->
-        <!-- <groupId>org.slf4j</groupId> -->
-        <!-- <artifactId>slf4j-log4j12</artifactId> -->
-        <!-- <version>${org.slf4j-version}</version> -->
-        <!-- <scope>runtime</scope> -->
-        <!-- </dependency> -->
-        <!-- <dependency> -->
-        <!-- <groupId>org.apache.logging.log4j</groupId> -->
-        <!-- <artifactId>log4j-core</artifactId> -->
-        <!-- <version>${log4j-version}</version> -->
-        <!-- <exclusions> -->
-        <!-- <exclusion> -->
-        <!-- <groupId>javax.mail</groupId> -->
-        <!-- <artifactId>mail</artifactId> -->
-        <!-- </exclusion> -->
-        <!-- <exclusion> -->
-        <!-- <groupId>javax.jms</groupId> -->
-        <!-- <artifactId>jms</artifactId> -->
-        <!-- </exclusion> -->
-        <!-- <exclusion> -->
-        <!-- <groupId>com.sun.jdmk</groupId> -->
-        <!-- <artifactId>jmxtools</artifactId> -->
-        <!-- </exclusion> -->
-        <!-- <exclusion> -->
-        <!-- <groupId>com.sun.jmx</groupId> -->
-        <!-- <artifactId>jmxri</artifactId> -->
-        <!-- </exclusion> -->
-        <!-- </exclusions> -->
-        <!-- <scope>runtime</scope> -->
-        <!-- </dependency> -->
-
-        <!-- @Inject -->
-        <!-- <dependency> -->
-        <!-- <groupId>javax.inject</groupId> -->
-        <!-- <artifactId>javax.inject</artifactId> -->
-        <!-- <version>1</version> -->
-        <!-- </dependency> -->
-
         <!-- Servlet -->
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -115,14 +47,6 @@
             <artifactId>jstl</artifactId>
             <version>1.2</version>
         </dependency>
-
-        <!-- Test -->
-        <!-- <dependency> -->
-        <!-- <groupId>junit</groupId> -->
-        <!-- <artifactId>junit</artifactId> -->
-        <!-- <version>4.7</version> -->
-        <!-- <scope>test</scope> -->
-        <!-- </dependency> -->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
@@ -139,57 +63,12 @@
             <artifactId>spring-data-neo4j</artifactId>
             <version>4.1.1.RELEASE</version>
         </dependency>
-        <!-- 		<dependency> -->
-        <!-- 		  <groupId>org.neo4j</groupId> -->
-        <!-- 		  <artifactId>neo4j-ogm</artifactId> -->
-        <!-- 		  <version>1.1.0</version> -->
-        <!-- 		</dependency> -->
-        <!-- Advanced Mapping support for Spring Data Neo4j -->
-        <!-- Neo4j transaction library -->
-        <!-- 		<dependency> -->
-        <!-- 			<groupId>org.springframework.data</groupId> -->
-        <!-- 			<artifactId>spring-data-neo4j-tx</artifactId> -->
-        <!-- 			<version>3.4.6.RELEASE</version> -->
-        <!-- 		</dependency> -->
-        <!-- Required Libraries for Neo4j -->
-        <!-- 		<dependency> -->
-        <!-- 			<groupId>org.springframework.data</groupId> -->
-        <!-- 			<artifactId>spring-data-neo4j-aspects</artifactId> -->
-        <!-- 			<version>3.4.6.RELEASE</version> -->
-        <!-- 		</dependency> -->
-        <!-- 		<dependency> -->
-        <!-- 		<groupId>org.springframework.data</groupId> -->
-        <!-- 		<artifactId>spring-data-neo4j-rest</artifactId> -->
-        <!-- 		<version>3.4.6.RELEASE</version> -->
-        <!-- 		</dependency> -->
-        <!-- <dependency> -->
-        <!-- <groupId>org.springframework</groupId> -->
-        <!-- <artifactId>spring-tx</artifactId> -->
-        <!-- <version>${org.springframework-version}</version> -->
-        <!-- </dependency> -->
         <!-- Spring Data commons -->
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-commons</artifactId>
             <version>1.12.3.RELEASE</version>
         </dependency>
-        <!-- <dependency> -->
-        <!-- <groupId>org.springframework.data</groupId> -->
-        <!-- <artifactId>spring-data-rest-webmvc</artifactId> -->
-        <!-- <version>2.5.3.RELEASE</version> -->
-        <!-- </dependency> -->
-        <!-- <dependency> -->
-        <!-- <groupId>org.springframework.data</groupId> -->
-        <!-- <artifactId>spring-data-jpa</artifactId> -->
-        <!-- <version>1.10.3.RELEASE</version> -->
-        <!-- </dependency> -->
-
-        <!-- <dependency> -->
-        <!-- <groupId>org.springframework.security</groupId> -->
-        <!-- <artifactId>spring-security-web</artifactId> -->
-        <!-- <version>${org.springframework.security}</version> -->
-        <!-- </dependency> -->
-
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-config</artifactId>
@@ -205,12 +84,6 @@
             <artifactId>spring-security-taglibs</artifactId>
             <version>${org.springframework.security}</version>
         </dependency>
-
-        <!-- <dependency> -->
-        <!-- <groupId>org.apache.tiles</groupId> -->
-        <!-- <artifactId>tiles-api</artifactId> -->
-        <!-- <version>${org.apache.tiles}</version> -->
-        <!-- </dependency> -->
         <dependency>
             <groupId>org.apache.tiles</groupId>
             <artifactId>tiles-jsp</artifactId>
@@ -221,11 +94,6 @@
             <artifactId>tiles-core</artifactId>
             <version>${org.apache.tiles}</version>
         </dependency>
-        <!-- <dependency> -->
-        <!-- <groupId>org.apache.tiles</groupId> -->
-        <!-- <artifactId>tiles-request-api</artifactId> -->
-        <!-- <version>1.0.6</version> -->
-        <!-- </dependency> -->
         <dependency>
             <groupId>org.apache.velocity</groupId>
             <artifactId>velocity</artifactId>
