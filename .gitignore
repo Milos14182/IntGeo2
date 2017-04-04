@@ -6,3 +6,4 @@ RemoteSystemsTempFiles
 Servers/
 .settings/
 nb-configuration.xml
+.idea/

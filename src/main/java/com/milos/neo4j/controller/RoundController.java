@@ -83,7 +83,7 @@ public class RoundController {
 		submitAnswersTmp.setCity(answersTmp.getCity());
 		submitAnswersTmp.setLake(answersTmp.getLake());
 		submitAnswersTmp.setMountain(answersTmp.getMountain());
-		submitAnswersTmp.setPlant(answersTmp.getMountain());
+		submitAnswersTmp.setPlant(answersTmp.getPlant());
 		submitAnswersTmp.setRiver(answersTmp.getRiver());
 		submitAnswersTmp.setState(answersTmp.getState());
 	}
