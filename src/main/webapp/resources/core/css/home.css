@@ -96,3 +96,16 @@ body {
     width: 130px;
     text-align: center;
 }
+.createGame {
+    margin-left: 42%;
+}
+.playContainer {
+    width: 84%;
+}
+.gameRow {
+    width: 25%;
+    height: 50px;
+}
+.gameLink {
+    margin-top: -10px;
+}

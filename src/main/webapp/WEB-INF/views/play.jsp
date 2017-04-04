@@ -7,7 +7,7 @@
 	<audio autoplay loop>
 		<source src="<c:url value="/resources/images/music.mp3" />">
 	</audio>
-	<div class="container">
+	<div class="container playContainer">
 		<input id="input_username" type="hidden" value="${userDetails.username}"/>
 		<div id="character" class="pull-left character">${character}</div>
 		<div id="scorePerRound" class="pull-right character">${scorePerRound}</div>
