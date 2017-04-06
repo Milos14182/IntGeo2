@@ -22,6 +22,7 @@ import com.milos.neo4j.repository.UserRepository;
 import com.milos.neo4j.repository.relations.GameRelationRepository;
 import com.milos.neo4j.services.GameService;
 import com.milos.neo4j.services.PlayService;
+import java.util.Date;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -75,6 +76,8 @@ public class GameServiceImpl implements GameService {
             game.setPlayers(players);
             game.setNumberOfPlayers(Long.valueOf(players.size()));
             game.setActiveGame(false);
+            game.setCreationDate(new Date());
+            game.setLocked(Boolean.FALSE);
             gameRepository.save(game);
             gameData = new GameData();
             gameConverter.copyFromEntityToData(game, gameData);
@@ -168,6 +171,24 @@ public class GameServiceImpl implements GameService {
     @Override
     public void updateGameLetter(String letter, Long gameId) {
         gameRepository.updateGameLetter(letter, gameId);
+    }
+
+    @Transactional(readOnly = false)
+    @Override
+    public void deleteOldGames(Date beforeDate) {
+        gameRepository.removeOldGames(beforeDate);
+    }
+
+    @Transactional(readOnly = false)
+    @Override
+    public GameData lockGame(Long gameId) {
+        Game game = gameRepository.lockGame(gameId);
+        GameData gameData = null;
+        if (game!=null) {
+            gameData = new GameData();
+            gameConverter.copyFromEntityToData(game, gameData);
+        }
+        return gameData;
     }
 
 }

@@ -9,62 +9,87 @@ import org.neo4j.ogm.annotation.Property;
 import org.neo4j.ogm.annotation.Relationship;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.util.Date;
 
 @NodeEntity
-@JsonIgnoreProperties(ignoreUnknown=true)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Game {
-	private @GraphId Long id;
-	
-	@Property(name="numberOfPlayers")
-	private Long numberOfPlayers;
-	
-	@Property(name = "activeGame")
-	private Boolean activeGame;
-	
-	@Relationship(type = "GAME_RELATION", direction = Relationship.OUTGOING)
-	private Set<User> players = new HashSet<>();
-	
-	@Property(name="firstLetter")
-	private String firstLetter;
 
-	public Boolean getActiveGame() {
-		return activeGame;
-	}
+    private @GraphId
+    Long id;
 
-	public void setActiveGame(Boolean activeGame) {
-		this.activeGame = activeGame;
-	}
+    @Property(name = "numberOfPlayers")
+    private Long numberOfPlayers;
 
-	public Long getId() {
-		return id;
-	}
+    @Property(name = "activeGame")
+    private Boolean activeGame;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    @Relationship(type = "GAME_RELATION", direction = Relationship.OUTGOING)
+    private Set<User> players = new HashSet<>();
 
+    @Property(name = "firstLetter")
+    private String firstLetter;
 
-	public Long getNumberOfPlayers() {
-		return numberOfPlayers;
-	}
+    @Property(name = "creationDate")
+    private Date creationDate;
+    
+    @Property(name = "locked")
+    private Boolean locked;
 
-	public void setNumberOfPlayers(Long numberOfPlayers) {
-		this.numberOfPlayers = numberOfPlayers;
-	}
+    public Boolean getActiveGame() {
+        return activeGame;
+    }
 
-	public Set<User> getPlayers() {
-		return players;
-	}
+    public void setActiveGame(Boolean activeGame) {
+        this.activeGame = activeGame;
+    }
 
-	public void setPlayers(Set<User> players) {
-		this.players = players;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public String getFirstLetter() {
-		return firstLetter;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setFirstLetter(String firstLetter) {
-		this.firstLetter = firstLetter;
-	}
+    public Long getNumberOfPlayers() {
+        return numberOfPlayers;
+    }
+
+    public void setNumberOfPlayers(Long numberOfPlayers) {
+        this.numberOfPlayers = numberOfPlayers;
+    }
+
+    public Set<User> getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(Set<User> players) {
+        this.players = players;
+    }
+
+    public String getFirstLetter() {
+        return firstLetter;
+    }
+
+    public void setFirstLetter(String firstLetter) {
+        this.firstLetter = firstLetter;
+    }
+
+    public Date getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public Boolean getLocked() {
+        return locked;
+    }
+
+    public void setLocked(Boolean locked) {
+        this.locked = locked;
+    }
+    
 }

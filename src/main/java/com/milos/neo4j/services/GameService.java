@@ -5,6 +5,7 @@ import java.util.Set;
 import com.milos.neo4j.data.GameData;
 import com.milos.neo4j.data.UserData;
 import com.milos.neo4j.data.UserGameData;
+import java.util.Date;
 
 public interface GameService {
 
@@ -25,4 +26,8 @@ public interface GameService {
     public void updateUserGame(String username, Long gameId, Long score);
 
     public void updateGameLetter(String letter, Long gameId);
+    
+    public void deleteOldGames(Date beforeDate);
+    
+    public GameData lockGame(Long gameId);
 }
