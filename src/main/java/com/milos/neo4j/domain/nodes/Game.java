@@ -31,7 +31,7 @@ public class Game {
     private String firstLetter;
 
     @Property(name = "creationDate")
-    private Date creationDate;
+    private Long creationDate;
     
     @Property(name = "locked")
     private Boolean locked;
@@ -76,11 +76,11 @@ public class Game {
         this.firstLetter = firstLetter;
     }
 
-    public Date getCreationDate() {
+    public Long getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(Date creationDate) {
+    public void setCreationDate(Long creationDate) {
         this.creationDate = creationDate;
     }
 

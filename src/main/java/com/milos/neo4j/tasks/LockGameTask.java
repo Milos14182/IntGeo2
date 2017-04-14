@@ -9,6 +9,7 @@ import com.milos.neo4j.services.GameService;
 import java.util.Calendar;
 import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -17,16 +18,16 @@ import org.springframework.stereotype.Component;
  * @author milos
  */
 @Component
-public class DeleteOldGames {
+public class LockGameTask {
     
     @Autowired
     private GameService gameService;
     
-    @Scheduled(fixedDelayString = "3600000")
-    public void deleteOldGames() {
+    @Scheduled(fixedDelayString = "5000")
+    public void lockUnlockedGames() {        
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date());
-        calendar.add(Calendar.HOUR, -1);
-        gameService.deleteOldGames(calendar.getTime());
+        calendar.add(Calendar.MINUTE, -1);
+        gameService.lockStartedGames(calendar.getTime());
     }
 }

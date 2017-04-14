@@ -7,18 +7,25 @@ import org.springframework.data.neo4j.repository.GraphRepository;
 
 import com.milos.neo4j.domain.nodes.Game;
 import java.util.Date;
+import java.util.List;
 
 public interface GameRepository extends GraphRepository<Game> {
 
-    @Query("MATCH (n:Game) WHERE n.activeGame = {0} RETURN n")
+    @Query("MATCH (n:Game) WHERE n.activeGame = {0} and n.locked = false RETURN n")
     public Set<Game> findAllInactiveGames(Boolean flag);
 
-    @Query("MATCH (n:Game) WHERE n.id = {1} SET n.firstLetter = {0} RETURN n")
+    @Query("MATCH (n:Game) WHERE ID(n) = {1} SET n.firstLetter = {0} RETURN n")
     public Game updateGameLetter(String letter, Long id);
     
-    @Query("MATCH (n:Game)-[rel]->() where n.cretionDate < {0} DELETE s,rel")
-    public void removeOldGames(Date beforeDate);
+    @Query("MATCH (n:Game)-[rel]->() WHERE n.creationDate < {0} DELETE n,rel")
+    public void removeOldGames(Long beforeDate);
     
-    @Query("MATCH (n:Game) where n.id = {0} SET n.locked = true RETURN s")
+    @Query("MATCH (n:Game) WHERE ID(n) = {0} SET n.locked = true RETURN n")
     public Game lockGame(Long id);
+    
+    @Query("MATCH (n:Game) WHERE n.locked = false RETURN n")
+    public Set<Game> getUnlockedGames();
+    
+    @Query("MATCH (n:Game) WHERE n.locked = false AND n.creationDate < {0} SET n.locked = true RETURN n")
+    public void lockUnlockedGames(Long startDate);
 }
