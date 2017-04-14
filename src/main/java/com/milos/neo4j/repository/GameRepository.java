@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface GameRepository extends GraphRepository<Game> {
 
-    @Query("MATCH (n:Game) WHERE n.activeGame = {0} and n.locked = false RETURN n")
+    @Query("MATCH (n:Game) WHERE n.locked = false RETURN n")
     public Set<Game> findAllInactiveGames(Boolean flag);
 
     @Query("MATCH (n:Game) WHERE ID(n) = {1} SET n.firstLetter = {0} RETURN n")
