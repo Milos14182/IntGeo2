@@ -21,9 +21,6 @@ public class Game {
     @Property(name = "numberOfPlayers")
     private Long numberOfPlayers;
 
-    @Property(name = "activeGame")
-    private Boolean activeGame;
-
     @Relationship(type = "GAME_RELATION", direction = Relationship.OUTGOING)
     private Set<User> players = new HashSet<>();
 
@@ -35,14 +32,6 @@ public class Game {
     
     @Property(name = "locked")
     private Boolean locked;
-
-    public Boolean getActiveGame() {
-        return activeGame;
-    }
-
-    public void setActiveGame(Boolean activeGame) {
-        this.activeGame = activeGame;
-    }
 
     public Long getId() {
         return id;

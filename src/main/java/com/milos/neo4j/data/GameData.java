@@ -12,18 +12,9 @@ public class GameData {
     private Long id;
     private Long numberOfPlayers;
     private Set<UserData> players = new HashSet<>();
-    private Boolean activeGame;
     private String firstLetter;
     private Date creationDate;
     private Boolean locked;
-
-    public Boolean getActiveGame() {
-        return activeGame;
-    }
-
-    public void setActiveGame(Boolean activeGame) {
-        this.activeGame = activeGame;
-    }
 
     public Long getId() {
         return id;

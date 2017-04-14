@@ -85,7 +85,6 @@ public class GameServiceImpl implements GameService {
                 players.add(user);
                 game.setPlayers(players);
                 game.setNumberOfPlayers(Long.valueOf(players.size()));
-                game.setActiveGame(false);
                 Date creationDate = new Date();
                 game.setCreationDate(creationDate.getTime());
                 game.setLocked(Boolean.FALSE);
