@@ -2,7 +2,7 @@ var stompClient = createStompClient();
 var answersAlreadySend = false;
 var collectAll = false;
 var count = 60;
-var counter = setInterval(roundTimer, 1000); //1000 will  run it every 1 second
+var counter = setInterval(loginPlayerTimer, 1000); //1000 will  run it every 1 second
 function setConnected(connected) {
     document.getElementById('connect').disabled = connected;
     document.getElementById('disconnect').disabled = !connected;
@@ -13,11 +13,22 @@ function setConnected(connected) {
 function connect(stompClient) {
     var pathnames = window.location.pathname.split('/');
     stompClient.connect({}, function (frame) {
-        roundTimer();
-        console.log('Connected: ' + frame);
-        stompClient.subscribe('/topic/play/answers/' + pathnames[pathnames.length - 1], function (
+        loginPlayerTimer();
+        $('#character').html("");
+        disableInputs();
+        stompClient.subscribe('/topic/play/checkLocked/' + pathnames[pathnames.length - 1], function (
                 calResult) {
-            showAllResults(calResult);
+            if (calResult) {
+                enableInputs();
+                counter = setInterval(roundTimer, 1000); //1000 will  run it every 1 second
+                roundTimer();
+                resetTimer();
+                console.log('Connected: ' + frame);
+                stompClient.subscribe('/topic/play/answers/' + pathnames[pathnames.length - 1], function (
+                        calResult) {
+                    showAllResults(calResult);
+                });
+            }
         });
     });
 }
@@ -28,11 +39,14 @@ function disconnect(stompClient) {
 }
 function sendNum(stompClient) {
     var pathnames = window.location.pathname.split('/');
-    
+
     stompClient.send("/intgeo/play/answers/" + pathnames[pathnames.length - 1], {},
             getInputValuesJSON());
 }
-
+function checkLockedGame(stompClient) {
+    var pathnames = window.location.pathname.split('/');
+    stompClient.send("/intgeo/play/checkLocked/" + pathnames[pathnames.length - 1], {});
+}
 function createStompClient() {
     var socket = new SockJS('/intgeo/greetingEndpoint');
     return Stomp.over(socket);
@@ -63,7 +77,7 @@ function getInputValuesJSON() {
         'plant': plant,
         'animal': animal,
         'gameId': gameId,
-        'collectAll' : collectAll
+        'collectAll': collectAll
     });
 }
 
@@ -77,7 +91,7 @@ function showAllResults(calResult) {
             answersAlreadySend = false;
             $(".answersSend").hide();
             if (answers[i].username == $('#input_username').val()) {
-                setMyAnswers(answers[i]); 
+                setMyAnswers(answers[i]);
             } else {
                 setIUserAnswers(answers[i], i)
             }
@@ -121,7 +135,7 @@ function roundTimer() {
     if (count <= 0)
     {
         clearInterval(counter);
-        if (!answersAlreadySend) {            
+        if (!answersAlreadySend) {
             collectAll = true;
             sendNum(stompClient);
         }
@@ -131,8 +145,41 @@ function roundTimer() {
     return false;
 }
 
+function loginPlayerTimer() {
+    $('#roundTimer').html(count);
+    count = count - 1;
+    if (count <= 0)
+    {
+        clearInterval(counter);
+        if (!answersAlreadySend) {
+            collectAll = true;
+            checkLockedGame(stompClient);
+        }
+        collectAll = false;
+        return true;
+    }
+    return false;
+}
 function resetTimer() {
     count = 60;
     clearInterval(counter);
     counter = setInterval(roundTimer, 1000);
+}
+function disableInputs() {
+    $('#input_state').attr("disabled", "disabled");
+    $('#input_city').attr("disabled", "disabled");
+    $('#input_mountain').attr("disabled", "disabled");
+    $('#input_lake').attr("disabled", "disabled");
+    $('#input_river').attr("disabled", "disabled");
+    $('#input_plant').attr("disabled", "disabled");
+    $('#input_animal').attr("disabled", "disabled");
+}
+function enableInputs() {
+    $('#input_state').removeAttr("disabled"); 
+    $('#input_city').removeAttr("disabled"); 
+    $('#input_mountain').removeAttr("disabled"); 
+    $('#input_lake').removeAttr("disabled"); 
+    $('#input_river').removeAttr("disabled"); 
+    $('#input_plant').removeAttr("disabled"); 
+    $('#input_animal').removeAttr("disabled"); 
 }
