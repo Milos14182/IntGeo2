@@ -28,4 +28,7 @@ public interface GameRepository extends GraphRepository<Game> {
     
     @Query("MATCH (n:Game) WHERE n.locked = false AND n.creationDate < {0} SET n.locked = true RETURN n")
     public void lockUnlockedGames(Long startDate);
+
+    @Query("MATCH (n:Game) WHERE ID(n) = {0} return n.locked")
+    public Boolean checkIsLocked(Long gameId);
 }

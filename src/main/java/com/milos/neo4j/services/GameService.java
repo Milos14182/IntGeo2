@@ -35,4 +35,6 @@ public interface GameService {
     public Set<GameData> getUnlockedGames();
     
     public void lockStartedGames(Date startDate);
+
+    public Boolean checkIsLocked(Long gameId);
 }

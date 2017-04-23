@@ -14,71 +14,76 @@ import com.milos.neo4j.services.PlayService;
 
 @Service
 public class RoundBrokerImpl implements RoundBroker {
-	@Autowired
-	PlayService playService;
-	
-	@Autowired
-	GameService gameService;
-	
-	String letter = "";
-	Boolean initalLetter = true;
-	@Override
-	public String createLetterForGameRound() {
-		initalLetter = false;
-		letter = playService.choseLetter();
-		return letter;
-	}
 
-	@Override
-	public boolean waitForAllUsersToAnswer(List<SubmitAnswersTmp> answers, Long gameId, boolean collectAll) {
-		GameData gameData = gameService.getGameById(gameId);
-		for (SubmitAnswersTmp submitAnswersTmp : answers) {
-			if ((!submitAnswersTmp.getSubmitet() || answers.size()!=gameData.getNumberOfPlayers().intValue())
-                                 && !collectAll) {
-				return false;
-			}
-		}
-		for (SubmitAnswersTmp submitAnswersTmp : answers) {
-			submitAnswersTmp.setSubmitet(false);
-		}
-		letter = playService.choseLetter();                
-                gameService.updateGameLetter(letter, gameId);
-		return true;
-	}
+    @Autowired
+    PlayService playService;
 
-	@Override
-	public boolean checkTime(Date roundStartTime) {
-		@SuppressWarnings("deprecation")
-		int minutes = roundStartTime.getMinutes();
-		@SuppressWarnings("deprecation")
-		int seconds = roundStartTime.getSeconds();
-		Date currentDate = new Date();
-		@SuppressWarnings("deprecation")
-		int currentSecconds = currentDate.getSeconds();
-		@SuppressWarnings("deprecation")
-		int currentMinutes = currentDate.getMinutes();
-		if ((minutes == (currentMinutes - 1)) && (seconds == currentSecconds)) {
-			return true;
-		} else {
-			return false;
-		}
-	}
+    @Autowired
+    GameService gameService;
 
-	@Override
-	public String getLetter() {
-		return letter;
-	}
+    String letter = "";
+    Boolean initalLetter = true;
 
-	@Override
-	public Boolean getInitalLetter() {
-		return initalLetter;
-	}
+    @Override
+    public String createLetterForGameRound() {
+        initalLetter = false;
+        letter = playService.choseLetter();
+        return letter;
+    }
 
-	@Override
-	public Long countScore(SubmitAnswersTmp submitAnswersTmp, UserData userData) {
-		return playService.countScore(submitAnswersTmp, userData);	
-	}
+    @Override
+    public boolean waitForAllUsersToAnswer(List<SubmitAnswersTmp> answers, Long gameId, boolean collectAll) {
+        GameData gameData = gameService.getGameById(gameId);
+        for (SubmitAnswersTmp submitAnswersTmp : answers) {
+            if ((!submitAnswersTmp.getSubmitet() || answers.size() != gameData.getNumberOfPlayers().intValue())
+                    && !collectAll) {
+                return false;
+            }
+        }
+        for (SubmitAnswersTmp submitAnswersTmp : answers) {
+            submitAnswersTmp.setSubmitet(false);
+        }
+        letter = playService.choseLetter();
+        gameService.updateGameLetter(letter, gameId);
+        return true;
+    }
 
-	
-	
+    @Override
+    public boolean checkTime(Date roundStartTime) {
+        @SuppressWarnings("deprecation")
+        int minutes = roundStartTime.getMinutes();
+        @SuppressWarnings("deprecation")
+        int seconds = roundStartTime.getSeconds();
+        Date currentDate = new Date();
+        @SuppressWarnings("deprecation")
+        int currentSecconds = currentDate.getSeconds();
+        @SuppressWarnings("deprecation")
+        int currentMinutes = currentDate.getMinutes();
+        if ((minutes == (currentMinutes - 1)) && (seconds == currentSecconds)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public String getLetter() {
+        return letter;
+    }
+
+    @Override
+    public Boolean getInitalLetter() {
+        return initalLetter;
+    }
+
+    @Override
+    public Long countScore(SubmitAnswersTmp submitAnswersTmp, UserData userData) {
+        return playService.countScore(submitAnswersTmp, userData);
+    }
+
+    @Override
+    public Boolean gameCanStart(Long gameId) {
+        return gameService.checkIsLocked(gameId);
+    }
+
 }

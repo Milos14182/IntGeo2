@@ -278,4 +278,15 @@ public class GameServiceImpl implements GameService {
         }
     }
 
+    @Transactional(readOnly = true)
+    @Override
+    public Boolean checkIsLocked(Long gameId) {
+        try {
+            return gameRepository.checkIsLocked(gameId);
+        } catch (RuntimeException ex) {
+            GEOGRAPHY_LOGGER.error("checkIsLocked throws error.", ex);
+            throw ex;
+        }
+    }
+
 }

@@ -19,4 +19,6 @@ public interface RoundBroker {
     public Boolean getInitalLetter();
 
     public Long countScore(SubmitAnswersTmp submitAnswersTmp, UserData userData);
+    
+    public Boolean gameCanStart(Long gameId);
 }

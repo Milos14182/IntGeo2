@@ -36,6 +36,11 @@ public class RoundController {
 	public RoundController() {
 		this.gamesContainer = new HashMap<>();
 	}
+        
+        @MessageMapping("/play/checkLocked/{gameId}")
+        public Boolean checkLocked(@DestinationVariable Long gameId) {
+            return roundBroker.gameCanStart(gameId);
+        }
 
 	@MessageMapping("/play/answers/{gameId}")
 	public String sendToGame(String answers, @DestinationVariable Integer gameId) throws Exception {
