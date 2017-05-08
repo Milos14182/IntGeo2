@@ -31,18 +31,17 @@
                 <form:label path="email">
                     <spring:message code="register.label.email" />
                 </form:label>
-                <form:input path="email" id="inputEmail" class="form-control" />
+                <form:input path="email" id="inputEmail" class="form-control" disabled="true"/>
                 <form:errors path="email" cssClass="error" />
             </div>
 
             <form:input type="hidden" path="username" />
-
             <div class="form-group">
                 <form:label path="password">
                     <spring:message code="register.label.password" />
                 </form:label>
                 <form:password path="password" id="inputPassword"
-                               class="form-control"/>
+                               class="form-control" showPassword="" value="${userData.password}"/>
                 <form:errors path="password" cssClass="error" />
             </div>
             <div class="form-group">

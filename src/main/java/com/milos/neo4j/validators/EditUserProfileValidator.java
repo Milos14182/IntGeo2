@@ -38,6 +38,7 @@ public class EditUserProfileValidator implements Validator {
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "age", "register.label.age.error");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "register.label.password.error");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "register.label.email.error");
+                ValidationUtils.rejectIfEmptyOrWhitespace(errors, "city", "register.label.city.error");
 
 		if (!(userData.getEmail() != null && userData.getEmail().isEmpty())) {
 			pattern = Pattern.compile(EMAIL_PATTERN);

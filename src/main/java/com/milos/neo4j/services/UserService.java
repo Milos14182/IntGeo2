@@ -5,6 +5,8 @@ import com.milos.neo4j.data.UserData;
 public interface UserService {
 
     public UserData save(UserData userData);
+    
+    public UserData authenticateUser(String username);
 
     public UserData getUser(String username);
 

@@ -22,46 +22,47 @@ import com.milos.neo4j.validators.EditUserProfileValidator;
 
 @Controller
 public class ProfileController {
-	@Autowired
-	UserService userService;
 
-	@Autowired
-	CityService cityService;
+    @Autowired
+    UserService userService;
 
-	@Autowired
-	EditUserProfileValidator editUserProfileValidator;
+    @Autowired
+    CityService cityService;
 
-	@InitBinder
-	protected void initBinder(WebDataBinder binder) {
-		binder.setValidator(editUserProfileValidator);
-	}
+    @Autowired
+    EditUserProfileValidator editUserProfileValidator;
 
-	@RequestMapping(value = "/profile", method = RequestMethod.GET)
-	public String profile(final HttpServletRequest request) {
-		return "profile";
-	}
+    @InitBinder
+    protected void initBinder(WebDataBinder binder) {
+        binder.setValidator(editUserProfileValidator);
+    }
 
-	@RequestMapping(value = "/profile/edit/{username}", method = RequestMethod.GET)
-	public String editUserProfile(@PathVariable String username, Model model) {
-		UserData userData = userService.getUser(username);
-		Iterable<CityData> citys = cityService.findAllCitys();
-		model.addAttribute("userData", userData);
-		model.addAttribute("citys", citys);
-		return "editUser";
-	}
+    @RequestMapping(value = "/profile", method = RequestMethod.GET)
+    public String profile(final HttpServletRequest request) {
+        return "profile";
+    }
 
-	@RequestMapping(value = "/profile/edit/{username}", method = RequestMethod.POST)
-	public String editUserProfile(@ModelAttribute("userData") UserData user, final HttpServletRequest request,
-			final HttpServletResponse response, final BindingResult errors, final Model model) {
-		editUserProfileValidator.validate(user, errors);
-		if (errors.hasErrors()) {
-			Iterable<CityData> citys = cityService.findAllCitys();
-			model.addAttribute("citys", citys);
-			return "editUser";
-		}
-		user = userService.updateUser(user);
-		request.getSession().setAttribute("userDetails", user);
-		return "redirect:/profile";
+    @RequestMapping(value = "/profile/edit/{username}", method = RequestMethod.GET)
+    public String editUserProfile(@PathVariable String username, Model model) {
+        UserData userData = userService.getUser(username);
+        Iterable<CityData> citys = cityService.findAllCitys();
+        model.addAttribute("userData", userData);
+        model.addAttribute("citys", citys);
+        return "editUser";
+    }
 
-	}
+    @RequestMapping(value = "/profile/edit/{username}", method = RequestMethod.POST)
+    public String editUserProfile(@ModelAttribute("userData") UserData user, final HttpServletRequest request,
+            final HttpServletResponse response, final BindingResult errors, final Model model) {
+        editUserProfileValidator.validate(user, errors);
+        if (errors.hasErrors()) {
+            Iterable<CityData> citys = cityService.findAllCitys();
+            model.addAttribute("citys", citys);
+            return "editUser";
+        }
+        user = userService.updateUser(user);
+        request.getSession().setAttribute("userDetails", user);
+        return "redirect:/profile";
+
+    }
 }

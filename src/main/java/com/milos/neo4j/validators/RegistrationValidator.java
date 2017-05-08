@@ -37,6 +37,7 @@ public class RegistrationValidator implements Validator {
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "age", "register.label.age.error");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "register.label.password.error");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "register.label.email.error");
+                ValidationUtils.rejectIfEmptyOrWhitespace(errors, "city", "register.label.city.error");
 
 		UserData userFromDatabase = userService.getUser(userData.getUsername());
 		if (userFromDatabase != null) {

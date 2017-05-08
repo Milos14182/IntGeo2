@@ -23,7 +23,6 @@ function connect(stompClient) {
                 counter = setInterval(roundTimer, 1000); //1000 will  run it every 1 second
                 roundTimer();
                 resetTimer();
-                
                 console.log('Connected: ' + frame);
                 stompClient.subscribe('/topic/play/answers/' + pathnames[pathnames.length - 1], function (
                         calResult) {

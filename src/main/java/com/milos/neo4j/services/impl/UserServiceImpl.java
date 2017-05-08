@@ -15,8 +15,11 @@ import com.milos.neo4j.repository.CityRepository;
 import com.milos.neo4j.repository.UserRepository;
 import com.milos.neo4j.repository.relations.LivesInCityRepository;
 import com.milos.neo4j.services.UserService;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service("userService")
+@Transactional(propagation = Propagation.MANDATORY)
 public class UserServiceImpl implements UserService {
 
     @Autowired
@@ -32,6 +35,7 @@ public class UserServiceImpl implements UserService {
     private UserConverter userConverter;
 
     @Override
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     public UserData save(UserData userData) {
         City city = cityRepository.getCityByName(userData.getCity().getName());
         userData.setCity(new CityData());
@@ -44,6 +48,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public UserData getUser(String username) {
         LivesInCity livesInCity = livesInCityRepository.getUserByUsername(username);
         UserData userData = null;
@@ -58,6 +63,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     public UserData updateUser(UserData userData) {
         User dataUser = new User();
         userConverter.copyFromDataToEntity(userData, dataUser);
@@ -71,4 +77,22 @@ public class UserServiceImpl implements UserService {
         userConverter.copyFromEntityToData(user, userData);
         return userData;
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public UserData authenticateUser(String username)throws RuntimeException {
+        User user = userRepository.getUserByUsername(username);        
+        if (user != null) {
+            UserData userData = new UserData();
+            userData.setCity(new CityData());
+            LivesInCity livesInCity = livesInCityRepository.getUserByUsername(username);
+            if (livesInCity!=null && livesInCity.getCity()!=null) {
+                user.setCity(livesInCity.getCity());
+            }
+            userConverter.copyFromEntityToData(user, userData);
+            return userData;
+        }        
+        throw new RuntimeException("Authentication for user failed, user is null.");
+    }
+
 }

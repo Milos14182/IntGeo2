@@ -79,6 +79,7 @@
                             <form:option value="${city.name}" label="${city.name}" />
                         </c:forEach>
                     </form:select>
+                    <form:errors path="city" class="control-label" />
                 </div>
                 <div class="row">
                     <div class="form-group">

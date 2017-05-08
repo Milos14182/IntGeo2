@@ -29,7 +29,7 @@ public class IntgeoAuthenticationSuccessHandler implements AuthenticationSuccess
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
             Authentication authentication) throws IOException, ServletException {
         String username = authentication.getName();
-        UserData user = userService.getUser(username);
+        UserData user = userService.authenticateUser(username);
         request.getSession().setAttribute("userDetails", user);
         redirectStrategy.sendRedirect(request, response, "/");
     }
