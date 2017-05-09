@@ -29,9 +29,15 @@ public class Game {
 
     @Property(name = "creationDate")
     private Long creationDate;
-    
+
     @Property(name = "locked")
     private Boolean locked;
+
+    @Property(name = "roundStartDate")
+    private Long roundStartDate;
+
+    @Property(name = "currentRound")
+    private Integer currentRoundNumber;
 
     public Long getId() {
         return id;
@@ -80,5 +86,21 @@ public class Game {
     public void setLocked(Boolean locked) {
         this.locked = locked;
     }
-    
+
+    public Long getRoundStartDate() {
+        return roundStartDate;
+    }
+
+    public void setRoundStartDate(Long roundStartDate) {
+        this.roundStartDate = roundStartDate;
+    }
+
+    public Integer getCurrentRoundNumber() {
+        return currentRoundNumber;
+    }
+
+    public void setCurrentRoundNumber(Integer currentRoundNumber) {
+        this.currentRoundNumber = currentRoundNumber;
+    }
+
 }

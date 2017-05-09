@@ -14,8 +14,8 @@ public interface GameRepository extends GraphRepository<Game> {
     @Query("MATCH (n:Game) WHERE n.locked = false RETURN n")
     public Set<Game> findAllInactiveGames(Boolean flag);
 
-    @Query("MATCH (n:Game) WHERE ID(n) = {1} SET n.firstLetter = {0} RETURN n")
-    public Game updateGameLetter(String letter, Long id);
+    @Query("MATCH (n:Game) WHERE ID(n) = {1} SET n.firstLetter = {0}, n.currentRound = {2}, n.roundStartDate = {3} RETURN n")
+    public Game updateGameLetter(String letter, Long id, Integer round, Long date);
     
     @Query("MATCH (n:Game)-[rel]->() WHERE n.creationDate < {0} DELETE n,rel")
     public void removeOldGames(Long beforeDate);

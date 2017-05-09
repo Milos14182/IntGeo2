@@ -37,9 +37,19 @@ public class RoundController {
 		this.gamesContainer = new HashMap<>();
 	}
         
+        @MessageMapping("/play/initialization/{gameId}")
+        public Integer checkInitiationTime(@DestinationVariable Long gameId) {
+            return roundBroker.waitUsersToJoinGame(gameId);
+        }
+        
         @MessageMapping("/play/checkLocked/{gameId}")
         public Boolean checkLocked(@DestinationVariable Long gameId) {
             return roundBroker.gameCanStart(gameId);
+        }
+        
+        @MessageMapping("/play/roundSync/{gameId}")
+        public Integer rooundSync(@DestinationVariable Long gameId) {
+            return roundBroker.gameRoundSinc(gameId);
         }
 
 	@MessageMapping("/play/answers/{gameId}")

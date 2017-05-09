@@ -11,6 +11,7 @@ import com.milos.neo4j.data.SubmitAnswersTmp;
 import com.milos.neo4j.data.UserData;
 import com.milos.neo4j.services.GameService;
 import com.milos.neo4j.services.PlayService;
+import java.util.Calendar;
 
 @Service
 public class RoundBrokerImpl implements RoundBroker {
@@ -44,7 +45,8 @@ public class RoundBrokerImpl implements RoundBroker {
             submitAnswersTmp.setSubmitet(false);
         }
         letter = playService.choseLetter();
-        gameService.updateGameLetter(letter, gameId);
+        Date roundDate = new Date();
+        gameService.updateGameLetter(letter, gameId, gameData.getCurrentRoundNumber() + 1, roundDate.getTime());
         return true;
     }
 
@@ -84,6 +86,42 @@ public class RoundBrokerImpl implements RoundBroker {
     @Override
     public Boolean gameCanStart(Long gameId) {
         return gameService.checkIsLocked(gameId);
+    }
+
+    @Override
+    public Integer waitUsersToJoinGame(Long gameId) {
+        GameData gameData = gameService.getGameById(gameId);
+        if (gameData != null && gameData.getLocked().equals(Boolean.FALSE)) {
+            Calendar calendar = Calendar.getInstance();
+            calendar.add(Calendar.MINUTE, -1);
+            Date date = calendar.getTime();
+            if (date.compareTo(gameData.getCreationDate()) < 0) {
+                Calendar creationDate = Calendar.getInstance();
+                long difference = creationDate.getTime().getTime() - gameData.getCreationDate().getTime();
+                Date diff = new Date(difference);
+                int positiveDiff = (diff.getSeconds() - 60) * -1;
+                return diff.getSeconds() == 0 ? Integer.valueOf(0) : positiveDiff;
+            }
+        }
+        return Integer.valueOf(0);
+    }
+
+    @Override
+    public Integer gameRoundSinc(Long gameId) {
+        GameData gameData = gameService.getGameById(gameId);
+        if (gameData != null && gameData.getLocked().equals(Boolean.TRUE)) {
+            Calendar calendar = Calendar.getInstance();
+            calendar.add(Calendar.MINUTE, -1);
+            Date date = calendar.getTime();
+            if (date.compareTo(gameData.getRoundStartDate()) < 0) {
+                Calendar creationDate = Calendar.getInstance();
+                long difference = creationDate.getTime().getTime() - gameData.getRoundStartDate().getTime();
+                Date diff = new Date(difference);
+                int positiveDiff = (diff.getSeconds() - 60) * -1;
+                return diff.getSeconds() == 0 ? Integer.valueOf(0) : positiveDiff;
+            }
+        }
+        return Integer.valueOf(0);
     }
 
 }

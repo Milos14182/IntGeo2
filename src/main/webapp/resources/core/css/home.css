@@ -45,6 +45,10 @@ body {
     border: 10px solid #00E554;
     border-radius: 50%;
 }
+.img-circle-player {
+    height: 10vh;
+    border-radius: 50%;
+}
 
 .playTable {
     background-image: url("../../resources/images/IGTable.png");
@@ -108,4 +112,11 @@ body {
 }
 .gameLink {
     margin-top: -10px;
+}
+#playerImage {
+    width: 5vw;
+    height: 5vw;
+    position: absolute;
+    margin-left: 34.3vw;
+    margin-top: 51vh;
 }

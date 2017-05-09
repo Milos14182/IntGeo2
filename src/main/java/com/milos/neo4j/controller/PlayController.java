@@ -18,30 +18,6 @@ public class PlayController {
 	@Autowired
 	GameService gameService;
 
-//	@RequestMapping(value = "/play", method = RequestMethod.GET)
-//	public String play(Model model, HttpServletRequest request) {
-//		SubmitAnswersTmp subAnsTmp = new SubmitAnswersTmp();
-//		String character = playService.choseLetter();
-//		model.addAttribute("answers", subAnsTmp);
-//		request.getSession().setAttribute("scorePerRound", Long.valueOf(0));
-//		request.getSession().setAttribute("character", character);
-//		return "play";
-//	}
-
-//	@RequestMapping(value = "/play", method = RequestMethod.POST)
-//	public String play(@ModelAttribute("answers") SubmitAnswersTmp answers, HttpServletRequest request,
-//			HttpServletResponse response, Model model) {
-//		Long scorePerRound = (Long) request.getSession().getAttribute("scorePerRound");
-//		String character = (String) request.getSession().getAttribute("character");
-//		UserData userData = (UserData) request.getSession().getAttribute("userDetails");
-//		scorePerRound = playService.countScore(answers, userData);
-//		request.getSession().setAttribute("scorePerRound", scorePerRound);
-//		character = playService.choseLetter();
-//		request.getSession().setAttribute("character", character);
-//		model.addAttribute("answers", new SubmitAnswersTmp());
-//		return "play";
-//	}
-
 	@RequestMapping(value = "/play/{gameId}", method = RequestMethod.GET)
 	public String playGame(HttpServletRequest request, @PathVariable Long gameId, Model model) {
 		SubmitAnswersTmp subAnsTmp = new SubmitAnswersTmp();

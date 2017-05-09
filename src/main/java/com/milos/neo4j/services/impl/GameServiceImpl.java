@@ -22,6 +22,7 @@ import com.milos.neo4j.repository.UserRepository;
 import com.milos.neo4j.repository.relations.GameRelationRepository;
 import com.milos.neo4j.services.GameService;
 import com.milos.neo4j.services.PlayService;
+import java.util.Calendar;
 import java.util.Date;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,47 +32,47 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional(propagation = Propagation.MANDATORY)
 public class GameServiceImpl implements GameService {
-
+    
     private static Logger GEOGRAPHY_LOGGER = LoggerFactory.getLogger("GEOGRAPHY");
-
+    
     @Autowired
     GameRepository gameRepository;
-
+    
     @Autowired
     GameRelationRepository gameRelationRepository;
-
+    
     @Autowired
     UserGameScoresRepository userGameScoresRepository;
-
+    
     @Autowired
     GameConverter gameConverter;
-
+    
     @Autowired
     UserRepository userRepository;
-
+    
     @Autowired
     UserConverter userConverter;
-
+    
     @Autowired
     PlayService playService;
-
+    
     @Autowired
     UserGameConverter userGameConverter;
-
+    
     @Transactional(readOnly = true)
     @Override
     public GameData getGameById(Long id) {
         GameData gameData = new GameData();
         try {
-            gameConverter.copyFromEntityToData(gameRepository.findOne(id), gameData);
+            gameConverter.copyFromEntityToData(gameRepository.findOne(id), gameData, "creationDate", "roundStartDate");
         } catch (RuntimeException ex) {
             GEOGRAPHY_LOGGER.error("getGameById throws error.", ex);
             throw ex;
         }
         return gameData;
     }
-
-    @Transactional(readOnly = false)
+    
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     @Override
     public GameData createNewGame(UserData userData) {
         GameData gameData = null;
@@ -88,6 +89,11 @@ public class GameServiceImpl implements GameService {
                 Date creationDate = new Date();
                 game.setCreationDate(creationDate.getTime());
                 game.setLocked(Boolean.FALSE);
+                game.setCurrentRoundNumber(1);
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(creationDate);
+                cal.add(Calendar.MINUTE, 1);
+                game.setRoundStartDate(cal.getTime().getTime());
                 gameRepository.save(game);
                 gameData = new GameData();
                 gameConverter.copyFromEntityToData(game, gameData);
@@ -98,7 +104,7 @@ public class GameServiceImpl implements GameService {
         }
         return gameData;
     }
-
+    
     @Transactional(readOnly = true)
     @Override
     public Set<GameData> getAllInactiveGames() {
@@ -112,8 +118,8 @@ public class GameServiceImpl implements GameService {
         }
         return inactiveGameDatas;
     }
-
-    @Transactional(readOnly = false)
+    
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     @Override
     public GameData addPlayer(UserData userData, Long gameId) {
         User user = new User();
@@ -141,7 +147,7 @@ public class GameServiceImpl implements GameService {
         }
         return gameData;
     }
-
+    
     @Transactional(readOnly = true)
     @Override
     public Set<UserGameData> getAllGamesForPlayer(UserData userData) {
@@ -167,8 +173,8 @@ public class GameServiceImpl implements GameService {
         }
         return userGameDatas;
     }
-
-    @Transactional(readOnly = false)
+    
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     @Override
     public void createNewUserGame(UserData userData, GameData game) {
         UserGameScores gameScores = new UserGameScores();
@@ -182,7 +188,7 @@ public class GameServiceImpl implements GameService {
             throw ex;
         }
     }
-
+    
     @Transactional(readOnly = true)
     @Override
     public UserGameData getUserGameData(String username, Long gameId) {
@@ -199,57 +205,57 @@ public class GameServiceImpl implements GameService {
         }
         return null;
     }
-
-    @Transactional(readOnly = false)
+    
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     @Override
     public void updateUserGame(String username, Long gameId, Long score) {
         try {
-        userGameScoresRepository.updateUserGameScore(username, gameId, score);
+            userGameScoresRepository.updateUserGameScore(username, gameId, score);
         } catch (RuntimeException ex) {
             GEOGRAPHY_LOGGER.error("updateUserGame throws error.", ex);
             throw ex;
         }
     }
-
-    @Transactional(readOnly = false)
+    
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     @Override
-    public void updateGameLetter(String letter, Long gameId) {
+    public void updateGameLetter(String letter, Long gameId, Integer round, Long date) {
         try {
-        gameRepository.updateGameLetter(letter, gameId);
+            gameRepository.updateGameLetter(letter, gameId, round, date);
         } catch (RuntimeException ex) {
             GEOGRAPHY_LOGGER.error("updateGameLetter throws error.", ex);
             throw ex;
         }
     }
-
-    @Transactional(readOnly = false)
+    
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     @Override
     public void deleteOldGames(Date beforeDate) {
         try {
-        gameRepository.removeOldGames(beforeDate.getTime());
+            gameRepository.removeOldGames(beforeDate.getTime());
         } catch (RuntimeException ex) {
             GEOGRAPHY_LOGGER.error("deleteOldGames throws error.", ex);
             throw ex;
         }
     }
-
-    @Transactional(readOnly = false)
+    
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     @Override
     public GameData lockGame(Long gameId) {        
         GameData gameData = null;
         try {
-        Game game = gameRepository.lockGame(gameId);
-        if (game != null) {
-            gameData = new GameData();
-            gameConverter.copyFromEntityToData(game, gameData);
-        }
+            Game game = gameRepository.lockGame(gameId);
+            if (game != null) {
+                gameData = new GameData();
+                gameConverter.copyFromEntityToData(game, gameData);
+            }
         } catch (RuntimeException ex) {
             GEOGRAPHY_LOGGER.error("lockGame throws error.", ex);
             throw ex;
         }
         return gameData;
     }
-
+    
     @Transactional(readOnly = true)
     @Override
     public Set<GameData> getUnlockedGames() {
@@ -266,8 +272,8 @@ public class GameServiceImpl implements GameService {
         }
         return unlockedGameDatas;
     }
-
-    @Transactional(readOnly = false)
+    
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     @Override
     public void lockStartedGames(Date startDate) {
         try {
@@ -277,7 +283,7 @@ public class GameServiceImpl implements GameService {
             throw ex;
         }
     }
-
+    
     @Transactional(readOnly = true)
     @Override
     public Boolean checkIsLocked(Long gameId) {
@@ -288,5 +294,5 @@ public class GameServiceImpl implements GameService {
             throw ex;
         }
     }
-
+    
 }

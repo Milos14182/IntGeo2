@@ -58,6 +58,10 @@ public class UserServiceImpl implements UserService {
             userData = new UserData();
             userData.setCity(new CityData());
             userConverter.copyFromEntityToData(user, userData);
+        } else {
+           User user = userRepository.getUserByUsername(username);
+           userData = new UserData();
+           userConverter.copyFromEntityToData(user, userData);
         }
         return userData;
     }

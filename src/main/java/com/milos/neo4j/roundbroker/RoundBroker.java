@@ -21,4 +21,8 @@ public interface RoundBroker {
     public Long countScore(SubmitAnswersTmp submitAnswersTmp, UserData userData);
     
     public Boolean gameCanStart(Long gameId);
+
+    public Integer waitUsersToJoinGame(Long gameId);
+    
+    public Integer gameRoundSinc(Long gameId);
 }

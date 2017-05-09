@@ -15,6 +15,8 @@ public class GameData {
     private String firstLetter;
     private Date creationDate;
     private Boolean locked;
+    private Date roundStartDate;
+    private Integer currentRoundNumber;
 
     public Long getId() {
         return id;
@@ -62,6 +64,22 @@ public class GameData {
 
     public void setLocked(Boolean locked) {
         this.locked = locked;
+    }
+
+    public Date getRoundStartDate() {
+        return roundStartDate;
+    }
+
+    public void setRoundStartDate(Date roundStartDate) {
+        this.roundStartDate = roundStartDate;
+    }
+
+    public Integer getCurrentRoundNumber() {
+        return currentRoundNumber;
+    }
+
+    public void setCurrentRoundNumber(Integer currentRoundNumber) {
+        this.currentRoundNumber = currentRoundNumber;
     }
 
 }

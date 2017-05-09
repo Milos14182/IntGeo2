@@ -2,7 +2,8 @@ var stompClient = createStompClient();
 var answersAlreadySend = false;
 var collectAll = false;
 var count = 60;
-var counter = setInterval(loginPlayerTimer, 1000); //1000 will  run it every 1 second
+var counter = null;
+//1000 will  run it every 1 second
 function setConnected(connected) {
     document.getElementById('connect').disabled = connected;
     document.getElementById('disconnect').disabled = !connected;
@@ -13,23 +14,36 @@ function setConnected(connected) {
 function connect(stompClient) {
     var pathnames = window.location.pathname.split('/');
     stompClient.connect({}, function (frame) {
-        loginPlayerTimer();
+        counter = setInterval(loginPlayerTimer, 1000);
+        waitPlayers(stompClient);
         $('#character').html("");
         disableInputs();
-        stompClient.subscribe('/topic/play/checkLocked/' + pathnames[pathnames.length - 1], function (
+        stompClient.subscribe('/topic/play/initialization/' + pathnames[pathnames.length - 1], function (
                 calResult) {
-            if (calResult) {
-                enableInputs();
-                counter = setInterval(roundTimer, 1000); //1000 will  run it every 1 second
-                roundTimer();
-                resetTimer();
-                console.log('Connected: ' + frame);
-                stompClient.subscribe('/topic/play/answers/' + pathnames[pathnames.length - 1], function (
-                        calResult) {
-                    showAllResults(calResult);
-                });
+            console.log(calResult.body);
+            if (calResult.body != "0") {
+                count = calResult.body;
+            } else {
+                startRound();
             }
         });
+    });
+}
+function startRound() {
+    var pathnames = window.location.pathname.split('/');
+    roundSync(stompClient);
+    clearInterval(counter);
+    enableInputs();
+    counter = setInterval(roundTimer, 1000); //1000 will  run it every 1 second
+    roundTimer();
+    stompClient.subscribe('/topic/play/roundSync/' + pathnames[pathnames.length - 1], function (
+            data) {
+        resetTimer(data.body);
+    });
+    stompClient.subscribe('/topic/play/answers/' + pathnames[pathnames.length - 1], function (
+            data) {
+        roundSync(stompClient);
+        showAllResults(data);
     });
 }
 function disconnect(stompClient) {
@@ -46,6 +60,15 @@ function sendNum(stompClient) {
 function checkLockedGame(stompClient) {
     var pathnames = window.location.pathname.split('/');
     stompClient.send("/intgeo/play/checkLocked/" + pathnames[pathnames.length - 1], {});
+}
+
+function waitPlayers(stompClient) {
+    var pathnames = window.location.pathname.split('/');
+    stompClient.send("/intgeo/play/initialization/" + pathnames[pathnames.length - 1], {});
+}
+function roundSync(stompClient) {
+    var pathnames = window.location.pathname.split('/');
+    stompClient.send("/intgeo/play/roundSync/" + pathnames[pathnames.length - 1], {});
 }
 function createStompClient() {
     var socket = new SockJS('/intgeo/greetingEndpoint');
@@ -153,15 +176,15 @@ function loginPlayerTimer() {
         clearInterval(counter);
         if (!answersAlreadySend) {
             collectAll = true;
-            checkLockedGame(stompClient);
+            startRound();
         }
         collectAll = false;
         return true;
     }
     return false;
 }
-function resetTimer() {
-    count = 60;
+function resetTimer(time) {
+    count = time;
     clearInterval(counter);
     counter = setInterval(roundTimer, 1000);
 }
@@ -175,11 +198,11 @@ function disableInputs() {
     $('#input_animal').attr("disabled", "disabled");
 }
 function enableInputs() {
-    $('#input_state').removeAttr("disabled"); 
-    $('#input_city').removeAttr("disabled"); 
-    $('#input_mountain').removeAttr("disabled"); 
-    $('#input_lake').removeAttr("disabled"); 
-    $('#input_river').removeAttr("disabled"); 
-    $('#input_plant').removeAttr("disabled"); 
-    $('#input_animal').removeAttr("disabled"); 
+    $('#input_state').removeAttr("disabled");
+    $('#input_city').removeAttr("disabled");
+    $('#input_mountain').removeAttr("disabled");
+    $('#input_lake').removeAttr("disabled");
+    $('#input_river').removeAttr("disabled");
+    $('#input_plant').removeAttr("disabled");
+    $('#input_animal').removeAttr("disabled");
 }
