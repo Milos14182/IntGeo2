@@ -101,7 +101,7 @@ public class PlayServiceImpl implements PlayService {
                         answers.setScore(answers.getScore() + extraPoints);
                     }
                 }
-                if (city.getName().equals(userData.getCity().getName())) {
+                if (userData.getCity() != null && city.getName().equals(userData.getCity().getName())) {
                     answers.setScore(answers.getScore() - extraPoints);
                 }
                 answers.setScore(answers.getScore() + uniqueRightResult);
@@ -145,7 +145,7 @@ public class PlayServiceImpl implements PlayService {
                 }
             }
         }
-        if (userData.getCity()!=null && userData.getCity().getName().equals(answers.getCity())) {
+        if (userData.getCity() != null && userData.getCity().getName().equals(answers.getCity())) {
             answers.setScore(answers.getScore() + uniqueRightResult);
         }
         checkAndSaveIntoDatabase(answers);
