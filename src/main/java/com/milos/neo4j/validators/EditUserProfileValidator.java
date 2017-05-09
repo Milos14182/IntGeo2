@@ -37,16 +37,16 @@ public class EditUserProfileValidator implements Validator {
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "lastname", "register.label.lastname.error");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "age", "register.label.age.error");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "register.label.password.error");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "register.label.email.error");
+//		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "register.label.email.error");
                 ValidationUtils.rejectIfEmptyOrWhitespace(errors, "city", "register.label.city.error");
 
-		if (!(userData.getEmail() != null && userData.getEmail().isEmpty())) {
-			pattern = Pattern.compile(EMAIL_PATTERN);
-			matcher = pattern.matcher(userData.getEmail());
-			if (!matcher.matches()) {
-				errors.rejectValue("email", "register.label.email.error");
-			}
-		}
+//		if (!(userData.getEmail() != null && userData.getEmail().isEmpty())) {
+//			pattern = Pattern.compile(EMAIL_PATTERN);
+//			matcher = pattern.matcher(userData.getEmail());
+//			if (!matcher.matches()) {
+//				errors.rejectValue("email", "register.label.email.error");
+//			}
+//		}
 		if (!(userData.getAge() != null && userData.getAge().isEmpty())) {
 			pattern = Pattern.compile(ID_PATTERN);
 			matcher = pattern.matcher(userData.getAge());

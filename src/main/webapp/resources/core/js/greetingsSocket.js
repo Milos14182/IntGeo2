@@ -54,16 +54,16 @@ function disconnect(stompClient) {
 function sendNum(stompClient) {
     var pathnames = window.location.pathname.split('/');
 
-//    stompClient.send("/intgeo/play/answers/" + pathnames[pathnames.length - 1], {},
-//            getInputValuesJSON());
-    //deploy
-    stompClient.send("/play/answers/" + pathnames[pathnames.length - 1], {},
+    stompClient.send("/intgeo/play/answers/" + pathnames[pathnames.length - 1], {},
             getInputValuesJSON());
+    //deploy
+//    stompClient.send("/play/answers/" + pathnames[pathnames.length - 1], {},
+//            getInputValuesJSON());
 }
 function checkLockedGame(stompClient) {
     var pathnames = window.location.pathname.split('/');
-//    stompClient.send("/intgeo/play/checkLocked/" + pathnames[pathnames.length - 1], {});
-    stompClient.send("/play/checkLocked/" + pathnames[pathnames.length - 1], {});
+    stompClient.send("/intgeo/play/checkLocked/" + pathnames[pathnames.length - 1], {});
+//    stompClient.send("/play/checkLocked/" + pathnames[pathnames.length - 1], {});
 }
 
 function waitPlayers(stompClient) {
@@ -73,14 +73,14 @@ function waitPlayers(stompClient) {
 }
 function roundSync(stompClient) {
     var pathnames = window.location.pathname.split('/');
+    stompClient.send("/intgeo/play/roundSync/" + pathnames[pathnames.length - 1], {});
 //    stompClient.send("/intgeo/play/roundSync/" + pathnames[pathnames.length - 1], {});
-    stompClient.send("/play/roundSync/" + pathnames[pathnames.length - 1], {});
 }
 function createStompClient() {
     //razvojni
-//    var socket = new SockJS('/intgeo/greetingEndpoint');
+    var socket = new SockJS('/intgeo/greetingEndpoint');
     //deploy
-    var socket = new SockJS('/greetingEndpoint');
+//    var socket = new SockJS('/greetingEndpoint');
     return Stomp.over(socket);
 }
 

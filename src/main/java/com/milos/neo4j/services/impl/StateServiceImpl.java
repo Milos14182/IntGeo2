@@ -42,9 +42,13 @@ public class StateServiceImpl implements StateService {
     @Transactional(readOnly = true)
     @Override
     public Iterable<StateData> getAllStates() {
-        Set<State> states = (Set<State>) stateRepository.findAll();
+        Iterable<State> states = stateRepository.findAll();
+        Set<State> setStates = new HashSet<>();
         Set<StateData> stateDatas = new HashSet<>();
-        stateConverter.copyFromEntitySetToDataSet(states, stateDatas, new StateData());
+        for (State state : states) {
+            setStates.add(state);
+        }        
+        stateConverter.copyFromEntitySetToDataSet(setStates, stateDatas, new StateData());
         List<StateData> sortedStateDatas = new ArrayList<>(stateDatas);
         Collections.sort(sortedStateDatas, (a, b) -> b.getName().compareTo(a.getName()));
         return sortedStateDatas;

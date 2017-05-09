@@ -17,60 +17,71 @@ import com.milos.neo4j.repository.CityRepository;
 import com.milos.neo4j.repository.StateRepository;
 import com.milos.neo4j.repository.relations.CityIsInStateRepository;
 import com.milos.neo4j.services.CityService;
+import java.util.Comparator;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 @Transactional(propagation = Propagation.MANDATORY)
 @Service("cityService")
 public class CityServiceImpl implements CityService {
-	@Autowired
-	CityRepository cityRepository;
-	
-	@Autowired
-	CityIsInStateRepository cityIsInStateRepository;
-	
-	@Autowired
-	StateRepository stateRepository;
-	
-	@Autowired
-	CityConverter cityConverter;
-	
-        @Transactional(readOnly = true)
-        @Override
-	public Iterable<CityData> findAllCitys() {
-		Set<City> citys = cityRepository.getAllCities();
-		Set<CityData> cityDatas = new HashSet<>();
-		CityData cityData = new CityData();
-		cityConverter.copyFromEntitySetToDataSet(citys, cityDatas, cityData);
-		List<CityData> sortedCityes = new ArrayList<>(cityDatas);
-		Collections.sort(sortedCityes, (a, b) -> b.getName().compareTo(a.getName()));
-		return sortedCityes;
-	}
 
-        @Transactional(readOnly = true)
-        @Override
-	public CityData getCityByName(String name) {
-		CityData cityData = null;
-		City city = cityRepository.getCityByName(name);
-		if (city != null) {
-			cityData = new CityData();
-			cityConverter.copyFromEntityToData(city, cityData);
-		}
-		return cityData;
-	}
+    @Autowired
+    CityRepository cityRepository;
 
-        @Transactional(readOnly = false)
-	@Override
-	public void saveCity(CityData cityData) {
-		City city = new City();
-		cityConverter.copyFromDataToEntity(cityData, city);
-		if (cityData.getStateData()!=null) {
-			if (cityData.getStateData().getId()!=null) {
-				State state = stateRepository.findOne(cityData.getStateData().getId());
-				city.setState(state);
-			}
-		}
-		cityRepository.save(city);
-	}
+    @Autowired
+    CityIsInStateRepository cityIsInStateRepository;
+
+    @Autowired
+    StateRepository stateRepository;
+
+    @Autowired
+    CityConverter cityConverter;
+
+    @Transactional(readOnly = true)
+    @Override
+    public Iterable<CityData> findAllCitys() {
+        Set<City> citys = cityRepository.getAllCities();
+        Set<CityData> cityDatas = new HashSet<>();
+        CityData cityData = new CityData();
+        cityConverter.copyFromEntitySetToDataSet(citys, cityDatas, cityData);
+        List<CityData> sortedCityes = new ArrayList<>(cityDatas);
+        Collections.sort(sortedCityes, (CityData a, CityData b) -> {
+            if (a.getName() != null && b.getName() != null) {
+                return b.getName().compareTo(a.getName());
+            } else if (a.getName() != null && b.getName() == null) {
+                return 1;
+            } else {
+                return -1;
+            }
+        });
+//        Collections.sort(sortedCityes, (a, b) -> b.getName().compareTo(a.getName()));
+        return sortedCityes;
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public CityData getCityByName(String name) {
+        CityData cityData = null;
+        City city = cityRepository.getCityByName(name);
+        if (city != null) {
+            cityData = new CityData();
+            cityConverter.copyFromEntityToData(city, cityData);
+        }
+        return cityData;
+    }
+
+    @Transactional(readOnly = false)
+    @Override
+    public void saveCity(CityData cityData) {
+        City city = new City();
+        cityConverter.copyFromDataToEntity(cityData, city);
+        if (cityData.getStateData() != null) {
+            if (cityData.getStateData().getId() != null) {
+                State state = stateRepository.findOne(cityData.getStateData().getId());
+                city.setState(state);
+            }
+        }
+        cityRepository.save(city);
+    }
 
 }
