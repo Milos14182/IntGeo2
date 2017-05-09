@@ -32,33 +32,33 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional(propagation = Propagation.MANDATORY)
 public class GameServiceImpl implements GameService {
-    
+
     private static Logger GEOGRAPHY_LOGGER = LoggerFactory.getLogger("GEOGRAPHY");
-    
+
     @Autowired
     GameRepository gameRepository;
-    
+
     @Autowired
     GameRelationRepository gameRelationRepository;
-    
+
     @Autowired
     UserGameScoresRepository userGameScoresRepository;
-    
+
     @Autowired
     GameConverter gameConverter;
-    
+
     @Autowired
     UserRepository userRepository;
-    
+
     @Autowired
     UserConverter userConverter;
-    
+
     @Autowired
     PlayService playService;
-    
+
     @Autowired
     UserGameConverter userGameConverter;
-    
+
     @Transactional(readOnly = true)
     @Override
     public GameData getGameById(Long id) {
@@ -71,7 +71,7 @@ public class GameServiceImpl implements GameService {
         }
         return gameData;
     }
-    
+
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     @Override
     public GameData createNewGame(UserData userData) {
@@ -104,7 +104,7 @@ public class GameServiceImpl implements GameService {
         }
         return gameData;
     }
-    
+
     @Transactional(readOnly = true)
     @Override
     public Set<GameData> getAllInactiveGames() {
@@ -118,7 +118,7 @@ public class GameServiceImpl implements GameService {
         }
         return inactiveGameDatas;
     }
-    
+
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     @Override
     public GameData addPlayer(UserData userData, Long gameId) {
@@ -147,7 +147,7 @@ public class GameServiceImpl implements GameService {
         }
         return gameData;
     }
-    
+
     @Transactional(readOnly = true)
     @Override
     public Set<UserGameData> getAllGamesForPlayer(UserData userData) {
@@ -173,7 +173,7 @@ public class GameServiceImpl implements GameService {
         }
         return userGameDatas;
     }
-    
+
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     @Override
     public void createNewUserGame(UserData userData, GameData game) {
@@ -188,7 +188,7 @@ public class GameServiceImpl implements GameService {
             throw ex;
         }
     }
-    
+
     @Transactional(readOnly = true)
     @Override
     public UserGameData getUserGameData(String username, Long gameId) {
@@ -205,7 +205,7 @@ public class GameServiceImpl implements GameService {
         }
         return null;
     }
-    
+
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     @Override
     public void updateUserGame(String username, Long gameId, Long score) {
@@ -216,7 +216,7 @@ public class GameServiceImpl implements GameService {
             throw ex;
         }
     }
-    
+
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     @Override
     public void updateGameLetter(String letter, Long gameId, Integer round, Long date) {
@@ -227,7 +227,7 @@ public class GameServiceImpl implements GameService {
             throw ex;
         }
     }
-    
+
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     @Override
     public void deleteOldGames(Date beforeDate) {
@@ -238,10 +238,10 @@ public class GameServiceImpl implements GameService {
             throw ex;
         }
     }
-    
+
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     @Override
-    public GameData lockGame(Long gameId) {        
+    public GameData lockGame(Long gameId) {
         GameData gameData = null;
         try {
             Game game = gameRepository.lockGame(gameId);
@@ -255,7 +255,7 @@ public class GameServiceImpl implements GameService {
         }
         return gameData;
     }
-    
+
     @Transactional(readOnly = true)
     @Override
     public Set<GameData> getUnlockedGames() {
@@ -272,7 +272,7 @@ public class GameServiceImpl implements GameService {
         }
         return unlockedGameDatas;
     }
-    
+
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     @Override
     public void lockStartedGames(Date startDate) {
@@ -283,7 +283,7 @@ public class GameServiceImpl implements GameService {
             throw ex;
         }
     }
-    
+
     @Transactional(readOnly = true)
     @Override
     public Boolean checkIsLocked(Long gameId) {
@@ -294,5 +294,21 @@ public class GameServiceImpl implements GameService {
             throw ex;
         }
     }
-    
+
+    @Transactional(readOnly = true)
+    @Override
+    public Set<GameData> getUserGames(UserData userData) {
+        Set<GameData> userGames = new HashSet<>();
+        try {
+            Set<Game> games = gameRelationRepository.findGamesForUser(userData.getUsername());
+            if (!games.isEmpty()) {
+                gameConverter.copyFromEntitySetToDataSet(games, userGames, new GameData());
+            }
+        } catch (RuntimeException ex) {
+            GEOGRAPHY_LOGGER.error("getUserGames throws error.", ex);
+            throw ex;
+        }
+        return userGames;
+    }
+
 }

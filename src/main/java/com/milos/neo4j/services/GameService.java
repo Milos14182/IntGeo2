@@ -5,9 +5,7 @@ import java.util.Set;
 import com.milos.neo4j.data.GameData;
 import com.milos.neo4j.data.UserData;
 import com.milos.neo4j.data.UserGameData;
-import com.milos.neo4j.domain.nodes.Game;
 import java.util.Date;
-import java.util.List;
 
 public interface GameService {
 
@@ -38,4 +36,6 @@ public interface GameService {
     public void lockStartedGames(Date startDate);
 
     public Boolean checkIsLocked(Long gameId);
+    
+    public Set<GameData> getUserGames(UserData userData);
 }

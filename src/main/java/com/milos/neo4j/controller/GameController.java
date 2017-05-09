@@ -17,35 +17,41 @@ import com.milos.neo4j.services.GameService;
 
 @Controller
 public class GameController {
-	@Autowired
-	GameService gameService;
 
-	@RequestMapping("/game")
-	public String showJoinOrCreatePage(Model model) {
-		Set<GameData> inactiveGames = gameService.getAllInactiveGames();
-		model.addAttribute("inactiveGames", inactiveGames);
-		return "joinOrCreate";
-	}
+    @Autowired
+    GameService gameService;
 
-	@RequestMapping("/game/createGame")
-	public String createNewGame(HttpServletRequest request) {
-		UserData userData = (UserData) request.getSession().getAttribute("userDetails");
-		GameData gameData = gameService.createNewGame(userData);
-		UserGameData userGameData = gameService.getUserGameData(userData.getUsername(), gameData.getId());
-		if (userGameData == null) {
-			gameService.createNewUserGame(userData, gameData);
-		}
-		return "redirect:/play/" + gameData.getId();
-	}
+    @RequestMapping("/game")
+    public String showJoinOrCreatePage(HttpServletRequest request, Model model) {
+        UserData userData = (UserData) request.getSession().getAttribute("userDetails");
+        Set<GameData> inactiveGames = gameService.getAllInactiveGames();
+        if (userData != null) {
+            Set<GameData> startedGamesForUser = gameService.getUserGames(userData);
+            model.addAttribute("startedGames", startedGamesForUser);
+        }
+        model.addAttribute("inactiveGames", inactiveGames);
+        return "joinOrCreate";
+    }
 
-	@RequestMapping("/game/joinGame/{gameId}")
-	public String joinGame(HttpServletRequest request, @PathVariable Long gameId, Model model) {
-		UserData userData = (UserData) request.getSession().getAttribute("userDetails");
-		GameData gameData = gameService.addPlayer(userData, gameId);
-		UserGameData userGameData = gameService.getUserGameData(userData.getUsername(), gameData.getId());
-		if (userGameData == null) {
-			gameService.createNewUserGame(userData, gameData);
-		}
-		return "redirect:/play/" + gameData.getId();
-	}
+    @RequestMapping("/game/createGame")
+    public String createNewGame(HttpServletRequest request) {
+        UserData userData = (UserData) request.getSession().getAttribute("userDetails");
+        GameData gameData = gameService.createNewGame(userData);
+        UserGameData userGameData = gameService.getUserGameData(userData.getUsername(), gameData.getId());
+        if (userGameData == null) {
+            gameService.createNewUserGame(userData, gameData);
+        }
+        return "redirect:/play/" + gameData.getId();
+    }
+
+    @RequestMapping("/game/joinGame/{gameId}")
+    public String joinGame(HttpServletRequest request, @PathVariable Long gameId, Model model) {
+        UserData userData = (UserData) request.getSession().getAttribute("userDetails");
+        GameData gameData = gameService.addPlayer(userData, gameId);
+        UserGameData userGameData = gameService.getUserGameData(userData.getUsername(), gameData.getId());
+        if (userGameData == null) {
+            gameService.createNewUserGame(userData, gameData);
+        }
+        return "redirect:/play/" + gameData.getId();
+    }
 }

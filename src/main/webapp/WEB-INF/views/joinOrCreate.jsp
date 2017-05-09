@@ -22,9 +22,32 @@
             </div>
         </div>
         <br />
+        <br />        
+        <div>
+            <c:if test="${not empty startedGames}">
+                <div class="gameRow"><spring:message code="game.label.startedGames" /></div>
+                <c:forEach var="game" items="${startedGames}">
+                    <div class="col-lg-3 gameRow">
+                        <div class="col-md-3">
+                            <spring:message code="game.label.inactiveGame" />${game.id}
+                        </div>
+                        <div class="col-md-1">${game.numberOfPlayers}</div>
+                        <div class="gameLink">
+                            <a href="<c:url value="/game/joinGame/${game.id}" />"> <img
+                                    class="img-circle"
+                                    src="<c:url value="/resources/images/play.png" />"
+                                    alt="Join game" width="40" height="40">
+                            </a>
+                        </div>
+                    </div>
+                </c:forEach>
+            </c:if>
+        </div>
+        <br />
         <br />
         <div>
             <c:if test="${not empty inactiveGames}">
+                <div class="gameRow"><spring:message code="game.label.inactiveGames" /></div>
                 <c:forEach var="game" items="${inactiveGames}">
                     <div class="col-lg-3 gameRow">
                         <div class="col-md-3">
