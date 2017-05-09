@@ -9,8 +9,8 @@
         <title><tiles:insertAttribute name="title" ignore="true" /></title>
         <meta name="description"
               content="<tiles:insertAttribute name="page_description" ignore="true"/>">
-        <link href="<c:url value="/resources/css/template.css"/>"
-              rel="stylesheet" type="text/css" />
+<!--        <link href="<c:url value="/resources/css/template.css"/>"
+              rel="stylesheet" type="text/css" />-->
         <link href="<c:url value="/resources/images/how_to.png" />"  rel="icon">
         <c:url var="cssURL" value="/resources/css/home.css" />
 
@@ -23,7 +23,7 @@
 
         <link href="${cssURL}" rel="stylesheet" type="text/css" />
 
-        <script src="<c:url value="/resources/js/jquery/jquery-1.11.3.js"/>"></script>
+        <!--<script src="<c:url value="/resources/js/jquery/jquery-1.11.3.js"/>"></script>-->
         <script src="<c:url value="/resources/js/main.js"/>"></script>
         <!--<script src="<c:url value="/resources/js/sockjs-0.3.4.min.js" />"></script>-->
         <script src="https://cdn.jsdelivr.net/sockjs/1/sockjs.min.js"></script>

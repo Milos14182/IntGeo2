@@ -6,15 +6,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class WebSocketController {
-	@MessageMapping("/greeting")
-	public String sendToGreeting(String code) throws Exception {
+
+    @MessageMapping("/greeting")
+    public String sendToGreeting(String code) throws Exception {
         Thread.sleep(2000);
         return code;
     }
-	
-	@RequestMapping("/start")
+
+    @RequestMapping("/start")
     public String start() {
         return "greeting";
-        
+
     }
 }
