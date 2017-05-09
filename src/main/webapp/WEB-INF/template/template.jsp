@@ -25,7 +25,8 @@
 
         <script src="<c:url value="/resources/js/jquery/jquery-1.11.3.js"/>"></script>
         <script src="<c:url value="/resources/js/main.js"/>"></script>
-        <script src="<c:url value="/resources/js/sockjs-0.3.4.min.js" />"></script>
+        <!--<script src="<c:url value="/resources/js/sockjs-0.3.4.min.js" />"></script>-->
+        <script src="<c:url value="/resources/js/sockjs.min.js" />"></script>
         <script src="<c:url value="/resources/js/stomp.min.js" />"></script>
         <script src="<c:url value="/resources/js/greetingsSocket.js" />"></script>
 
