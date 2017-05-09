@@ -71,7 +71,7 @@ function roundSync(stompClient) {
     stompClient.send("/intgeo/play/roundSync/" + pathnames[pathnames.length - 1], {});
 }
 function createStompClient() {
-    var socket = new SockJS('/intgeo/greetingEndpoint');
+    var socket = new SockJS('/greetingEndpoint');
     return Stomp.over(socket);
 }
 
