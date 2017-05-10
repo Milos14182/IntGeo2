@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 import com.milos.neo4j.security.CustomUserDetails;
+import com.milos.neo4j.security.IntgeoAuthenticationErrorHandler;
 import com.milos.neo4j.security.IntgeoAuthenticationSuccessHandler;
 
 @Configuration
@@ -21,6 +22,8 @@ public class SpringSecurity extends WebSecurityConfigurerAdapter {
 
     @Autowired
     IntgeoAuthenticationSuccessHandler intgeoAuthenticationSuccessHandler;
+    @Autowired
+    IntgeoAuthenticationErrorHandler authenticationErrorHandler;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -31,7 +34,8 @@ public class SpringSecurity extends WebSecurityConfigurerAdapter {
                 .antMatchers("/game/**").access("hasRole('ROLE_USER')")
                 .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
                 .and().formLogin()
-                .successHandler(intgeoAuthenticationSuccessHandler);
+                .successHandler(intgeoAuthenticationSuccessHandler)
+                .failureHandler(authenticationErrorHandler);
     }
 
     @Override

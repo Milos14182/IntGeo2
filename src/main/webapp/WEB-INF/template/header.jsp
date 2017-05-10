@@ -45,7 +45,7 @@
                     <sec:authorize access="hasRole('ROLE_ANONYMOUS')">
                         <c:url value="/login" var="login" />
                         <form class="navbar-form navbar-right" id="loginUser"
-                              method="POST" action="${login}">
+                              method="POST" action="${login}">                            
                             <div class="form-group">
                                 <input name="username" type="text" placeholder="Username"
                                        class="form-control" />
@@ -75,8 +75,13 @@
                     </sec:authorize>
                 </div>
             </div>
-        </nav>
-
+        </nav> 
+        <c:if test="<%= request.getParameter(\"error\")!=null %>">
+            <div style="margin-top: -20px" class="alert warning">
+                <span class="closebtn" onclick="this.parentElement.style.display = 'none';">&times;</span>
+                <spring:message code="login.error.message"></spring:message>
+            </div>
+        </c:if>  
     </div>
 </div>
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
