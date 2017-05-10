@@ -68,8 +68,8 @@ function checkLockedGame(stompClient) {
 
 function waitPlayers(stompClient) {
     var pathnames = window.location.pathname.split('/');
-//    stompClient.send("/intgeo/play/initialization/" + pathnames[pathnames.length - 1], {});
-    stompClient.send("/play/initialization/" + pathnames[pathnames.length - 1], {});
+    stompClient.send("/intgeo/play/initialization/" + pathnames[pathnames.length - 1], {});
+//    stompClient.send("/play/initialization/" + pathnames[pathnames.length - 1], {});
 }
 function roundSync(stompClient) {
     var pathnames = window.location.pathname.split('/');
