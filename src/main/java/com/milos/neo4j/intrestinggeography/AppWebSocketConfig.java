@@ -14,7 +14,6 @@ public class AppWebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer
     public void configureMessageBroker(MessageBrokerRegistry config) {
         config.enableSimpleBroker("/topic");
         config.setApplicationDestinationPrefixes("/intgeo");
-//        config.setApplicationDestinationPrefixes("/");
     }
 
     @Override
