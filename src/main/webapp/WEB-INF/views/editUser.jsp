@@ -31,7 +31,7 @@
                 <form:label path="email">
                     <spring:message code="register.label.email" />
                 </form:label>
-                <form:input path="email" id="inputEmail" class="form-control" disabled="true" value="${userDetails.email}"/>
+                <form:input path="email" id="inputEmail" class="form-control" disabled="true" value="${userData.email}"/>
                 <form:errors path="email" cssClass="error" />
             </div>
 
