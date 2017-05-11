@@ -145,7 +145,7 @@ public class PlayServiceImpl implements PlayService {
                 }
             }
         }
-        if (userData.getCity() != null && userData.getCity().getName().equals(answers.getCity())) {
+        if (userData.getCity() != null && userData.getCity().getName()!=null && userData.getCity().getName().equals(answers.getCity())) {
             answers.setScore(answers.getScore() + uniqueRightResult);
         }
         checkAndSaveIntoDatabase(answers);

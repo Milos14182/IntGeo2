@@ -13,10 +13,9 @@ function setConnected(connected) {
 }
 function connect(stompClient) {
     var pathnames = window.location.pathname.split('/');
-    stompClient.connect({}, function (frame) {
+    stompClient.connect({}, function () {
         counter = setInterval(loginPlayerTimer, 1000);
         waitPlayers(stompClient);
-        $('#character').html("");
         disableInputs();
         stompClient.subscribe('/topic/play/initialization/' + pathnames[pathnames.length - 1], function (
                 calResult) {
@@ -76,9 +75,9 @@ function roundSync(stompClient) {
 }
 function createStompClient() {
     //razvojni
-//    var socket = new SockJS('/intgeo/greetingEndpoint');
+    var socket = new SockJS('/intgeo/greetingEndpoint');
     //deploy
-    var socket = new SockJS('/greetingEndpoint');
+//    var socket = new SockJS('/greetingEndpoint');
     return Stomp.over(socket);
 }
 
@@ -196,6 +195,7 @@ function resetTimer(time) {
     counter = setInterval(roundTimer, 1000);
 }
 function disableInputs() {
+    $('#character').css("visibility", "hidden");
     $('#input_state').attr("disabled", "disabled");
     $('#input_city').attr("disabled", "disabled");
     $('#input_mountain').attr("disabled", "disabled");
@@ -205,6 +205,7 @@ function disableInputs() {
     $('#input_animal').attr("disabled", "disabled");
 }
 function enableInputs() {
+    $("#character").css("visibility", "visible");
     $('#input_state').removeAttr("disabled");
     $('#input_city').removeAttr("disabled");
     $('#input_mountain').removeAttr("disabled");

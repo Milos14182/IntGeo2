@@ -6,8 +6,6 @@ import org.springframework.data.neo4j.annotation.Query;
 import org.springframework.data.neo4j.repository.GraphRepository;
 
 import com.milos.neo4j.domain.nodes.Game;
-import java.util.Date;
-import java.util.List;
 
 public interface GameRepository extends GraphRepository<Game> {
 
@@ -17,7 +15,7 @@ public interface GameRepository extends GraphRepository<Game> {
     @Query("MATCH (n:Game) WHERE ID(n) = {1} SET n.firstLetter = {0}, n.currentRound = {2}, n.roundStartDate = {3} RETURN n")
     public Game updateGameLetter(String letter, Long id, Integer round, Long date);
     
-    @Query("MATCH (n:Game)-[rel]->() WHERE n.creationDate < {0} DELETE n,rel")
+    @Query("MATCH (n:Game)-[rel]->() WHERE n.creationDate is null or n.creationDate < {0} DELETE n,rel")
     public void removeOldGames(Long beforeDate);
     
     @Query("MATCH (n:Game) WHERE ID(n) = {0} SET n.locked = true RETURN n")
