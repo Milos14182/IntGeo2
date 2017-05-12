@@ -29,4 +29,10 @@ public interface GameRepository extends GraphRepository<Game> {
 
     @Query("MATCH (n:Game) WHERE ID(n) = {0} return n.locked")
     public Boolean checkIsLocked(Long gameId);
+    
+    @Query("MATCH (n:Game) WHERE ID(n) = {0} return n.previouslySelectedLetters")
+    public String getPreviousLetters(Long gameId);
+    
+    @Query("MATCH (n:Game) WHERE ID(n) = {0} SET n.previouslySelectedLetters={1}")
+    public void updatePreviousLetters(Long gameId, String previouslySelectedLetters);
 }

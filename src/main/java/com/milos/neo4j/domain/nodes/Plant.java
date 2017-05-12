@@ -11,70 +11,84 @@ import org.neo4j.ogm.annotation.Relationship;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @NodeEntity
-@JsonIgnoreProperties(ignoreUnknown=true)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Plant {
-	private @GraphId Long id;
 
-	@Property(name = "name")
-	private String name;
+    private @GraphId
+    Long id;
 
-	@Property(name = "description")
-	private String description;
-	
-	@Property(name = "active")
-	private boolean active;
+    @Property(name = "name")
+    private String name;
 
-	@Relationship(type = "PLANT_IS_IN_STATE", direction = Relationship.OUTGOING)
-	private State state;
+    @Property(name = "description")
+    private String description;
 
-	@Relationship(type = "PLANT_HABITATION", direction = Relationship.OUTGOING)
-	private Set<City> cities = new HashSet<City>();
+    @Property(name = "active")
+    private boolean active;
 
-	public boolean isActive() {
-		return active;
-	}
+    @Property(name = "synonims")
+    private String synonims;
 
-	public void setActive(boolean active) {
-		this.active = active;
-	}
+    @Relationship(type = "PLANT_IS_IN_STATE", direction = Relationship.OUTGOING)
+    private State state;
 
-	public State getState() {
-		return state;
-	}
+    @Relationship(type = "PLANT_HABITATION", direction = Relationship.OUTGOING)
+    private Set<City> cities = new HashSet<City>();
 
-	public void setState(State state) {
-		this.state = state;
-	}
+    public boolean isActive() {
+        return active;
+    }
 
-	public Set<City> getCities() {
-		return cities;
-	}
+    public void setActive(boolean active) {
+        this.active = active;
+    }
 
-	public void setCities(Set<City> cities) {
-		this.cities = cities;
-	}
+    public State getState() {
+        return state;
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public void setState(State state) {
+        this.state = state;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public Set<City> getCities() {
+        return cities;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public void setCities(Set<City> cities) {
+        this.cities = cities;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getSynonims() {
+        return synonims;
+    }
+
+    public void setSynonims(String synonims) {
+        this.synonims = synonims;
+    }
+
 }

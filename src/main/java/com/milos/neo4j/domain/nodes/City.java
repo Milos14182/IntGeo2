@@ -11,82 +11,95 @@ import org.neo4j.ogm.annotation.Relationship;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @NodeEntity
-@JsonIgnoreProperties(ignoreUnknown=true)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class City {
-	private @GraphId Long id;
 
-	@Property(name = "name")
-	private String name;
+    private @GraphId
+    Long id;
 
-	@Property(name = "description")
-	private String description;
+    @Property(name = "name")
+    private String name;
 
-	@Property(name = "active")
-	private boolean active;
+    @Property(name = "description")
+    private String description;
 
-	@Relationship(type = "CITY_IS_IN_STATE", direction = Relationship.OUTGOING)
-	private State state;
+    @Property(name = "active")
+    private boolean active;
 
-	@Relationship(type = "LIVES_IN_CITY", direction = Relationship.INCOMING)
-	private Set<User> users = new HashSet<User>();
+    @Property(name = "synonims")
+    private String synonims;
 
-	@Relationship(type = "PLANT_HABITATION", direction = Relationship.INCOMING)
-	private Set<Plant> plants = new HashSet<Plant>();
+    @Relationship(type = "CITY_IS_IN_STATE", direction = Relationship.OUTGOING)
+    private State state;
 
-	public boolean isActive() {
-		return active;
-	}
+    @Relationship(type = "LIVES_IN_CITY", direction = Relationship.INCOMING)
+    private Set<User> users = new HashSet<User>();
 
-	public void setActive(boolean active) {
-		this.active = active;
-	}
+    @Relationship(type = "PLANT_HABITATION", direction = Relationship.INCOMING)
+    private Set<Plant> plants = new HashSet<Plant>();
 
-	public Set<User> getUsers() {
-		return users;
-	}
+    public boolean isActive() {
+        return active;
+    }
 
-	public void setUsers(Set<User> users) {
-		this.users = users;
-	}
+    public void setActive(boolean active) {
+        this.active = active;
+    }
 
-	public Set<Plant> getPlants() {
-		return plants;
-	}
+    public Set<User> getUsers() {
+        return users;
+    }
 
-	public void setPlants(Set<Plant> plants) {
-		this.plants = plants;
-	}
+    public void setUsers(Set<User> users) {
+        this.users = users;
+    }
 
-	public State getState() {
-		return state;
-	}
+    public Set<Plant> getPlants() {
+        return plants;
+    }
 
-	public void setState(State state) {
-		this.state = state;
-	}
+    public void setPlants(Set<Plant> plants) {
+        this.plants = plants;
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public State getState() {
+        return state;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setState(State state) {
+        this.state = state;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getSynonims() {
+        return synonims;
+    }
+
+    public void setSynonims(String synonims) {
+        this.synonims = synonims;
+    }
 
 }

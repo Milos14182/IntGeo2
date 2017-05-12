@@ -17,6 +17,7 @@ public class GameData {
     private Boolean locked;
     private Date roundStartDate;
     private Integer currentRoundNumber;
+    private String previouslySelectedLetters;
 
     public Long getId() {
         return id;
@@ -80,6 +81,14 @@ public class GameData {
 
     public void setCurrentRoundNumber(Integer currentRoundNumber) {
         this.currentRoundNumber = currentRoundNumber;
+    }
+
+    public String getPreviouslySelectedLetters() {
+        return previouslySelectedLetters;
+    }
+
+    public void setPreviouslySelectedLetters(String previouslySelectedLetters) {
+        this.previouslySelectedLetters = previouslySelectedLetters;
     }
 
 }

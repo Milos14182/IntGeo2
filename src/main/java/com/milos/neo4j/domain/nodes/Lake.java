@@ -11,70 +11,83 @@ import org.neo4j.ogm.annotation.Relationship;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @NodeEntity
-@JsonIgnoreProperties(ignoreUnknown=true)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Lake {
-	private @GraphId Long id;
 
-	@Property(name = "name")
-	private String name;
+    private @GraphId
+    Long id;
 
-	@Property(name = "description")
-	private String description;
+    @Property(name = "name")
+    private String name;
 
-	@Property(name = "active")
-	private boolean active;
+    @Property(name = "description")
+    private String description;
 
-	@Relationship(type = "RIVER_GOES_IN", direction = Relationship.INCOMING)
-	private Set<River> rivers = new HashSet<River>();
+    @Property(name = "active")
+    private boolean active;
 
-	@Relationship(type = "LAKE_IS_IN_STATE", direction = Relationship.OUTGOING)
-	private State state;
+    @Property(name = "synonims")
+    private String synonims;
 
-	public boolean isActive() {
-		return active;
-	}
+    @Relationship(type = "RIVER_GOES_IN", direction = Relationship.INCOMING)
+    private Set<River> rivers = new HashSet<River>();
 
-	public void setActive(boolean active) {
-		this.active = active;
-	}
+    @Relationship(type = "LAKE_IS_IN_STATE", direction = Relationship.OUTGOING)
+    private State state;
 
-	public Long getId() {
-		return id;
-	}
+    public boolean isActive() {
+        return active;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setActive(boolean active) {
+        this.active = active;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public Set<River> getRivers() {
-		return rivers;
-	}
+    public String getDescription() {
+        return description;
+    }
 
-	public void setRivers(Set<River> rivers) {
-		this.rivers = rivers;
-	}
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-	public State getState() {
-		return state;
-	}
+    public Set<River> getRivers() {
+        return rivers;
+    }
 
-	public void setState(State state) {
-		this.state = state;
-	}
+    public void setRivers(Set<River> rivers) {
+        this.rivers = rivers;
+    }
+
+    public State getState() {
+        return state;
+    }
+
+    public void setState(State state) {
+        this.state = state;
+    }
+
+    public String getSynonims() {
+        return synonims;
+    }
+
+    public void setSynonims(String synonims) {
+        this.synonims = synonims;
+    }
 }

@@ -8,7 +8,7 @@ import com.milos.neo4j.data.UserData;
 
 public interface RoundBroker {
 
-    public String createLetterForGameRound();
+    public String createLetterForGameRound(Long gameId);
 
     public boolean waitForAllUsersToAnswer(List<SubmitAnswersTmp> answers, Long gameId, boolean collectAll);
 

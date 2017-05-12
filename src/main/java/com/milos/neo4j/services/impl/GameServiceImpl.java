@@ -16,6 +16,7 @@ import com.milos.neo4j.domain.nodes.Game;
 import com.milos.neo4j.domain.nodes.User;
 import com.milos.neo4j.domain.nodes.UserGameScores;
 import com.milos.neo4j.domain.relations.GameRelation;
+import com.milos.neo4j.enums.LatinAlfabet;
 import com.milos.neo4j.repository.GameRepository;
 import com.milos.neo4j.repository.UserGameScoresRepository;
 import com.milos.neo4j.repository.UserRepository;
@@ -81,7 +82,10 @@ public class GameServiceImpl implements GameService {
             GameRelation gameRelation = gameRelationRepository.findGameRelationForUser(userData.getUsername());
             if (user != null && gameRelation == null) {
                 Game game = new Game();
-                game.setFirstLetter(playService.choseLetter());
+                int letterNumber = (int) (Math.random() * 23 + 1);
+                String letter = LatinAlfabet.values()[letterNumber].toString();
+                game.setFirstLetter(letter);
+                game.setPreviouslySelectedLetters(letter);
                 Set<User> players = new HashSet<>();
                 players.add(user);
                 game.setPlayers(players);
@@ -309,6 +313,28 @@ public class GameServiceImpl implements GameService {
             throw ex;
         }
         return userGames;
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public String getPreviousLetters(Long gameId) {
+        try {
+            return gameRepository.getPreviousLetters(gameId);
+        } catch (RuntimeException ex) {
+            GEOGRAPHY_LOGGER.error("getPreviousLetters throws error.", ex);
+            throw ex;
+        }
+    }
+
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+    @Override
+    public void updatePreviousLetters(Long gameId, String previouslySelectedLetters) {
+        try {
+            gameRepository.updatePreviousLetters(gameId, previouslySelectedLetters);
+        } catch (RuntimeException ex) {
+            GEOGRAPHY_LOGGER.error("getPreviousLetters throws error.", ex);
+            throw ex;
+        }
     }
 
 }

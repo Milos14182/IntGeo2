@@ -11,115 +11,128 @@ import org.neo4j.ogm.annotation.Relationship;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @NodeEntity
-@JsonIgnoreProperties(ignoreUnknown=true)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class State {
-	private @GraphId Long id;
 
-	@Property(name = "name")
-	private String name;
+    private @GraphId
+    Long id;
 
-	@Property(name = "description")
-	private String description;
+    @Property(name = "name")
+    private String name;
 
-	@Property(name = "active")
-	private boolean active;
-	
-	@Relationship(type = "CITY_IS_IN_STATE", direction = Relationship.INCOMING)
-	private Set<City> cities = new HashSet<City>();
+    @Property(name = "description")
+    private String description;
 
-	@Relationship(type = "MOUNTAIN_IS_IN_STATE", direction = Relationship.INCOMING)
-	private Set<Mountain> mountains = new HashSet<Mountain>();
+    @Property(name = "active")
+    private boolean active;
 
-	@Relationship(type = "ANIMAL_IS_IN_STATE", direction = Relationship.INCOMING)
-	private Set<Animal> animals = new HashSet<Animal>();
+    @Property(name = "synonims")
+    private String synonims;
 
-	@Relationship(type = "LAKE_IS_IN_STATE", direction = Relationship.INCOMING)
-	private Set<Lake> lakes = new HashSet<Lake>();
+    @Relationship(type = "CITY_IS_IN_STATE", direction = Relationship.INCOMING)
+    private Set<City> cities = new HashSet<City>();
 
-	@Relationship(type = "PLANT_IS_IN_STATE", direction = Relationship.INCOMING)
-	private Set<Plant> plantes = new HashSet<Plant>();
+    @Relationship(type = "MOUNTAIN_IS_IN_STATE", direction = Relationship.INCOMING)
+    private Set<Mountain> mountains = new HashSet<Mountain>();
 
-	@Relationship(type = "RIVER_IS_IN_STATE", direction = Relationship.INCOMING)
-	private Set<River> rivers = new HashSet<River>();
+    @Relationship(type = "ANIMAL_IS_IN_STATE", direction = Relationship.INCOMING)
+    private Set<Animal> animals = new HashSet<Animal>();
 
-	public boolean isActive() {
-		return active;
-	}
+    @Relationship(type = "LAKE_IS_IN_STATE", direction = Relationship.INCOMING)
+    private Set<Lake> lakes = new HashSet<Lake>();
 
-	public void setActive(boolean active) {
-		this.active = active;
-	}
+    @Relationship(type = "PLANT_IS_IN_STATE", direction = Relationship.INCOMING)
+    private Set<Plant> plantes = new HashSet<Plant>();
 
-	public Set<City> getCities() {
-		return cities;
-	}
+    @Relationship(type = "RIVER_IS_IN_STATE", direction = Relationship.INCOMING)
+    private Set<River> rivers = new HashSet<River>();
 
-	public void setCities(Set<City> cities) {
-		this.cities = cities;
-	}
+    public boolean isActive() {
+        return active;
+    }
 
-	public Set<Mountain> getMountains() {
-		return mountains;
-	}
+    public void setActive(boolean active) {
+        this.active = active;
+    }
 
-	public void setMountains(Set<Mountain> mountains) {
-		this.mountains = mountains;
-	}
+    public Set<City> getCities() {
+        return cities;
+    }
 
-	public Set<Animal> getAnimals() {
-		return animals;
-	}
+    public void setCities(Set<City> cities) {
+        this.cities = cities;
+    }
 
-	public void setAnimals(Set<Animal> animals) {
-		this.animals = animals;
-	}
+    public Set<Mountain> getMountains() {
+        return mountains;
+    }
 
-	public Set<Lake> getLakes() {
-		return lakes;
-	}
+    public void setMountains(Set<Mountain> mountains) {
+        this.mountains = mountains;
+    }
 
-	public void setLakes(Set<Lake> lakes) {
-		this.lakes = lakes;
-	}
+    public Set<Animal> getAnimals() {
+        return animals;
+    }
 
-	public Set<Plant> getPlantes() {
-		return plantes;
-	}
+    public void setAnimals(Set<Animal> animals) {
+        this.animals = animals;
+    }
 
-	public void setPlantes(Set<Plant> plantes) {
-		this.plantes = plantes;
-	}
+    public Set<Lake> getLakes() {
+        return lakes;
+    }
 
-	public Set<River> getRivers() {
-		return rivers;
-	}
+    public void setLakes(Set<Lake> lakes) {
+        this.lakes = lakes;
+    }
 
-	public void setRivers(Set<River> rivers) {
-		this.rivers = rivers;
-	}
+    public Set<Plant> getPlantes() {
+        return plantes;
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public void setPlantes(Set<Plant> plantes) {
+        this.plantes = plantes;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public Set<River> getRivers() {
+        return rivers;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public void setRivers(Set<River> rivers) {
+        this.rivers = rivers;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getSynonims() {
+        return synonims;
+    }
+
+    public void setSynonims(String synonims) {
+        this.synonims = synonims;
+    }
 
 }

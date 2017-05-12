@@ -18,6 +18,7 @@ import com.milos.neo4j.domain.relations.RiverFlowsThroughState;
 import com.milos.neo4j.enums.LatinAlfabet;
 import com.milos.neo4j.repository.AnimalRepository;
 import com.milos.neo4j.repository.CityRepository;
+import com.milos.neo4j.repository.GameRepository;
 import com.milos.neo4j.repository.LakeRepository;
 import com.milos.neo4j.repository.MountainRepository;
 import com.milos.neo4j.repository.PlantRepository;
@@ -26,7 +27,9 @@ import com.milos.neo4j.repository.StateRepository;
 import com.milos.neo4j.repository.relations.CityIsInStateRepository;
 import com.milos.neo4j.repository.relations.MountainIsInStateRepository;
 import com.milos.neo4j.repository.relations.RiverFlowsThroughStateRepository;
+import com.milos.neo4j.services.GameService;
 import com.milos.neo4j.services.PlayService;
+import java.util.Set;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -65,6 +68,9 @@ public class PlayServiceImpl implements PlayService {
 
     @Autowired
     RiverFlowsThroughStateRepository riverFlowsThroughStateRepository;
+    
+    @Autowired
+    private GameService gameService;
 
     @Transactional(readOnly = true)
     @Override
@@ -76,7 +82,7 @@ public class PlayServiceImpl implements PlayService {
             answers.setScore(Long.valueOf(0));
         }
         if (!answers.getState().equals("") && answers.getState().startsWith(answers.getCharacter())) {
-            State state = stateRepository.getStateByName(answers.getState());
+            State state = stateRepository.getStateByNameOrSynonim(answers.getState(), "~ '.*" + answers.getState() + ".*'");
             if (state != null && state.isActive()) {
                 if (userData.getCity() != null) {
                     cityIsInState = cityIsInStateRepository.getStateOfCity(userData.getCity().getName(),
@@ -86,13 +92,13 @@ public class PlayServiceImpl implements PlayService {
             }
         }
         if (!answers.getAnimal().equals("") && answers.getAnimal().startsWith(answers.getCharacter())) {
-            Animal animal = animalRepository.getAnimalByName(answers.getAnimal());
+            Animal animal = animalRepository.getAnimalByNameOrSynonim(answers.getAnimal(), "~ '.*" + answers.getAnimal()+ ".*'");
             if (animal != null && animal.isActive()) {
                 answers.setScore(answers.getScore() + uniqueRightResult);
             }
         }
         if (!answers.getCity().equals("") && answers.getCity().startsWith(answers.getCharacter())) {
-            City city = cityRepository.getCityByName(answers.getCity());
+            City city = cityRepository.getCityByNameOrSynonim(answers.getCity(), "~ '.*" + answers.getCity()+ ".*'");
             if (city != null && city.isActive()) {
                 if (cityIsInState != null) {
                     CityIsInState cityIsInStateAnswers = cityIsInStateRepository.getStateOfCity(city.getName(),
@@ -108,13 +114,13 @@ public class PlayServiceImpl implements PlayService {
             }
         }
         if (!answers.getLake().equals("") && answers.getLake().startsWith(answers.getCharacter())) {
-            Lake lake = lakeRepository.getLakeByName(answers.getLake());
+            Lake lake = lakeRepository.getLakeByNameOrSynonim(answers.getLake(), "~ '.*" + answers.getLake()+ ".*'");
             if (lake != null && lake.isActive()) {
                 answers.setScore(answers.getScore() + uniqueRightResult);
             }
         }
         if (!answers.getMountain().equals("") && answers.getMountain().startsWith(answers.getCharacter())) {
-            Mountain mountain = mountainRepository.getMountainByName(answers.getMountain());
+            Mountain mountain = mountainRepository.getMountainByNameOrSynonim(answers.getMountain(), "~ '.*" + answers.getMountain()+ ".*'");
             if (mountain != null && mountain.isActive()) {
                 if (cityIsInState != null) {
                     mountainIsInState = mountainIsInStateRepository.getMountainInState(answers.getMountain(),
@@ -127,13 +133,13 @@ public class PlayServiceImpl implements PlayService {
             }
         }
         if (!answers.getPlant().equals("") && answers.getPlant().startsWith(answers.getCharacter())) {
-            Plant plant = plantRepository.getPlantByName(answers.getPlant());
+            Plant plant = plantRepository.getPlantByNameOrSynonim(answers.getPlant(), "~ '.*" + answers.getPlant()+ ".*'");
             if (plant != null && plant.isActive()) {
                 answers.setScore(answers.getScore() + uniqueRightResult);
             }
         }
         if (!answers.getRiver().equals("") && answers.getRiver().startsWith(answers.getCharacter())) {
-            River river = riverRepository.getRiverByName(answers.getRiver());
+            River river = riverRepository.getRiverByNameOrSynonim(answers.getRiver(), "~ '.*" + answers.getRiver()+ ".*'");
             if (river != null && river.isActive()) {
                 answers.setScore(answers.getScore() + uniqueRightResult);
                 if (cityIsInState != null) {
@@ -145,7 +151,7 @@ public class PlayServiceImpl implements PlayService {
                 }
             }
         }
-        if (userData.getCity() != null && userData.getCity().getName()!=null && userData.getCity().getName().equals(answers.getCity())) {
+        if (userData.getCity() != null && userData.getCity().getName() != null && userData.getCity().getName().equals(answers.getCity())) {
             answers.setScore(answers.getScore() + uniqueRightResult);
         }
         checkAndSaveIntoDatabase(answers);
@@ -154,9 +160,20 @@ public class PlayServiceImpl implements PlayService {
 
     @Transactional(readOnly = true)
     @Override
-    public String choseLetter() {
-        int letterNumber = (int) (Math.random() * 23 + 1);
-        return LatinAlfabet.values()[letterNumber].toString();
+    public String choseLetter(Long gameId) {
+        String prevouslySelectedLetters = gameService.getPreviousLetters(gameId);
+        boolean selected = false;
+        String letter = "";
+        while (!selected) {
+            int letterNumber = (int) (Math.random() * 23 + 1);
+            letter = LatinAlfabet.values()[letterNumber].toString();
+            if (!prevouslySelectedLetters.contains(letter)) {
+                selected = true;
+            }
+        }
+        prevouslySelectedLetters += ", " + letter;
+        gameService.updatePreviousLetters(gameId, prevouslySelectedLetters);
+        return letter;
     }
 
     @Transactional(readOnly = false)

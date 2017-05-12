@@ -23,6 +23,12 @@
                 </form:label>
                 <form:textarea path="description" class="form-control" />
             </div>
+            <div class="form-group">
+                <form:label path="synonims">
+                    <spring:message code="admin.edit.label.synonims" />
+                </form:label>
+                <form:textarea path="synonims" class="form-control" />
+            </div>
             <div class="form-inline">
                 <form:label path="active">
                     <spring:message code="admin.edit.label.active" />

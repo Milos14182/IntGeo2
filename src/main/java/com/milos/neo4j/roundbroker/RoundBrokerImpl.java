@@ -26,9 +26,9 @@ public class RoundBrokerImpl implements RoundBroker {
     Boolean initalLetter = true;
 
     @Override
-    public String createLetterForGameRound() {
+    public String createLetterForGameRound(Long gameId) {
         initalLetter = false;
-        letter = playService.choseLetter();
+        letter = playService.choseLetter(gameId);
         return letter;
     }
 
@@ -44,7 +44,7 @@ public class RoundBrokerImpl implements RoundBroker {
         for (SubmitAnswersTmp submitAnswersTmp : answers) {
             submitAnswersTmp.setSubmitet(false);
         }
-        letter = playService.choseLetter();
+        letter = playService.choseLetter(gameId);
         Date roundDate = new Date();
         gameService.updateGameLetter(letter, gameId, gameData.getCurrentRoundNumber() + 1, roundDate.getTime());
         return true;

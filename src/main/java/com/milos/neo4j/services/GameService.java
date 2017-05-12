@@ -38,4 +38,8 @@ public interface GameService {
     public Boolean checkIsLocked(Long gameId);
     
     public Set<GameData> getUserGames(UserData userData);
+    
+    public String getPreviousLetters(Long gameId);
+    
+    public void updatePreviousLetters(Long gameId, String previouslySelectedLetters);
 }

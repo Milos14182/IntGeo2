@@ -11,70 +11,84 @@ import org.neo4j.ogm.annotation.Relationship;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @NodeEntity
-@JsonIgnoreProperties(ignoreUnknown=true)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class River {
-	private @GraphId Long id;
 
-	@Property(name = "name")
-	private String name;
+    private @GraphId
+    Long id;
 
-	@Property(name = "description")
-	private String description;
-	
-	@Property(name = "active")
-	private boolean active;
+    @Property(name = "name")
+    private String name;
 
-	@Relationship(type = "RIVER_FLOWS_THROUGH_STATE", direction = Relationship.OUTGOING)
-	private Set<State> state = new HashSet<State>();
+    @Property(name = "description")
+    private String description;
 
-	@Relationship(type = "RIVER_GOES_IN", direction = Relationship.OUTGOING)
-	private Lake lake;
+    @Property(name = "active")
+    private boolean active;
 
-	public boolean isActive() {
-		return active;
-	}
+    @Property(name = "synonims")
+    private String synonims;
 
-	public void setActive(boolean active) {
-		this.active = active;
-	}
+    @Relationship(type = "RIVER_FLOWS_THROUGH_STATE", direction = Relationship.OUTGOING)
+    private Set<State> state = new HashSet<State>();
 
-	public Set<State> getState() {
-		return state;
-	}
+    @Relationship(type = "RIVER_GOES_IN", direction = Relationship.OUTGOING)
+    private Lake lake;
 
-	public void setState(Set<State> state) {
-		this.state = state;
-	}
-	
-	public Lake getLake() {
-		return lake;
-	}
+    public boolean isActive() {
+        return active;
+    }
 
-	public void setLake(Lake lake) {
-		this.lake = lake;
-	}
+    public void setActive(boolean active) {
+        this.active = active;
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public Set<State> getState() {
+        return state;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setState(Set<State> state) {
+        this.state = state;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public Lake getLake() {
+        return lake;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setLake(Lake lake) {
+        this.lake = lake;
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getSynonims() {
+        return synonims;
+    }
+
+    public void setSynonims(String synonims) {
+        this.synonims = synonims;
+    }
+
 }

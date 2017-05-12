@@ -4,106 +4,118 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.util.List;
 
 @JsonIgnoreProperties("meta")
 public class CityData {
-	private Long id;
-	private String name;
-	private String description;
-	private boolean active;
-	private StateData stateData;
-	private Set<UserData> users = new HashSet<UserData>();
-	private Set<PlantData> plants = new HashSet<PlantData>();
-	private Set<RiverData> rivers = new HashSet<RiverData>();
-	private Set<LakeData> lakes = new HashSet<LakeData>();
-	private Set<AnimalData> animals = new HashSet<AnimalData>();
-	private Set<MountainData> mountains = new HashSet<MountainData>();
-	
-	public StateData getStateData() {
-		return stateData;
-	}
 
-	public void setStateData(StateData stateData) {
-		this.stateData = stateData;
-	}
+    private Long id;
+    private String name;
+    private String description;
+    private boolean active;
+    private StateData stateData;
+    private String synonims;
+    private Set<UserData> users = new HashSet<UserData>();
+    private Set<PlantData> plants = new HashSet<PlantData>();
+    private Set<RiverData> rivers = new HashSet<RiverData>();
+    private Set<LakeData> lakes = new HashSet<LakeData>();
+    private Set<AnimalData> animals = new HashSet<AnimalData>();
+    private Set<MountainData> mountains = new HashSet<MountainData>();
 
-	public boolean isActive() {
-		return active;
-	}
+    public StateData getStateData() {
+        return stateData;
+    }
 
-	public void setActive(boolean active) {
-		this.active = active;
-	}
+    public void setStateData(StateData stateData) {
+        this.stateData = stateData;
+    }
 
-	public Set<PlantData> getPlants() {
-		return plants;
-	}
+    public boolean isActive() {
+        return active;
+    }
 
-	public void setPlants(Set<PlantData> plants) {
-		this.plants = plants;
-	}
+    public void setActive(boolean active) {
+        this.active = active;
+    }
 
-	public Set<RiverData> getRivers() {
-		return rivers;
-	}
+    public Set<PlantData> getPlants() {
+        return plants;
+    }
 
-	public void setRivers(Set<RiverData> rivers) {
-		this.rivers = rivers;
-	}
+    public void setPlants(Set<PlantData> plants) {
+        this.plants = plants;
+    }
 
-	public Set<LakeData> getLakes() {
-		return lakes;
-	}
+    public Set<RiverData> getRivers() {
+        return rivers;
+    }
 
-	public void setLakes(Set<LakeData> lakes) {
-		this.lakes = lakes;
-	}
+    public void setRivers(Set<RiverData> rivers) {
+        this.rivers = rivers;
+    }
 
-	public Set<AnimalData> getAnimals() {
-		return animals;
-	}
+    public Set<LakeData> getLakes() {
+        return lakes;
+    }
 
-	public void setAnimals(Set<AnimalData> animals) {
-		this.animals = animals;
-	}
+    public void setLakes(Set<LakeData> lakes) {
+        this.lakes = lakes;
+    }
 
-	public Set<MountainData> getMountains() {
-		return mountains;
-	}
+    public Set<AnimalData> getAnimals() {
+        return animals;
+    }
 
-	public void setMountains(Set<MountainData> mountains) {
-		this.mountains = mountains;
-	}
+    public void setAnimals(Set<AnimalData> animals) {
+        this.animals = animals;
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public Set<MountainData> getMountains() {
+        return mountains;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setMountains(Set<MountainData> mountains) {
+        this.mountains = mountains;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public Set<UserData> getUsers() {
-		return users;
-	}
+    public String getDescription() {
+        return description;
+    }
 
-	public void setUsers(Set<UserData> users) {
-		this.users = users;
-	}
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Set<UserData> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<UserData> users) {
+        this.users = users;
+    }
+
+    public String getSynonims() {
+        return synonims;
+    }
+
+    public void setSynonims(String synonims) {
+        this.synonims = synonims;
+    }
+
 }

@@ -38,6 +38,9 @@ public class Game {
 
     @Property(name = "currentRound")
     private Integer currentRoundNumber;
+    
+    @Property(name = "previouslySelectedLetters")
+    private String previouslySelectedLetters;
 
     public Long getId() {
         return id;
@@ -101,6 +104,14 @@ public class Game {
 
     public void setCurrentRoundNumber(Integer currentRoundNumber) {
         this.currentRoundNumber = currentRoundNumber;
+    }
+
+    public String getPreviouslySelectedLetters() {
+        return previouslySelectedLetters;
+    }
+
+    public void setPreviouslySelectedLetters(String previouslySelectedLetters) {
+        this.previouslySelectedLetters = previouslySelectedLetters;
     }
 
 }

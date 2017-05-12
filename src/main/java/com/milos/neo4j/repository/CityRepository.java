@@ -12,6 +12,9 @@ public interface CityRepository extends GraphRepository<City> {
     @Query("MATCH (s:City) WHERE s.name = {0} RETURN s")
     public City getCityByName(String name);
 
+    @Query("MATCH (s:City) WHERE s.name = {0} or (s.synonims is not null and s.synonims={1}) RETURN s")
+    public City getCityByNameOrSynonim(String name, String synonim);
+
     @Query("MATCH (s:City) RETURN s ORDER BY s.name ASC")
     public Set<City> getAllCities();
 

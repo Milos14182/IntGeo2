@@ -9,86 +9,96 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties("meta")
 public class RiverData {
-	private Long id;
-	private String name;
-	private String description;
-	private boolean active;
-	private Set<StateData> stateDatas = new HashSet<StateData>();
-	private Set<CityData> cityDatas = new HashSet<CityData>();
-	private Set<AnimalData> animalDatas = new HashSet<AnimalData>();
-	private List<Long> stateIds = new ArrayList<>();
-	private LakeData lake;
 
-	public List<Long> getStateIds() {
-		return stateIds;
-	}
+    private Long id;
+    private String name;
+    private String description;
+    private boolean active;
+    private String synonims;
+    private Set<StateData> stateDatas = new HashSet<StateData>();
+    private Set<CityData> cityDatas = new HashSet<CityData>();
+    private Set<AnimalData> animalDatas = new HashSet<AnimalData>();
+    private List<Long> stateIds = new ArrayList<>();
+    private LakeData lake;
 
-	public void setStateIds(List<Long> stateIds) {
-		this.stateIds = stateIds;
-	}
+    public List<Long> getStateIds() {
+        return stateIds;
+    }
 
-	public boolean isActive() {
-		return active;
-	}
+    public void setStateIds(List<Long> stateIds) {
+        this.stateIds = stateIds;
+    }
 
-	public void setActive(boolean active) {
-		this.active = active;
-	}
+    public boolean isActive() {
+        return active;
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public void setActive(boolean active) {
+        this.active = active;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    public String getDescription() {
+        return description;
+    }
 
-	public Set<StateData> getStateDatas() {
-		return stateDatas;
-	}
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-	public void setStateDatas(Set<StateData> stateDatas) {
-		this.stateDatas = stateDatas;
-	}
+    public Set<StateData> getStateDatas() {
+        return stateDatas;
+    }
 
-	public Set<CityData> getCityDatas() {
-		return cityDatas;
-	}
+    public void setStateDatas(Set<StateData> stateDatas) {
+        this.stateDatas = stateDatas;
+    }
 
-	public void setCityDatas(Set<CityData> cityDatas) {
-		this.cityDatas = cityDatas;
-	}
+    public Set<CityData> getCityDatas() {
+        return cityDatas;
+    }
 
-	public Set<AnimalData> getAnimalDatas() {
-		return animalDatas;
-	}
+    public void setCityDatas(Set<CityData> cityDatas) {
+        this.cityDatas = cityDatas;
+    }
 
-	public void setAnimalDatas(Set<AnimalData> animalDatas) {
-		this.animalDatas = animalDatas;
-	}
+    public Set<AnimalData> getAnimalDatas() {
+        return animalDatas;
+    }
 
-	public LakeData getLake() {
-		return lake;
-	}
+    public void setAnimalDatas(Set<AnimalData> animalDatas) {
+        this.animalDatas = animalDatas;
+    }
 
-	public void setLake(LakeData lake) {
-		this.lake = lake;
-	}
+    public LakeData getLake() {
+        return lake;
+    }
+
+    public void setLake(LakeData lake) {
+        this.lake = lake;
+    }
+
+    public String getSynonims() {
+        return synonims;
+    }
+
+    public void setSynonims(String synonims) {
+        this.synonims = synonims;
+    }
 
 }

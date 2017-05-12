@@ -11,103 +11,117 @@ import org.neo4j.ogm.annotation.Relationship;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @NodeEntity
-@JsonIgnoreProperties(ignoreUnknown=true)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Animal {
-	private @GraphId Long id;
 
-	@Property(name = "name")
-	private String name;
+    private @GraphId
+    Long id;
 
-	@Property(name = "description")
-	private String description;
+    @Property(name = "name")
+    private String name;
 
-	@Property(name = "active")
-	private boolean active;
+    @Property(name = "description")
+    private String description;
 
-	@Relationship(type = "ANIMAL_IS_IN_STATE", direction = Relationship.OUTGOING)
-	private Set<State> states = new HashSet<State>();
+    @Property(name = "active")
+    private boolean active;
 
-	@Relationship(type = "ANIMAL_IS_ON_MOUNTAIN", direction = Relationship.OUTGOING)
-	private Set<Mountain> mountains = new HashSet<Mountain>();
+    @Property(name = "synonims")
+    private String synonims;
 
-	@Relationship(type = "ANIMAL_IS_IN_CITY", direction = Relationship.OUTGOING)
-	private Set<City> cities;
+    @Relationship(type = "ANIMAL_IS_IN_STATE", direction = Relationship.OUTGOING)
+    private Set<State> states = new HashSet<State>();
 
-	@Relationship(type = "ANIMAL_IS_IN_RIVER", direction = Relationship.OUTGOING)
-	private Set<River> rivers;
+    @Relationship(type = "ANIMAL_IS_ON_MOUNTAIN", direction = Relationship.OUTGOING)
+    private Set<Mountain> mountains = new HashSet<Mountain>();
 
-	@Relationship(type = "ANIMAL_IS_IN_LAKE", direction = Relationship.OUTGOING)
-	private Set<Lake> lakes;
+    @Relationship(type = "ANIMAL_IS_IN_CITY", direction = Relationship.OUTGOING)
+    private Set<City> cities;
 
-	public boolean isActive() {
-		return active;
-	}
+    @Relationship(type = "ANIMAL_IS_IN_RIVER", direction = Relationship.OUTGOING)
+    private Set<River> rivers;
 
-	public void setActive(boolean active) {
-		this.active = active;
-	}
+    @Relationship(type = "ANIMAL_IS_IN_LAKE", direction = Relationship.OUTGOING)
+    private Set<Lake> lakes;
 
-	public Set<State> getStates() {
-		return states;
-	}
+    public boolean isActive() {
+        return active;
+    }
 
-	public void setStates(Set<State> states) {
-		this.states = states;
-	}
+    public void setActive(boolean active) {
+        this.active = active;
+    }
 
-	public Set<Mountain> getMountains() {
-		return mountains;
-	}
+    public Set<State> getStates() {
+        return states;
+    }
 
-	public void setMountains(Set<Mountain> mountains) {
-		this.mountains = mountains;
-	}
+    public void setStates(Set<State> states) {
+        this.states = states;
+    }
 
-	public Set<City> getCities() {
-		return cities;
-	}
+    public Set<Mountain> getMountains() {
+        return mountains;
+    }
 
-	public void setCities(Set<City> cities) {
-		this.cities = cities;
-	}
+    public void setMountains(Set<Mountain> mountains) {
+        this.mountains = mountains;
+    }
 
-	public Set<River> getRivers() {
-		return rivers;
-	}
+    public Set<City> getCities() {
+        return cities;
+    }
 
-	public void setRivers(Set<River> rivers) {
-		this.rivers = rivers;
-	}
+    public void setCities(Set<City> cities) {
+        this.cities = cities;
+    }
 
-	public Set<Lake> getLakes() {
-		return lakes;
-	}
+    public Set<River> getRivers() {
+        return rivers;
+    }
 
-	public void setLakes(Set<Lake> lakes) {
-		this.lakes = lakes;
-	}
+    public void setRivers(Set<River> rivers) {
+        this.rivers = rivers;
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public Set<Lake> getLakes() {
+        return lakes;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setLakes(Set<Lake> lakes) {
+        this.lakes = lakes;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getSynonims() {
+        return synonims;
+    }
+
+    public void setSynonims(String synonims) {
+        this.synonims = synonims;
+    }
+
 }

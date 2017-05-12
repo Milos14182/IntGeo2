@@ -7,6 +7,6 @@ public interface PlayService {
 
 	public Long countScore(SubmitAnswersTmp answers, UserData userData);
 	
-	public String choseLetter();
+	public String choseLetter(Long gameId);
 	
 }
