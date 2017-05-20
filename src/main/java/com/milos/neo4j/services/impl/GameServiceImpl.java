@@ -336,5 +336,35 @@ public class GameServiceImpl implements GameService {
             throw ex;
         }
     }
+    
+    @Transactional(readOnly = true)
+    @Override
+    public void deleteUserGameScoresBeforeDate(Date beforeDate) {
+        try {
+            Set<Long> gameIds = gameRepository.getGameIdsForDelete(beforeDate.getTime());
+            for (Long gameId : gameIds) {
+                userGameScoresRepository.deleteUserGameScore(gameId);
+            }
+        } catch (RuntimeException ex) {
+            GEOGRAPHY_LOGGER.error("getGameIdsForDelete throws error.", ex);
+            throw ex;
+        }
+    }
 
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+    @Override
+    public GameData endGame(Long gameId) {
+        try {
+            Game game = gameRepository.endGame(gameId);
+            if (game != null) {
+                GameData gameData = new GameData();
+                gameConverter.copyFromEntityToData(game, gameData);
+                return gameData;
+            }
+            return null;
+        } catch (RuntimeException ex) {
+            GEOGRAPHY_LOGGER.error("endGame throws error.", ex);
+            throw ex;
+        }
+    }
 }

@@ -11,6 +11,7 @@ import com.milos.neo4j.data.SubmitAnswersTmp;
 import com.milos.neo4j.data.UserData;
 import com.milos.neo4j.services.GameService;
 import com.milos.neo4j.services.PlayService;
+import com.milos.neo4j.services.UserService;
 import java.util.Calendar;
 
 @Service
@@ -21,6 +22,9 @@ public class RoundBrokerImpl implements RoundBroker {
 
     @Autowired
     GameService gameService;
+
+    @Autowired
+    private UserService userService;
 
     String letter = "";
     Boolean initalLetter = true;
@@ -80,7 +84,11 @@ public class RoundBrokerImpl implements RoundBroker {
 
     @Override
     public Long countScore(SubmitAnswersTmp submitAnswersTmp, UserData userData) {
-        return playService.countScore(submitAnswersTmp, userData);
+        Long score = playService.countScore(submitAnswersTmp, userData);
+        if (score.compareTo(Long.valueOf(300))>=0) {
+            gameService.endGame(Long.valueOf(submitAnswersTmp.getGameId()));
+        }        
+        return score;
     }
 
     @Override

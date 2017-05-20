@@ -42,4 +42,8 @@ public interface GameService {
     public String getPreviousLetters(Long gameId);
     
     public void updatePreviousLetters(Long gameId, String previouslySelectedLetters);
+    
+    void deleteUserGameScoresBeforeDate(Date beforeDate);
+    
+    GameData endGame(Long gameId);
 }

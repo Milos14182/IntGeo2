@@ -41,6 +41,9 @@ public class Game {
     
     @Property(name = "previouslySelectedLetters")
     private String previouslySelectedLetters;
+    
+    @Property(name = "ended")
+    private Boolean ended;
 
     public Long getId() {
         return id;

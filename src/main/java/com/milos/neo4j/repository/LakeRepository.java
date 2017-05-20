@@ -11,7 +11,7 @@ public interface LakeRepository extends GraphRepository<Lake> {
 	@Query("MATCH (s:Lake) WHERE s.name = {0} RETURN s")
 	public Lake getLakeByName(String name);
                 
-        @Query("MATCH (s:Lake) WHERE s.name = {0} or (s.synonims is not null and s.synonims={1}) RETURN s")
+        @Query("MATCH (s:Lake) WHERE s.name = {0} or s.synonims CONTAINS {1} RETURN s")
 	public Lake getLakeByNameOrSynonim(String name, String synonim);
 	
 	@Query("MATCH (s:Lake) where s.active = {0} RETURN s")

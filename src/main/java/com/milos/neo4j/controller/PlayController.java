@@ -11,21 +11,32 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.milos.neo4j.data.GameData;
 import com.milos.neo4j.data.SubmitAnswersTmp;
+import com.milos.neo4j.data.UserData;
+import com.milos.neo4j.data.UserGameData;
 import com.milos.neo4j.services.GameService;
 
 @Controller
 public class PlayController {
-	@Autowired
-	GameService gameService;
 
-	@RequestMapping(value = "/play/{gameId}", method = RequestMethod.GET)
-	public String playGame(HttpServletRequest request, @PathVariable Long gameId, Model model) {
-		SubmitAnswersTmp subAnsTmp = new SubmitAnswersTmp();
-		GameData gameData = gameService.getGameById(gameId);
-		model.addAttribute("answers", subAnsTmp);
-		model.addAttribute("gameData", gameData);
-		request.getSession().setAttribute("scorePerRound", Long.valueOf(0));
-		request.getSession().setAttribute("character", gameData.getFirstLetter());
-		return "play";
-	}
+    @Autowired
+    GameService gameService;
+
+    @RequestMapping(value = "/play/{gameId}", method = RequestMethod.GET)
+    public String playGame(HttpServletRequest request, @PathVariable Long gameId, Model model) {
+        UserData userData = (UserData) request.getSession().getAttribute("userDetails");
+        SubmitAnswersTmp subAnsTmp = new SubmitAnswersTmp();
+        GameData gameData = gameService.getGameById(gameId);
+        Long scorePerRound = Long.valueOf(0);
+        if (userData != null) {
+            UserGameData userGameData = gameService.getUserGameData(userData.getUsername(), gameId);
+            if (userGameData!=null && userGameData.getScore()!=null) {
+                scorePerRound = userGameData.getScore();
+            }
+        }
+        model.addAttribute("answers", subAnsTmp);
+        model.addAttribute("gameData", gameData);
+        request.getSession().setAttribute("scorePerRound", scorePerRound);
+        request.getSession().setAttribute("character", gameData.getFirstLetter());
+        return "play";
+    }
 }

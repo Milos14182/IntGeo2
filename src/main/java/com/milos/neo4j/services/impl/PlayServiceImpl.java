@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.milos.neo4j.data.SubmitAnswersTmp;
 import com.milos.neo4j.data.UserData;
+import com.milos.neo4j.data.UserGameData;
 import com.milos.neo4j.domain.nodes.Animal;
 import com.milos.neo4j.domain.nodes.City;
 import com.milos.neo4j.domain.nodes.Lake;
@@ -68,7 +69,7 @@ public class PlayServiceImpl implements PlayService {
 
     @Autowired
     RiverFlowsThroughStateRepository riverFlowsThroughStateRepository;
-    
+
     @Autowired
     private GameService gameService;
 
@@ -82,7 +83,7 @@ public class PlayServiceImpl implements PlayService {
             answers.setScore(Long.valueOf(0));
         }
         if (!answers.getState().equals("") && answers.getState().startsWith(answers.getCharacter())) {
-            State state = stateRepository.getStateByNameOrSynonim(answers.getState(), "~ '.*" + answers.getState() + ".*'");
+            State state = stateRepository.getStateByNameOrSynonim(answers.getState(), answers.getState());
             if (state != null && state.isActive()) {
                 if (userData.getCity() != null) {
                     cityIsInState = cityIsInStateRepository.getStateOfCity(userData.getCity().getName(),
@@ -92,13 +93,13 @@ public class PlayServiceImpl implements PlayService {
             }
         }
         if (!answers.getAnimal().equals("") && answers.getAnimal().startsWith(answers.getCharacter())) {
-            Animal animal = animalRepository.getAnimalByNameOrSynonim(answers.getAnimal(), "~ '.*" + answers.getAnimal()+ ".*'");
+            Animal animal = animalRepository.getAnimalByNameOrSynonim(answers.getAnimal(), answers.getAnimal());
             if (animal != null && animal.isActive()) {
                 answers.setScore(answers.getScore() + uniqueRightResult);
             }
         }
         if (!answers.getCity().equals("") && answers.getCity().startsWith(answers.getCharacter())) {
-            City city = cityRepository.getCityByNameOrSynonim(answers.getCity(), "~ '.*" + answers.getCity()+ ".*'");
+            City city = cityRepository.getCityByNameOrSynonim(answers.getCity(), answers.getCity());
             if (city != null && city.isActive()) {
                 if (cityIsInState != null) {
                     CityIsInState cityIsInStateAnswers = cityIsInStateRepository.getStateOfCity(city.getName(),
@@ -114,13 +115,13 @@ public class PlayServiceImpl implements PlayService {
             }
         }
         if (!answers.getLake().equals("") && answers.getLake().startsWith(answers.getCharacter())) {
-            Lake lake = lakeRepository.getLakeByNameOrSynonim(answers.getLake(), "~ '.*" + answers.getLake()+ ".*'");
+            Lake lake = lakeRepository.getLakeByNameOrSynonim(answers.getLake(), answers.getLake());
             if (lake != null && lake.isActive()) {
                 answers.setScore(answers.getScore() + uniqueRightResult);
             }
         }
         if (!answers.getMountain().equals("") && answers.getMountain().startsWith(answers.getCharacter())) {
-            Mountain mountain = mountainRepository.getMountainByNameOrSynonim(answers.getMountain(), "~ '.*" + answers.getMountain()+ ".*'");
+            Mountain mountain = mountainRepository.getMountainByNameOrSynonim(answers.getMountain(), answers.getMountain());
             if (mountain != null && mountain.isActive()) {
                 if (cityIsInState != null) {
                     mountainIsInState = mountainIsInStateRepository.getMountainInState(answers.getMountain(),
@@ -133,13 +134,13 @@ public class PlayServiceImpl implements PlayService {
             }
         }
         if (!answers.getPlant().equals("") && answers.getPlant().startsWith(answers.getCharacter())) {
-            Plant plant = plantRepository.getPlantByNameOrSynonim(answers.getPlant(), "~ '.*" + answers.getPlant()+ ".*'");
+            Plant plant = plantRepository.getPlantByNameOrSynonim(answers.getPlant(), answers.getPlant());
             if (plant != null && plant.isActive()) {
                 answers.setScore(answers.getScore() + uniqueRightResult);
             }
         }
         if (!answers.getRiver().equals("") && answers.getRiver().startsWith(answers.getCharacter())) {
-            River river = riverRepository.getRiverByNameOrSynonim(answers.getRiver(), "~ '.*" + answers.getRiver()+ ".*'");
+            River river = riverRepository.getRiverByNameOrSynonim(answers.getRiver(), answers.getRiver());
             if (river != null && river.isActive()) {
                 answers.setScore(answers.getScore() + uniqueRightResult);
                 if (cityIsInState != null) {

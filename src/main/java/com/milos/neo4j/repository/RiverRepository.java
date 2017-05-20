@@ -12,7 +12,7 @@ public interface RiverRepository extends GraphRepository<River> {
     @Query("MATCH (s:River) WHERE s.name = {0} RETURN s")
     public River getRiverByName(String name);
 
-    @Query("MATCH (s:River) WHERE s.name = {0} or (s.synonims is not null and s.synonims={1}) RETURN s")
+    @Query("MATCH (s:River) WHERE s.name = {0} or s.synonims CONTAINS {1} RETURN s")
     public River getRiverByNameOrSynonim(String name, String synonim);
 
     @Query("MATCH (s:River) where s.active = {0} RETURN s")

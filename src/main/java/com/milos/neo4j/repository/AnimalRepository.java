@@ -11,7 +11,7 @@ public interface AnimalRepository extends GraphRepository<Animal> {
 	@Query("MATCH (s:Animal) WHERE s.name = {0} RETURN s")
 	public Animal getAnimalByName(String name);
         
-        @Query("MATCH (s:Animal) WHERE s.name = {0} or (s.synonims is not null and s.synonims={1}) RETURN s")
+        @Query("MATCH (s:Animal) WHERE s.name = {0} or s.synonims CONTAINS {1} RETURN s")
 	public Animal getAnimalByNameOrSynonim(String name, String synonim);
 	
 	@Query("MATCH (s:Animal) where s.active = {0} RETURN s")

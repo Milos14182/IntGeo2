@@ -11,4 +11,7 @@ public interface UserGameScoresRepository extends GraphRepository<UserGameScores
 	
 	@Query("MATCH (u:UserGameScores) WHERE u.username = {0} and u.gameId = {1} SET u.score={2} RETURN u")
 	public UserGameScores updateUserGameScore(String username, Long id, Long score);
+        
+        @Query("MATCH (u:UserGameScores) WHERE u.gameId = {0} DELETE u")
+	public void deleteUserGameScore(Long id);
 }

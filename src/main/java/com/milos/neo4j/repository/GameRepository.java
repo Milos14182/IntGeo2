@@ -35,4 +35,10 @@ public interface GameRepository extends GraphRepository<Game> {
     
     @Query("MATCH (n:Game) WHERE ID(n) = {0} SET n.previouslySelectedLetters={1}")
     public void updatePreviousLetters(Long gameId, String previouslySelectedLetters);
+    
+    @Query("MATCH (n:Game)-[rel]->() WHERE n.creationDate is null or n.creationDate < {0} RETURN ID(n)")
+    public Set<Long> getGameIdsForDelete(Long beforeDate);
+    
+    @Query("MATCH (n:Game) WHERE ID(n) = {0} SET n.ended = true RETURN n")
+    public Game endGame(Long gameID);
 }

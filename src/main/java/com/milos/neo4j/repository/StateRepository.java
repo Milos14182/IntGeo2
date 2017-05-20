@@ -11,7 +11,7 @@ public interface StateRepository extends GraphRepository<State> {
 	@Query("MATCH (s:State) WHERE s.name = {0} RETURN s")
 	public State getStateByName(String name);
         
-        @Query("MATCH (s:State) WHERE s.name = {0} or (s.synonims is not null and s.synonims={1}) RETURN s")
+        @Query("MATCH (s:State) WHERE s.name = {0} or s.synonims CONTAINS {1} RETURN s")
 	public State getStateByNameOrSynonim(String name, String synonim);
 	
 	@Query("MATCH (s:State) where s.active = {0} RETURN s")
