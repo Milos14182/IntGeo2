@@ -27,11 +27,12 @@ public class SpringSecurity extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.headers().frameOptions().sameOrigin();
-        http.authorizeRequests()
+        http.csrf().disable()
+                .headers().frameOptions().sameOrigin()
+                .and()
+                .authorizeRequests()
                 .antMatchers("/profile/**").access("hasRole('ROLE_USER')")
-                .antMatchers("/play/**").access("hasRole('ROLE_USER')")
-                .antMatchers("/game/**").access("hasRole('ROLE_USER')")
+                .antMatchers("/play/**", "/game/**").access("hasRole('ROLE_USER')")
                 .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
                 .antMatchers("/greetingEndpoint/**").permitAll()
                 .and().formLogin()
