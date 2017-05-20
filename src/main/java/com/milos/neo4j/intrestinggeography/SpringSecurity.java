@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import com.milos.neo4j.security.CustomUserDetails;
 import com.milos.neo4j.security.IntgeoAuthenticationErrorHandler;
 import com.milos.neo4j.security.IntgeoAuthenticationSuccessHandler;
+import java.util.logging.Level;
 
 @Configuration
 @EnableWebSecurity
@@ -37,7 +38,9 @@ public class SpringSecurity extends WebSecurityConfigurerAdapter {
                 .antMatchers("/greetingEndpoint/**").permitAll()
                 .and().formLogin()
                 .successHandler(intgeoAuthenticationSuccessHandler)
-                .failureHandler(authenticationErrorHandler);
+                .failureHandler(authenticationErrorHandler)
+                .and()
+                .logout().logoutSuccessUrl("/");
     }
 
     @Override

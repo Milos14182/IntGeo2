@@ -18,6 +18,7 @@ import com.milos.neo4j.data.UserData;
 import com.milos.neo4j.data.UserGameData;
 import com.milos.neo4j.services.GameService;
 import com.milos.neo4j.services.UserService;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * Handles requests for the application home page.
@@ -36,9 +37,9 @@ public class HomeController {
 		return "home";
 	}
 	
-	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String signOut(final HttpServletRequest request,
-			final HttpServletResponse response) {
+			final HttpServletResponse response, @RequestParam String logout) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 	    if (auth != null){    
 	        new SecurityContextLogoutHandler().logout(request, response, auth);
