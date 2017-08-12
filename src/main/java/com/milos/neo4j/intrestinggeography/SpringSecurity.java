@@ -28,7 +28,8 @@ public class SpringSecurity extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.headers().frameOptions().sameOrigin()
+        http.csrf().disable()
+                .headers().frameOptions().sameOrigin()
                 .and()
                 .authorizeRequests()
                 .antMatchers("/profile/**").access("hasRole('ROLE_USER')")

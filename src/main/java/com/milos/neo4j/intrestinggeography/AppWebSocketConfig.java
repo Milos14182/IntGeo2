@@ -19,7 +19,9 @@ public class AppWebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint("/greetingEndpoint").setAllowedOrigins("*").withSockJS();
+        registry.addEndpoint("/greetingEndpoint").setAllowedOrigins(
+                "https://intgeo.herokuapp.com:443", "http://localhost:8084"
+        ).withSockJS();
     }
 
 }
