@@ -13,15 +13,12 @@ public class AppWebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer
     @Override
     public void configureMessageBroker(MessageBrokerRegistry config) {
         config.enableSimpleBroker("/topic");
-//        config.setApplicationDestinationPrefixes("/");
         config.setApplicationDestinationPrefixes("/");
     }
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint("/greetingEndpoint").setAllowedOrigins(
-                "https://intgeo.herokuapp.com:443", "http://localhost:8084", "http://intgeo.herokuapp.com:80"
-        ).withSockJS();
+        registry.addEndpoint("/greetingEndpoint").setAllowedOrigins("*").withSockJS();
     }
 
 }

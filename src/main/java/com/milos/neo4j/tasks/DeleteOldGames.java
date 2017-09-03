@@ -8,7 +8,6 @@ package com.milos.neo4j.tasks;
 import com.milos.neo4j.services.GameService;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;

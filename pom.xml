@@ -140,9 +140,9 @@
         </repository>
     </repositories>
     
-    <profiles>
+<!--    <profiles>
         <profile>
-            <id>openshift</id>
+            <id>openshift</id>-->
             <build>
                 <plugins>
                     <plugin>
@@ -179,8 +179,8 @@
                     </plugin>
                 </plugins>
             </build>
-        </profile>
-    </profiles>
+<!--        </profile>
+    </profiles>-->
 
     
 </project>
