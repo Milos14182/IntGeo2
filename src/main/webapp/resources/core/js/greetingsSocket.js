@@ -1,5 +1,6 @@
 var stompClient = createStompClient();
 var answersAlreadySend = false;
+var answersSend = false;
 var collectAll = false;
 var count = 60;
 var counter = null;
@@ -37,6 +38,9 @@ function startRound() {
     roundTimer();
     stompClient.subscribe('/topic/play/roundSync/' + pathnames[pathnames.length - 1], function (
             data) {
+        if (data.body!=="0") {
+            answersSend = false;
+        }
         resetTimer(data.body);
     });
     stompClient.subscribe('/topic/play/answers/' + pathnames[pathnames.length - 1], function (
@@ -54,6 +58,7 @@ function sendNum(stompClient) {
     var pathnames = window.location.pathname.split('/');
 
     stompClient.send("/play/answers/" + pathnames[pathnames.length - 1], {}, getInputValuesJSON());
+    answersSend = true;
     //deploy
 //    stompClient.send("/play/answers/" + pathnames[pathnames.length - 1], {}, getInputValuesJSON());
 }
@@ -74,10 +79,7 @@ function roundSync(stompClient) {
 //    stompClient.send("/play/roundSync/" + pathnames[pathnames.length - 1], {});
 }
 function createStompClient() {
-    //razvojni
     var socket = new SockJS('/greetingEndpoint');
-//    deploy
-//    var socket = new SockJS('/greetingEndpoint');
     return Stomp.over(socket);
 }
 
@@ -93,7 +95,7 @@ function getInputValuesJSON() {
     var plant = $('#input_plant').val().toUpperCase();
     var animal = $('#input_animal').val().toUpperCase();
     var url = window.location.href;
-    var gameId = url.split('/')[5];
+    var gameId = url.split('/')[4];
     return JSON.stringify({
         'username': username,
         'character': character,
@@ -112,7 +114,8 @@ function getInputValuesJSON() {
 
 function showAllResults(calResult) {
     var answers = JSON.parse(calResult.body);
-    if (answers == false) {
+    var username = $('#input_username').val();
+    if (answers["submitted"] == true && answers[username] == true) {
         answersAlreadySend = true;
         $(".answersSend").show();
     } else {
@@ -161,7 +164,7 @@ function setIUserAnswers(answers, int) {
 function roundTimer() {
     $('#roundTimer').html(count);
     count = count - 1;
-    if (count <= 0)
+    if (count <= 0 && !answersSend)
     {
         clearInterval(counter);
         if (!answersAlreadySend) {

@@ -16,6 +16,7 @@ import com.milos.neo4j.data.UserGameData;
 import com.milos.neo4j.roundbroker.RoundBroker;
 import com.milos.neo4j.services.GameService;
 import com.milos.neo4j.services.UserService;
+import java.util.Map;
 
 @Controller
 public class RoundController {
@@ -59,7 +60,7 @@ public class RoundController {
         UserData userData = userService.getUser(answersTmp.getUsername());
         Long scorePerRound = roundBroker.countScore(answersTmp, userData);
         if (roundBroker.getInitalLetter()) {
-            roundBroker.createLetterForGameRound(Long.valueOf(gameId.longValue()));
+            roundBroker.createLetterForGameRound(gameId.longValue());
         }
         answersTmp.setCharacter(roundBroker.getLetter());
         answersTmp.setScore(scorePerRound);
@@ -82,9 +83,9 @@ public class RoundController {
             games.add(answersTmp);
             gamesContainer.put(answersTmp.getGameId(), games);
         }
-        gameService.updateUserGame(answersTmp.getUsername(), Long.valueOf(gameId.longValue()), scorePerRound);
-        if (!roundBroker.waitForAllUsersToAnswer(games, Long.valueOf(gameId.longValue()), answersTmp.isCollectAll())) {
-            return objectMapper.writeValueAsString(false);
+        gameService.updateUserGame(answersTmp.getUsername(), gameId.longValue(), scorePerRound);
+        if (!roundBroker.waitForAllUsersToAnswer(games, gameId.longValue(), answersTmp.isCollectAll())) {
+            return objectMapper.writeValueAsString(getSubmitedUsers(games));
         }
         return objectMapper.writeValueAsString(games);
     }
@@ -100,5 +101,16 @@ public class RoundController {
         submitAnswersTmp.setPlant(answersTmp.getPlant());
         submitAnswersTmp.setRiver(answersTmp.getRiver());
         submitAnswersTmp.setState(answersTmp.getState());
+    }
+
+    private Map<String, Boolean> getSubmitedUsers(List<SubmitAnswersTmp> answers) {
+        Map<String, Boolean> users = new HashMap<>();
+        users.put("submitted", Boolean.TRUE);
+        answers.forEach((submitAnswersTmp) -> {
+            if (submitAnswersTmp.getSubmitet().equals(Boolean.TRUE)) {
+                users.put(submitAnswersTmp.getUsername(), Boolean.TRUE);
+            }
+        });
+        return users;
     }
 }
