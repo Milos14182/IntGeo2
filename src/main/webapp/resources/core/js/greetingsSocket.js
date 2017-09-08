@@ -14,6 +14,7 @@ function setConnected(connected) {
 }
 function connect(stompClient) {
     var pathnames = window.location.pathname.split('/');
+    disableInputs();
     stompClient.connect({}, function () {
         counter = setInterval(loginPlayerTimer, 1000);
         waitPlayers(stompClient);
@@ -38,7 +39,7 @@ function startRound() {
     roundTimer();
     stompClient.subscribe('/topic/play/roundSync/' + pathnames[pathnames.length - 1], function (
             data) {
-        if (data.body!=="0") {
+        if (data.body !== "0") {
             answersSend = false;
         }
         resetTimer(data.body);
@@ -118,11 +119,12 @@ function showAllResults(calResult) {
     if (answers["submitted"] == true && answers[username] == true) {
         answersAlreadySend = true;
         $(".answersSend").show();
+        disableInputs();
     } else {
         for (var i in answers) {
             answersAlreadySend = false;
             $(".answersSend").hide();
-            if (answers[i].username == $('#input_username').val()) {
+            if (answers[i].username == username) {
                 setMyAnswers(answers[i]);
             } else {
                 setIUserAnswers(answers[i], i)
@@ -150,8 +152,10 @@ function setMyAnswers(answers) {
     $('#input_river').val('');
     $('#input_plant').val('');
     $('#input_animal').val('');
+    enableInputs();
 }
 function setIUserAnswers(answers, int) {
+    $('#scorePerRound-').html(answers.score);
     $('#stateResult-' + int).html(answers.state.toUpperCase());
     $('#cityResult-' + int).html(answers.city.toUpperCase());
     $('#mountainResult-' + int).html(answers.mountain.toUpperCase());

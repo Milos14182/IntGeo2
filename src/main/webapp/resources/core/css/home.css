@@ -117,8 +117,8 @@ body {
     width: 5vw;
     height: 5vw;
     position: absolute;
-    margin-left: 34.3vw;
-    margin-top: 51vh;
+    margin-left: 33.75vw;
+    margin-top: 50vh;
 }
 .riverStatesWraper {
     overflow:auto; 
@@ -157,4 +157,47 @@ body {
     opacity: 0.83;
     transition: opacity 0.6s;
     margin-bottom: 15px;
+}
+
+#user-0 {
+    margin-left: 300px;
+    width: 20vh;
+    height: 17vh;
+    margin-top: 300px;
+    position: absolute;
+}
+#user-1 {
+    margin-left: 350px;
+    width: 20vh;
+    height: 17vh;
+    margin-top: -40px;
+    position: absolute;
+}
+#user-2 {
+    margin-left: 800px;
+    width: 20vh;
+    height: 17vh;
+    margin-top: -40px;
+    position: absolute;
+}
+#scorePerRound-1 {
+    width: 50px;
+    height: 20px;
+    position: absolute;
+    margin-top: 60px;
+    margin-left: 620px;
+}
+#scorePerRound-2 {
+    width: 50px;
+    height: 20px;
+    position: absolute;
+    margin-top: 60px;
+    margin-left: 800px;
+}
+#scorePerRound-0{
+    width: 50px;
+    height: 20px;
+    position: absolute;
+    margin-top: 280px;
+    margin-left: 360px;
 }

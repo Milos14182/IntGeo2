@@ -26,8 +26,9 @@
             </figure>
         </div>
         <div class="playTable">
-            <c:forEach var="i" begin="0" end="5">
-                <div id="user-${i}" style="margin-left: ${i*21}px; width: 20px">
+            <c:forEach var="i" begin="0" end="5">                
+                <div id="scorePerRound-${i}"></div>
+                <div id="user-${i}">
                     <div id="stateResult-${i}"></div>
                     <div id="cityResult-${i}"></div>
                     <div id="mountainResult-${i}"></div>
