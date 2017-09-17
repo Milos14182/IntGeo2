@@ -21,7 +21,7 @@ public class MyNeo4jConfiguration extends Neo4jConfiguration {
                 .setURI("http://intgeo:0EbuUIXFA7i20bHS5nMP@hobby-cjpmkomjfhocgbkeddbolenl.dbs.graphenedb.com:24789");
         return config;
     }
-
+    
     @Override
     public SessionFactory getSessionFactory() {
         return new SessionFactory(getConfiguration(), "com.milos.neo4j.domain");

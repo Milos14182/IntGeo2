@@ -16,11 +16,15 @@ import com.milos.neo4j.domain.nodes.Game;
 import com.milos.neo4j.domain.nodes.User;
 import com.milos.neo4j.domain.nodes.UserGameScores;
 import com.milos.neo4j.domain.relations.GameRelation;
+import com.milos.neo4j.domain.relations.GameScores;
+import com.milos.neo4j.domain.relations.UserScores;
 import com.milos.neo4j.enums.LatinAlfabet;
 import com.milos.neo4j.repository.GameRepository;
 import com.milos.neo4j.repository.UserGameScoresRepository;
 import com.milos.neo4j.repository.UserRepository;
 import com.milos.neo4j.repository.relations.GameRelationRepository;
+import com.milos.neo4j.repository.relations.GameScoresRepository;
+import com.milos.neo4j.repository.relations.UserScoreRepository;
 import com.milos.neo4j.services.GameService;
 import com.milos.neo4j.services.PlayService;
 import java.util.Calendar;
@@ -38,27 +42,24 @@ public class GameServiceImpl implements GameService {
 
     @Autowired
     GameRepository gameRepository;
-
     @Autowired
     GameRelationRepository gameRelationRepository;
-
     @Autowired
-    UserGameScoresRepository userGameScoresRepository;
-
+    private UserGameScoresRepository userGameScoresRepository;
     @Autowired
-    GameConverter gameConverter;
-
+    private GameConverter gameConverter;
     @Autowired
-    UserRepository userRepository;
-
+    private UserRepository userRepository;
     @Autowired
-    UserConverter userConverter;
-
+    private UserConverter userConverter;
     @Autowired
-    PlayService playService;
-
+    private PlayService playService;
     @Autowired
-    UserGameConverter userGameConverter;
+    private UserGameConverter userGameConverter;
+    @Autowired 
+    private GameScoresRepository gameScoresRepository;
+    @Autowired
+    private UserScoreRepository userScoreRepository;
 
     @Transactional(readOnly = true)
     @Override
@@ -187,6 +188,12 @@ public class GameServiceImpl implements GameService {
             gameScores.setScore(userData.getGameScore());
             gameScores.setUsername(userData.getUsername());
             userGameScoresRepository.save(gameScores);
+            Game gameEntity = new Game();
+            User user = new User();
+            gameConverter.copyFromDataToEntity(game, gameEntity);
+            userConverter.copyFromDataToEntity(userData, user);
+            gameScoresRepository.save(new GameScores(gameEntity, gameScores));
+            userScoreRepository.save(new UserScores(user, gameScores));
         } catch (RuntimeException ex) {
             GEOGRAPHY_LOGGER.error("createNewUserGame throws error.", ex);
             throw ex;

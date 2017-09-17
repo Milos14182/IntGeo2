@@ -22,11 +22,11 @@ public class DeleteOldGames {
     @Autowired
     private GameService gameService;
     
-    @Scheduled(fixedDelayString = "3600000")
+    @Scheduled(cron = "0 0 23 * * SUN")
     public void deleteOldGames() {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date());
-        calendar.add(Calendar.HOUR, -1);
+        calendar.add(Calendar.WEEK_OF_MONTH, -1);
         gameService.deleteUserGameScoresBeforeDate(calendar.getTime());
         gameService.deleteOldGames(calendar.getTime());
     }

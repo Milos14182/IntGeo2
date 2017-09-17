@@ -3,56 +3,60 @@
 <!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 
 <tiles-definitions>
-	<definition name="home" extends="defaultTemplate">
-		<put-attribute name="title" value="Home" />
-		<put-attribute name="content" value="/WEB-INF/views/home.jsp" />
-	</definition>
-	<definition name="about" extends="defaultTemplate">
-		<put-attribute name="title" value="About" />
-		<put-attribute name="content" value="/WEB-INF/views/about.jsp" />
-	</definition>
-	<definition name="contact" extends="defaultTemplate">
-		<put-attribute name="title" value="Contact" />
-		<put-attribute name="content" value="/WEB-INF/views/contact.jsp" />
-	</definition>
-	<definition name="profile" extends="defaultTemplate">
-		<put-attribute name="title" value="Profile" />
-		<put-attribute name="content" value="/WEB-INF/views/profile.jsp" />
-	</definition>
-	<definition name="register" extends="defaultTemplate">
-		<put-attribute name="title" value="Register" />
-		<put-attribute name="content" value="/WEB-INF/views/register.jsp" />
-	</definition>
-	<definition name="play" extends="defaultTemplate">
-		<put-attribute name="title" value="Play" />
-		<put-attribute name="content" value="/WEB-INF/views/play.jsp" />
-	</definition>
-	<definition name="howTo" extends="defaultTemplate">
-		<put-attribute name="title" value="How To" />
-		<put-attribute name="content" value="/WEB-INF/views/how_to.jsp" />
-	</definition>
-	<definition name="points" extends="defaultTemplate">
-		<put-attribute name="title" value="Points" />
-		<put-attribute name="content" value="/WEB-INF/views/points.jsp" />
-	</definition>
-	<definition name="editUser" extends="defaultTemplate">
-		<put-attribute name="title" value="Edit User Details" />
-		<put-attribute name="content" value="/WEB-INF/views/editUser.jsp" />
-	</definition>
-	<definition name="admin" extends="defaultTemplate">
-		<put-attribute name="title" value="Admin" />
-		<put-attribute name="content" value="/WEB-INF/views/admin.jsp" />
-	</definition>
-	<definition name="editNode" extends="defaultTemplate">
-		<put-attribute name="title" value="Edit Node" />
-		<put-attribute name="content" value="/WEB-INF/views/editNode.jsp" />
-	</definition>
-	<definition name="joinOrCreate" extends="defaultTemplate">
-		<put-attribute name="title" value="Join or create game" />
-		<put-attribute name="content" value="/WEB-INF/views/joinOrCreate.jsp" />
-	</definition>
-	<definition name="greeting" extends="defaultTemplate">
-		<put-attribute name="title" value="Greeting" />
-		<put-attribute name="content" value="/WEB-INF/views/greetingSocket.jsp" />
-	</definition>
+    <definition name="home" extends="defaultTemplate">
+        <put-attribute name="title" value="Home" />
+        <put-attribute name="content" value="/WEB-INF/views/home.jsp" />
+    </definition>
+    <definition name="about" extends="defaultTemplate">
+        <put-attribute name="title" value="About" />
+        <put-attribute name="content" value="/WEB-INF/views/about.jsp" />
+    </definition>
+    <definition name="contact" extends="defaultTemplate">
+        <put-attribute name="title" value="Contact" />
+        <put-attribute name="content" value="/WEB-INF/views/contact.jsp" />
+    </definition>
+    <definition name="profile" extends="defaultTemplate">
+        <put-attribute name="title" value="Profile" />
+        <put-attribute name="content" value="/WEB-INF/views/profile.jsp" />
+    </definition>
+    <definition name="register" extends="defaultTemplate">
+        <put-attribute name="title" value="Register" />
+        <put-attribute name="content" value="/WEB-INF/views/register.jsp" />
+    </definition>
+    <definition name="play" extends="defaultTemplate">
+        <put-attribute name="title" value="Play" />
+        <put-attribute name="content" value="/WEB-INF/views/play.jsp" />
+    </definition>
+    <definition name="howTo" extends="defaultTemplate">
+        <put-attribute name="title" value="How To" />
+        <put-attribute name="content" value="/WEB-INF/views/how_to.jsp" />
+    </definition>
+    <definition name="points" extends="defaultTemplate">
+        <put-attribute name="title" value="Points" />
+        <put-attribute name="content" value="/WEB-INF/views/points.jsp" />
+    </definition>
+    <definition name="editUser" extends="defaultTemplate">
+        <put-attribute name="title" value="Edit User Details" />
+        <put-attribute name="content" value="/WEB-INF/views/editUser.jsp" />
+    </definition>
+    <definition name="admin" extends="defaultTemplate">
+        <put-attribute name="title" value="Admin" />
+        <put-attribute name="content" value="/WEB-INF/views/admin.jsp" />
+    </definition>
+    <definition name="editNode" extends="defaultTemplate">
+        <put-attribute name="title" value="Edit Node" />
+        <put-attribute name="content" value="/WEB-INF/views/editNode.jsp" />
+    </definition>
+    <definition name="joinOrCreate" extends="defaultTemplate">
+        <put-attribute name="title" value="Join or create game" />
+        <put-attribute name="content" value="/WEB-INF/views/joinOrCreate.jsp" />
+    </definition>
+    <definition name="greeting" extends="defaultTemplate">
+        <put-attribute name="title" value="Greeting" />
+        <put-attribute name="content" value="/WEB-INF/views/greetingSocket.jsp" />
+    </definition>
+    <definition name="scoreboard" extends="defaultTemplate">
+        <put-attribute name="title" value="Screboard" />
+        <put-attribute name="content" value="/WEB-INF/views/scoreboard.jsp" />
+    </definition>
 </tiles-definitions>

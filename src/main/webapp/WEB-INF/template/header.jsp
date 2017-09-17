@@ -40,6 +40,8 @@
                             <li><a href='<c:url value ="/admin"/>'><spring:message
                                         code="header.label.admin" /></a></li>
                                 </sec:authorize>
+                        <li><a href='<c:url value ="/scoreboard"/>'><spring:message
+                                    code="header.label.scoreboard" /></a></li>
                     </ul>
 
                     <sec:authorize access="hasRole('ROLE_ANONYMOUS')">
@@ -80,7 +82,7 @@
             <div style="margin-top: -20px" class="alert warning">
                 <span class="closebtn" onclick="this.parentElement.style.display = 'none';">&times;</span>
                 <spring:message code="login.error.message"></spring:message>
-            </div>
+                </div>
         </c:if>  
     </div>
 </div>

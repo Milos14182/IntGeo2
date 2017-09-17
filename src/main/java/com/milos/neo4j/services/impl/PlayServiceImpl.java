@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 
 import com.milos.neo4j.data.SubmitAnswersTmp;
 import com.milos.neo4j.data.UserData;
-import com.milos.neo4j.data.UserGameData;
 import com.milos.neo4j.domain.nodes.Animal;
 import com.milos.neo4j.domain.nodes.City;
 import com.milos.neo4j.domain.nodes.Lake;
@@ -19,7 +18,6 @@ import com.milos.neo4j.domain.relations.RiverFlowsThroughState;
 import com.milos.neo4j.enums.LatinAlfabet;
 import com.milos.neo4j.repository.AnimalRepository;
 import com.milos.neo4j.repository.CityRepository;
-import com.milos.neo4j.repository.GameRepository;
 import com.milos.neo4j.repository.LakeRepository;
 import com.milos.neo4j.repository.MountainRepository;
 import com.milos.neo4j.repository.PlantRepository;
@@ -30,7 +28,6 @@ import com.milos.neo4j.repository.relations.MountainIsInStateRepository;
 import com.milos.neo4j.repository.relations.RiverFlowsThroughStateRepository;
 import com.milos.neo4j.services.GameService;
 import com.milos.neo4j.services.PlayService;
-import java.util.Set;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 

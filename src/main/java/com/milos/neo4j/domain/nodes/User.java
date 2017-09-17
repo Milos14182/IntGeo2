@@ -11,148 +11,163 @@ import org.springframework.format.annotation.NumberFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.util.HashSet;
+import java.util.Set;
 
 @NodeEntity
-@JsonIgnoreProperties(ignoreUnknown=true)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class User {
-	private @GraphId Long id;
 
-	@NotNull(message = "Firstname input is empty.")
-	@Property(name = "firstname")
-	private String firstname;
+    private @GraphId
+    Long id;
 
-	@NotNull(message = "Lastname input is empty.")
-	@Property(name = "lastname")
-	private String lastname;
+    @NotNull(message = "Firstname input is empty.")
+    @Property(name = "firstname")
+    private String firstname;
 
-	@NotNull(message = "Username input is empty.")
-	@Property(name = "username")
-	private String username;
+    @NotNull(message = "Lastname input is empty.")
+    @Property(name = "lastname")
+    private String lastname;
 
-	@NotNull(message = "Please enter password.")
-	@Size(min = 6, max = 15, message = "Your password must be between 6 and 15 characters.")
-	@Property(name = "password")
-	private String password;
+    @NotNull(message = "Username input is empty.")
+    @Property(name = "username")
+    private String username;
 
-	@NotNull(message = "Age is not set")
-	@NumberFormat
-	@Property(name = "age")
-	private String age;
+    @NotNull(message = "Please enter password.")
+    @Size(min = 6, max = 15, message = "Your password must be between 6 and 15 characters.")
+    @Property(name = "password")
+    private String password;
 
-	@NotNull
-	@Property(name = "gender")
-	private String gender = "Male";
+    @NotNull(message = "Age is not set")
+    @NumberFormat
+    @Property(name = "age")
+    private String age;
 
-	@NotNull(message = "Email can't be empty.")
-	@Property(name = "email")
-	private String email;
-	
-	@Property(name = "userImage")
-	private byte[] userImage;
-	
-	@Property(name = "gameScore")
-	private Long gameScore;
-	
-	@JsonIgnore
-	@Property(name="admin")
-	private Boolean admin;
+    @NotNull
+    @Property(name = "gender")
+    private String gender = "Male";
 
-	public byte[] getUserImage() {
-		return userImage;
-	}
+    @NotNull(message = "Email can't be empty.")
+    @Property(name = "email")
+    private String email;
 
-	public void setUserImage(byte[] userImage) {
-		this.userImage = userImage;
-	}
+    @Property(name = "userImage")
+    private byte[] userImage;
 
-	@Relationship(type = "LIVES_IN_CITY", direction = Relationship.OUTGOING)
-	private City city;
+    @Property(name = "gameScore")
+    private Long gameScore;
 
-	public Long getId() {
-		return id;
-	}
+    @JsonIgnore
+    @Property(name = "admin")
+    private Boolean admin;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public byte[] getUserImage() {
+        return userImage;
+    }
 
-	public City getCity() {
-		return city;
-	}
+    public void setUserImage(byte[] userImage) {
+        this.userImage = userImage;
+    }
 
-	public void setCity(City city) {
-		this.city = city;
-	}
+    @Relationship(type = "LIVES_IN_CITY", direction = Relationship.OUTGOING)
+    private City city;
+    
+    @Relationship(type = "USER_SCORE_RELATION", direction = Relationship.OUTGOING)
+    private Set<UserGameScores> userGameScores = new HashSet<>();
 
-	public String getFirstname() {
-		return this.firstname;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setFirstname(final String firstname) {
-		this.firstname = firstname;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public String getLastname() {
-		return this.lastname;
-	}
+    public City getCity() {
+        return city;
+    }
 
-	public void setLastname(final String lastname) {
-		this.lastname = lastname;
-	}
+    public void setCity(City city) {
+        this.city = city;
+    }
 
-	public String getUsername() {
-		return this.username;
-	}
+    public String getFirstname() {
+        return this.firstname;
+    }
 
-	public void setUsername(final String username) {
-		this.username = username;
-	}
+    public void setFirstname(final String firstname) {
+        this.firstname = firstname;
+    }
 
-	public String getPassword() {
-		return this.password;
-	}
+    public String getLastname() {
+        return this.lastname;
+    }
 
-	public void setPassword(final String password) {
-		this.password = password;
-	}
+    public void setLastname(final String lastname) {
+        this.lastname = lastname;
+    }
 
-	public String getAge() {
-		return this.age;
-	}
+    public String getUsername() {
+        return this.username;
+    }
 
-	public void setAge(final String age) {
-		this.age = age;
-	}
+    public void setUsername(final String username) {
+        this.username = username;
+    }
 
-	public String getGender() {
-		return this.gender;
-	}
+    public String getPassword() {
+        return this.password;
+    }
 
-	public void setGender(final String gender) {
-		this.gender = gender;
-	}
+    public void setPassword(final String password) {
+        this.password = password;
+    }
 
-	public String getEmail() {
-		return this.email;
-	}
+    public String getAge() {
+        return this.age;
+    }
 
-	public void setEmail(final String email) {
-		this.email = email;
-	}
+    public void setAge(final String age) {
+        this.age = age;
+    }
 
-	public Long getGameScore() {
-		return gameScore;
-	}
+    public String getGender() {
+        return this.gender;
+    }
 
-	public void setGameScore(Long gameScore) {
-		this.gameScore = gameScore;
-	}
+    public void setGender(final String gender) {
+        this.gender = gender;
+    }
 
-	public Boolean getAdmin() {
-		return admin;
-	}
+    public String getEmail() {
+        return this.email;
+    }
 
-	public void setAdmin(Boolean admin) {
-		this.admin = admin;
-	}
+    public void setEmail(final String email) {
+        this.email = email;
+    }
+
+    public Long getGameScore() {
+        return gameScore;
+    }
+
+    public void setGameScore(Long gameScore) {
+        this.gameScore = gameScore;
+    }
+
+    public Boolean getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(Boolean admin) {
+        this.admin = admin;
+    }
+
+    public Set<UserGameScores> getUserGameScores() {
+        return userGameScores;
+    }
+
+    public void setUserGameScores(Set<UserGameScores> userGameScores) {
+        this.userGameScores = userGameScores;
+    }
 }

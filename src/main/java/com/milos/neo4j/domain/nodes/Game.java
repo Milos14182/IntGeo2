@@ -9,7 +9,7 @@ import org.neo4j.ogm.annotation.Property;
 import org.neo4j.ogm.annotation.Relationship;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import java.util.Date;
+import com.milos.neo4j.domain.relations.GameScores;
 
 @NodeEntity
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -38,12 +38,15 @@ public class Game {
 
     @Property(name = "currentRound")
     private Integer currentRoundNumber;
-    
+
     @Property(name = "previouslySelectedLetters")
     private String previouslySelectedLetters;
-    
+
     @Property(name = "ended")
     private Boolean ended;
+    
+    @Relationship(type = "GAME_SCORE_RELATION", direction = Relationship.OUTGOING)
+    private Set<UserGameScores> userGameScores = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -117,4 +120,19 @@ public class Game {
         this.previouslySelectedLetters = previouslySelectedLetters;
     }
 
+    public Boolean getEnded() {
+        return ended;
+    }
+
+    public void setEnded(Boolean ended) {
+        this.ended = ended;
+    }
+
+    public Set<UserGameScores> getUserGameScores() {
+        return userGameScores;
+    }
+
+    public void setUserGameScores(Set<UserGameScores> userGameScores) {
+        this.userGameScores = userGameScores;
+    }
 }

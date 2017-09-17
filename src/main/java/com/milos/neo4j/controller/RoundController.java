@@ -12,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.milos.neo4j.data.SubmitAnswersTmp;
 import com.milos.neo4j.data.UserData;
-import com.milos.neo4j.data.UserGameData;
 import com.milos.neo4j.roundbroker.RoundBroker;
 import com.milos.neo4j.services.GameService;
 import com.milos.neo4j.services.UserService;
