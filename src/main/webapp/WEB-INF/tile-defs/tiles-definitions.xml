@@ -43,10 +43,6 @@
         <put-attribute name="title" value="Join or create game" />
         <put-attribute name="content" value="/WEB-INF/views/joinOrCreate.jsp" />
     </definition>
-    <definition name="greeting" extends="defaultTemplate">
-        <put-attribute name="title" value="Greeting" />
-        <put-attribute name="content" value="/WEB-INF/views/greetingSocket.jsp" />
-    </definition>
     <definition name="scoreboard" extends="defaultTemplate">
         <put-attribute name="title" value="Screboard" />
         <put-attribute name="content" value="/WEB-INF/views/scoreboard.jsp" />

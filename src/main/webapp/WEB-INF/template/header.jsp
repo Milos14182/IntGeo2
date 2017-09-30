@@ -109,25 +109,68 @@
                     </div>
                 </div>
             </sec:authorize>
+            <sec:authorize access="hasRole('ROLE_USER') || hasRole('ROLE_ADMIN')">
+                <div class="container">
+                    <div class="carousel-caption">
+                        <p>
+                            <a class="btn btn-lg btn-primary" href="${home}" role="button"><spring:message
+                                    code="home.label.learnMore" /></a>
+                        </p>
+                    </div>
+                </div>
+            </sec:authorize>
         </div>
         <div class="item">
             <img class="second-slide"
                  src="<c:url value="/resources/images/slide2.jpg" />"
                  alt="Second slide">
-            <div class="container">
-                <div class="carousel-caption">
-                    <p>
-                        <c:url value="/how_to" var="howTo" />
-                        <a class="btn btn-lg btn-primary" href="${howTo}" role="button"><spring:message
-                                code="home.label.learnMore" /></a>
-                    </p>
+            <sec:authorize access="hasRole('ROLE_ANONYMOUS')">
+                <div class="container">
+                    <div class="carousel-caption">
+                        <p>
+                            <c:url value="/register" var="register" />
+                            <a class="btn btn-lg btn-primary" href='${register}' role="button"><spring:message
+                                    code="home.label.signUp" /></a>
+                        </p>
+                    </div>
                 </div>
-            </div>
+            </sec:authorize>
+            <sec:authorize access="hasRole('ROLE_USER') || hasRole('ROLE_ADMIN')">
+                <div class="container">
+                    <div class="carousel-caption">
+                        <p>
+                            <a class="btn btn-lg btn-primary" href="${home}" role="button"><spring:message
+                                    code="home.label.learnMore" /></a>
+                        </p>
+                    </div>
+                </div>
+            </sec:authorize>
         </div>
         <div class="item">
             <img class="third-slide"
                  src="<c:url value="/resources/images/slide3.jpg" />"
                  alt="Third slide">
+            <sec:authorize access="hasRole('ROLE_ANONYMOUS')">
+                <div class="container">
+                    <div class="carousel-caption">
+                        <p>
+                            <c:url value="/register" var="register" />
+                            <a class="btn btn-lg btn-primary" href='${register}' role="button"><spring:message
+                                    code="home.label.signUp" /></a>
+                        </p>
+                    </div>
+                </div>
+            </sec:authorize>
+            <sec:authorize access="hasRole('ROLE_USER') || hasRole('ROLE_ADMIN')">
+                <div class="container">
+                    <div class="carousel-caption">
+                        <p>
+                            <a class="btn btn-lg btn-primary" href="${home}" role="button"><spring:message
+                                    code="home.label.learnMore" /></a>
+                        </p>
+                    </div>
+                </div>
+            </sec:authorize>
         </div>
     </div>
     <a class="left carousel-control" href="#myCarousel" role="button"
