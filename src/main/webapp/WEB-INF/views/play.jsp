@@ -45,37 +45,44 @@
         <div class="form-inline play-form">
             <div class="form-group anwers-group">
                 <div class="col-md-12 answer-input">
-                    <input id="input_state" type="text" placeholder="<spring:message code="play.label.state" />" class="form-control input-place" />
+                    <label for="input_state" class="form-control -fill"><spring:message code="play.label.state" /></label>
+                    <input id="input_state" type="text" class="form-control input-place" />
                 </div>
             </div>
             <div class="form-group anwers-group">
                 <div class="col-md-12 answer-input">
-                    <input id="input_city" type="text" placeholder="<spring:message code="play.label.city" />" class="form-control input-place" />
+                    <label for="input_state" class="form-control -fill"><spring:message code="play.label.city" /></label>
+                    <input id="input_city" type="text" class="form-control input-place" />
                 </div>
             </div>
             <div class="form-group anwers-group">
                 <div class="col-md-12 answer-input">
-                    <input id="input_mountain" type="text" placeholder="<spring:message code="play.label.mountain" />" class="form-control input-place" />
+                    <label for="input_state" class="form-control -fill"><spring:message code="play.label.mountain" /></label>
+                    <input id="input_mountain" type="text" class="form-control input-place" />
                 </div>
             </div>
             <div class="form-group anwers-group">
                 <div class="col-md-12 answer-input">
-                    <input id="input_river" type="text" placeholder="<spring:message code="play.label.river" />" class="form-control input-place" />
+                    <label for="input_state" class="form-control -fill"><spring:message code="play.label.river" /></label>
+                    <input id="input_river" type="text" class="form-control input-place" />
                 </div>
             </div>
             <div class="form-group anwers-group">
                 <div class="col-md-12 answer-input">
-                    <input id="input_lake" type="text" placeholder="<spring:message code="play.label.lake" />" class="form-control input-place" />
+                    <label for="input_state" class="form-control -fill"><spring:message code="play.label.lake" /></label>
+                    <input id="input_lake" type="text" class="form-control input-place" />
                 </div>
             </div>
             <div class="form-group anwers-group">
                 <div class="col-md-12 answer-input">
-                    <input id="input_animal" type="text" placeholder="<spring:message code="play.label.animal" />" class="form-control input-place" />
+                    <label for="input_state" class="form-control -fill"><spring:message code="play.label.animal" /></label>
+                    <input id="input_animal" type="text" class="form-control input-place" />
                 </div>
             </div>
             <div class="form-group anwers-group">
                 <div class="col-md-12 answer-input">
-                    <input id="input_plant" type="text" placeholder="<spring:message code="play.label.plant" />" class="form-control input-place" />
+                    <label for="input_state" class="form-control -fill"><spring:message code="play.label.plant" /></label>
+                    <input id="input_plant" type="text" class="form-control input-place" />
                 </div>
             </div>
             <div class="form-group anwers-group">

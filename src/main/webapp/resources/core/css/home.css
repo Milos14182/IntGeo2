@@ -1,16 +1,13 @@
 @CHARSET "ISO-8859-2";
-
 html {
     position: relative;
     min-height: 100%;
 }
-
 body {
     /* Margin bottom by footer height */
     margin-bottom: 45px;
     background-color: #f4f9f9;
 }
-
 .footer {
     position: absolute;
     bottom: 0;
@@ -20,50 +17,22 @@ body {
     background-color: #222;
     border-color: #080808;
 }
-
 .footer>div>p>a {
     color: #9d9d9d;
 }
-
 .footer>div>p>a:hover, .footer>div>p>a:focus {
     color: #fff;
     background-color: transparent;
     text-decoration: none;
 }
-
-.profile {
-    min-height: 355px;
-    display: inline-block;
-}
-
-.ig-logo {
-    /* 	width: 100%; */
-    height: 100%;
-}
-
-/*.img-circle:hover {
-    border: 10px solid #00E554;
-    border-radius: 50%;
-}*/
-.img-circle-player {
-    height: 8vh;
-    border-radius: 50%;
-}
-
-.playTable {
-    background-image: url("../../resources/images/IGTable.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 40vw 25vw;
-    width: 40vw;
-    height: 25vw;
-}
-.answersSend{
-    display: none;
-}
 .body-content {
     max-width:70vw;
     margin: auto;
+}
+.body-content-play {
+    width: 80vw;
+    margin-left: 15vw;
+    height: 55vh;
 }
 .error {
     color:#960f13;
@@ -75,21 +44,76 @@ body {
 }
 .user-name {
 }
-
+/******LOGIN-ERROR*******/
+.alert.warning {
+    background-color: #ff9800;
+}
+.closebtn {
+    padding-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 20px;
+    line-height: 18px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.alert {
+    padding: 20px;
+    background-color: #f44336;
+    color: white;
+    opacity: 0.83;
+    transition: opacity 0.6s;
+    margin-bottom: 15px;
+}
+.profile {
+    min-height: 355px;
+    display: inline-block;
+}
+.ig-logo {
+    height: 100%;
+}
+/***********CREATE-GAME*********/
+.create-game-row {
+    width: 50%;
+    margin-left: 25%;
+}
+.create-game-button{
+    background: none;
+    border: none;
+}
+.create-game-input {
+    width: 3vw;
+    float: right;
+}
+/*********PLAY-GAME********/
+.img-circle-player {
+    height: 8vh;
+    border-radius: 50%;
+}
+.playTable {
+    background-image: url("../../resources/images/IGTable.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 40vw 25vw;
+    width: 40vw;
+    height: 25vw;
+}
+.answersSend{
+    display: none;
+}
 #roundTimer {
     position: absolute;
     margin-left: 45%;
     margin-top: 12%;
     font-size: 120px;
 }
-
 #character {
     position: absolute;
     margin-top: 4.5%;
     font-size: 120px;
     margin-left: 45%;
 }
-
 #scorePerRound {
     border: solid 2px;
     border-color: black;
@@ -99,10 +123,6 @@ body {
     font-size: 60px;
     width: 130px;
     text-align: center;
-}
-.create-game-row {
-    width: 50%;
-    margin-left: 25%;
 }
 .playContainer {
     width: 80%;
@@ -125,67 +145,29 @@ body {
     margin-left: 12.4vw;
     margin-top: 41.4vh;
 }
-.riverStatesWraper {
-    overflow:auto; 
-    height:400px; 
-    width: 50vw;
+.input-place {
+    width: 70% !important;
+    border-radius: 0 4px 4px 0;
 }
-.riverStatesDiv {
-    height:25px; width: 15vw;
-}
-.riverStatesCheckbox {
-    width: 20px;
-    height: 20px;
-    margin-left: 15vw !important;
-}
-.riverStatesName {
-    height: 25px;
-    margin-top: -20px;
-}
-.alert.warning {
-    background-color: #ff9800;
-}
-.closebtn {
-    padding-left: 15px;
-    color: white;
-    font-weight: bold;
-    float: right;
-    font-size: 20px;
-    line-height: 18px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-.alert {
-    padding: 20px;
-    background-color: #f44336;
-    color: white;
-    opacity: 0.83;
-    transition: opacity 0.6s;
-    margin-bottom: 15px;
-}
-.scoreboard-tab {
+.anwers-group {
     width: 100%;
 }
-.scoreboard-body-column {
-    width: 100%;
-    text-align: center;
+.-fill {
+    border-radius: 4px 0 0 4px;
+    -webkit-flex-basis: 30%;
+    flex-basis: 30%;
+    line-height: 41px;
+    width: 30% !important;
+    padding: 0 16px;
+    font-size: 13px;
+    border: 0;
+    flex: none;
+    align-items: center;
+    color: #535a60;
+    background-color: #eff0f1;
 }
-.scoreboard-header {
-    width: 50vw;
-}
-.scoreboard-body {
-    width: 50vw;
-}
-.scoreboard-body-row{
-    width: 50vw;
-    margin-left: 25%;
-}
-.scoreboard-header-row{
-    width: 50vw;
-    margin-left: 37%;
-}
-.scoreboard-line {
-    margin-left: 25%;
+.answer-input {
+    display: flex;
 }
 .user-score{
     width: 5vw;
@@ -286,25 +268,69 @@ body {
     border-left: 14px solid black; 
     border-bottom: 7px solid transparent; 
 }
-.body-content-play {
-    width: 80vw;
-    margin-left: 15vw;
-    height: 55vh;
+/*********SCOREBOARD-PAGE*******/
+.scoreboard-tab {
+    width: 100%;
 }
-.create-game-button{
-    background: none;
-    border: none;
+.scoreboard-body-column {
+    width: 100%;
+    text-align: center;
 }
-.create-game-input {
-    width: 3vw;
-    float: right;
+.scoreboard-header {
+    width: 50vw;
+}
+.scoreboard-body {
+    width: 50vw;
+}
+.scoreboard-body-row{
+    width: 50vw;
+    margin-left: 25%;
+}
+.scoreboard-body-row:hover {
+    background-color: #46b8da;
+    border: 1px solid gray;
+    border-radius: 5px;
+}
+.scoreboard-header-row{
+    width: 50vw;
+    margin-left: 37%;
+}
+.scoreboard-line {
+    margin-left: 25%;
 }
 .scoreboard-image{
     width: 5vw;
 }
-.input-place {
-    width: 100% !important;
+/*******ADMIN PAGE********/
+.admin-row:hover {
+    background-color: #46b8da;
+    border: 1px solid gray;
+    border-radius: 5px;
 }
-.anwers-group {
-    width: 100%;
+.tab {
+    width: 5vw !important;
+}
+.tab a:hover {
+    background-color: white !important;
+}
+.active.tab a {
+    background-color: #46b8da !important;
+}
+.active.tab a:hover {
+    background-color: white !important;
+}
+/************EDIT-NODES******/
+.riverStatesWraper {
+    overflow:auto; 
+    height:400px; 
+    width: 50vw;
+}
+.riverStatesCheckbox {
+    width: 20px;
+    height: 20px;
+    margin-left: 15vw !important;
+}
+.riverStatesName {
+    height: 25px;
+    margin-top: -20px;
 }

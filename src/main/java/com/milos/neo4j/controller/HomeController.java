@@ -25,39 +25,46 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 @Controller
 public class HomeController {
-	@Autowired
-	UserService userService;
-	@Autowired
-	GameService gameService;
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(final HttpServletRequest request, final Model model) {
-		final UserData user = new UserData();
-		model.addAttribute("user", user);
-		return "home";
-	}
-	
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String signOut(final HttpServletRequest request,
-			final HttpServletResponse response, @RequestParam String logout) {
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	    if (auth != null){    
-	        new SecurityContextLogoutHandler().logout(request, response, auth);
-	    }
-	    return "redirect:/";
-	}
+    @Autowired
+    UserService userService;
+    @Autowired
+    GameService gameService;
 
-	@RequestMapping(value = "/points", method = RequestMethod.GET)
-	public String points(final HttpServletRequest request, final Model m) {
-		UserData userData = (UserData) request.getSession().getAttribute("userDetails");
-		Set<UserGameData> gameDatas = gameService.getAllGamesForPlayer(userData);
-		m.addAttribute("gameDatas", gameDatas);
-		m.addAttribute("userData", userData);
-		return "points";
-	}
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String home(final HttpServletRequest request, final Model model) {
+        final UserData user = new UserData();
+        model.addAttribute("user", user);
+        return "home";
+    }
 
-	@RequestMapping(value = "/how_to", method = RequestMethod.GET)
-	public String howto(final Model m) {
-		return "howTo";
-	}
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String signOut(final HttpServletRequest request,
+            final HttpServletResponse response, @RequestParam(required = false) String logout,
+            @RequestParam(required = false) Boolean error) {
+        String redirectUrl = "redirect:/";
+        if (error != null && error.equals(Boolean.TRUE)) {
+            return redirectUrl + "?error=true";
+        } else {
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            if (auth != null) {
+                new SecurityContextLogoutHandler().logout(request, response, auth);
+            }
+        }
+        return redirectUrl;
+    }
+
+    @RequestMapping(value = "/points", method = RequestMethod.GET)
+    public String points(final HttpServletRequest request, final Model m) {
+        UserData userData = (UserData) request.getSession().getAttribute("userDetails");
+        Set<UserGameData> gameDatas = gameService.getAllGamesForPlayer(userData);
+        m.addAttribute("gameDatas", gameDatas);
+        m.addAttribute("userData", userData);
+        return "points";
+    }
+
+    @RequestMapping(value = "/how_to", method = RequestMethod.GET)
+    public String howto(final Model m) {
+        return "howTo";
+    }
 }

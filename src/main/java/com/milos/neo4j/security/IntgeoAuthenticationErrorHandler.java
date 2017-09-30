@@ -22,9 +22,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class IntgeoAuthenticationErrorHandler implements AuthenticationFailureHandler {
     
-    private String failureUrl="?error=true";
-
-    private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
+    private final String failureUrl="?error=true";
+    private final RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {

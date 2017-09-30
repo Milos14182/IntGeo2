@@ -27,7 +27,32 @@
             </div>
         </div>
     </div>
+    <br />
     <div  class="scoreboard-body">
+        <div class="row scoreboard-body-row">
+            <div class="col-sm-1 col-md-2 scoreboard-image">
+                <div class="scoreboard-body-column">
+                </div>
+            </div>
+            <c:if test="${type!='winnings'}">
+                <div class="col-sm-1 col-md-2">
+                    <div class="scoreboard-body-column"><spring:message code="scoreboard.header.gameId" /></div>
+                </div>
+            </c:if>
+            <div class="col-sm-1 col-md-2">
+                <div class="scoreboard-body-column"><spring:message code="scoreboard.header.firstname" /></div>
+            </div>
+            <div class="col-sm-1 col-md-2">
+                <div class="scoreboard-body-column"><spring:message code="scoreboard.header.lastname" /></div>
+            </div>
+            <div class="col-sm-1 col-md-2">
+                <div class="scoreboard-body-column"><spring:message code="scoreboard.header.city" /></div>
+            </div>
+            <div class="col-sm-1 col-md-2">
+                <div class="scoreboard-body-column"><spring:message code="scoreboard.header.score" /></div>
+            </div>
+        </div>
+        <br />
         <c:forEach var="scoreboard" items="${scoreboards}">
             <div class="row scoreboard-body-row">
                 <div class="col-sm-1 col-md-2 scoreboard-image">
@@ -43,7 +68,7 @@
                         </c:if>
                     </div>
                 </div>
-                <c:if test="${scoreboard.gameId!=null}">
+                <c:if test="${type!='winnings'}">
                     <div class="col-sm-1 col-md-2">
                         <div class="scoreboard-body-column">${scoreboard.gameId}</div>
                     </div>
