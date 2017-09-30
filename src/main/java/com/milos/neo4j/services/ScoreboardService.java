@@ -21,4 +21,6 @@ public interface ScoreboardService {
     Iterable<Scoreboard> getWeeklyScoreboard();
     
     List<Scoreboard> getWinningsScoreboard();
+    
+    List<Scoreboard> getAllScoresForUser(String username);
 }

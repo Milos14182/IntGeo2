@@ -70,6 +70,11 @@ body {
     min-height: 355px;
     display: inline-block;
 }
+.profile-score:hover {
+    background-color: #46b8da;
+    border: 1px solid gray;
+    border-radius: 5px;
+}
 .ig-logo {
     height: 100%;
 }

@@ -15,22 +15,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.milos.neo4j.data.CityData;
+import com.milos.neo4j.data.Scoreboard;
 import com.milos.neo4j.data.UserData;
 import com.milos.neo4j.services.CityService;
+import com.milos.neo4j.services.ScoreboardService;
 import com.milos.neo4j.services.UserService;
 import com.milos.neo4j.validators.EditUserProfileValidator;
+import java.util.List;
 
 @Controller
 public class ProfileController {
 
     @Autowired
-    UserService userService;
-
+    private UserService userService;
     @Autowired
-    CityService cityService;
-
+    private CityService cityService;
     @Autowired
-    EditUserProfileValidator editUserProfileValidator;
+    private EditUserProfileValidator editUserProfileValidator;
+    @Autowired
+    private ScoreboardService scoreboardService;
 
     @InitBinder
     protected void initBinder(WebDataBinder binder) {
@@ -38,7 +41,10 @@ public class ProfileController {
     }
 
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
-    public String profile(final HttpServletRequest request) {
+    public String profile(final HttpServletRequest request, Model model) {
+        UserData userData = (UserData)request.getSession().getAttribute("userDetails");
+        List<Scoreboard> scoreboards = scoreboardService.getAllScoresForUser(userData.getUsername());
+        model.addAttribute("scoreboards", scoreboards);
         return "profile";
     }
 

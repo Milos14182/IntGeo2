@@ -27,14 +27,6 @@
         <put-attribute name="title" value="Play" />
         <put-attribute name="content" value="/WEB-INF/views/play.jsp" />
     </definition>
-    <definition name="howTo" extends="defaultTemplate">
-        <put-attribute name="title" value="How To" />
-        <put-attribute name="content" value="/WEB-INF/views/how_to.jsp" />
-    </definition>
-    <definition name="points" extends="defaultTemplate">
-        <put-attribute name="title" value="Points" />
-        <put-attribute name="content" value="/WEB-INF/views/points.jsp" />
-    </definition>
     <definition name="editUser" extends="defaultTemplate">
         <put-attribute name="title" value="Edit User Details" />
         <put-attribute name="content" value="/WEB-INF/views/editUser.jsp" />

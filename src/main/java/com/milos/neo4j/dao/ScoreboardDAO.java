@@ -17,4 +17,6 @@ public interface ScoreboardDAO {
     Iterable<Scoreboard> getFullScoreboard(Long startTime, Long endTime);
     
     List<Scoreboard> getWinningsScoreboard(Long startTime, Long endTime);
+    
+    List<Scoreboard> getAllScoresForUser(String username);
 }

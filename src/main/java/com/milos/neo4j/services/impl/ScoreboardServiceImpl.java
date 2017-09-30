@@ -68,4 +68,10 @@ public class ScoreboardServiceImpl implements ScoreboardService {
         return scoreboardDAO.getWinningsScoreboard(calendar.getTimeInMillis(), now);
     }
 
+    @Transactional(readOnly = true)
+    @Override
+    public List<Scoreboard> getAllScoresForUser(String username) {
+        return scoreboardDAO.getAllScoresForUser(username);
+    }
+
 }
