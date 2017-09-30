@@ -109,6 +109,8 @@ public class RoundBrokerImpl implements RoundBroker {
                 Date diff = new Date(difference);
                 int positiveDiff = (diff.getSeconds() - 60) * -1;
                 return diff.getSeconds() == 0 ? Integer.valueOf(0) : positiveDiff;
+            } else {
+                gameService.lockGame(gameId);
             }
         }
         return Integer.valueOf(0);

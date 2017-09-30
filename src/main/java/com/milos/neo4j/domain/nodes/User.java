@@ -9,13 +9,10 @@ import org.neo4j.ogm.annotation.Property;
 import org.neo4j.ogm.annotation.Relationship;
 import org.springframework.format.annotation.NumberFormat;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.HashSet;
 import java.util.Set;
 
 @NodeEntity
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class User {
 
     private @GraphId
@@ -57,7 +54,7 @@ public class User {
     @Property(name = "gameScore")
     private Long gameScore;
 
-    @JsonIgnore
+//    @JsonIgnore
     @Property(name = "admin")
     private Boolean admin;
 
@@ -69,6 +66,7 @@ public class User {
         this.userImage = userImage;
     }
 
+    @NotNull(message = "city relation is required")
     @Relationship(type = "LIVES_IN_CITY", direction = Relationship.OUTGOING)
     private City city;
     

@@ -5,8 +5,8 @@ import com.milos.neo4j.data.UserData;
 
 public interface PlayService {
 
-	public Long countScore(SubmitAnswersTmp answers, UserData userData);
-	
-	public String choseLetter(Long gameId);
-	
+    public Long countScore(SubmitAnswersTmp answers, UserData userData);
+
+    public String choseLetter(Long gameId);
+
 }

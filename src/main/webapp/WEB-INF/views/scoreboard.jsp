@@ -30,7 +30,7 @@
     <div  class="scoreboard-body">
         <c:forEach var="scoreboard" items="${scoreboards}">
             <div class="row scoreboard-body-row">
-                <div class="col-sm-1 col-md-2">
+                <div class="col-sm-1 col-md-2 scoreboard-image">
                     <div class="scoreboard-body-column">
                         <c:if test="${not empty scoreboard.userImage}">
                             <img src="data:image/png;base64,${scoreboard.userImage}"

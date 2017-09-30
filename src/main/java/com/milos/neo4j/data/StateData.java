@@ -21,6 +21,14 @@ public class StateData {
     private Set<PlantData> plantes = new HashSet<PlantData>();
     private Set<RiverData> rivers = new HashSet<RiverData>();
 
+    public StateData() {
+    }
+
+    public StateData(String name) {
+        this.name = name;
+        this.active = false;
+    }
+
     public boolean isActive() {
         return active;
     }

@@ -26,7 +26,7 @@ public class PlayController {
         UserData userData = (UserData) request.getSession().getAttribute("userDetails");
         SubmitAnswersTmp subAnsTmp = new SubmitAnswersTmp();
         GameData gameData = gameService.getGameById(gameId);
-        Long scorePerRound = Long.valueOf(0);
+        Long scorePerRound = 0l;
         if (userData != null) {
             UserGameData userGameData = gameService.getUserGameData(userData.getUsername(), gameId);
             if (userGameData!=null && userGameData.getScore()!=null) {

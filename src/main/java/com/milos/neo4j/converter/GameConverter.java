@@ -8,6 +8,18 @@ import java.util.Date;
 
 @Component
 public class GameConverter extends AbstractConverter<Game, GameData> {
+    
+    private static final Integer defaultEndPoints = 300;
+
+    @Override
+    public void copyFromDataToEntity(GameData data, Game entity) {
+        copyFromDataToEntity(data, entity, "creationDate", "roundStartDate", "endPoints"); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void copyFromEntityToData(Game entity, GameData data) {
+        copyFromEntityToData(entity, data, "creationDate", "roundStartDate", "endPoints"); //To change body of generated methods, choose Tools | Templates.
+    }
 
     @Override
     public void copyFromDataToEntity(GameData data, Game entity, String... ignoreProperties) {
@@ -16,6 +28,8 @@ public class GameConverter extends AbstractConverter<Game, GameData> {
         Date roundStartDate = data.getRoundStartDate() != null ? data.getCreationDate() : new Date();
         entity.setCreationDate(creationDate.getTime());
         entity.setRoundStartDate(roundStartDate.getTime());
+        Integer endPoints = data.getEndPoints()!=null ? data.getEndPoints() : defaultEndPoints;
+        entity.setEndPoints(endPoints);
     }
 
     @Override
@@ -25,6 +39,7 @@ public class GameConverter extends AbstractConverter<Game, GameData> {
         Date roundStartDate = entity.getRoundStartDate() != null ? new Date(entity.getRoundStartDate()) : null;
         data.setCreationDate(creationDate);
         data.setRoundStartDate(roundStartDate);
+        data.setEndPoints(entity.getEndPoints());
     }
 
 }

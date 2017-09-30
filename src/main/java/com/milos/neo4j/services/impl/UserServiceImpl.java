@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.milos.neo4j.converter.UserConverter;
+import com.milos.neo4j.dao.UserDAO;
 import com.milos.neo4j.data.CityData;
 import com.milos.neo4j.data.UserData;
 import com.milos.neo4j.domain.nodes.City;
@@ -24,15 +25,14 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
-
     @Autowired
     private LivesInCityRepository livesInCityRepository;
-
     @Autowired
     private CityRepository cityRepository;
-
     @Autowired
     private UserConverter userConverter;
+    @Autowired
+    private UserDAO userDAO;
 
     @Override
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
@@ -59,13 +59,13 @@ public class UserServiceImpl implements UserService {
             userData.setCity(new CityData());
             userConverter.copyFromEntityToData(user, userData);
         } else {
-           User user = userRepository.getUserByUsername(username);
-           if (user==null) {
-               return userData;
-           }
-           userData = new UserData();
-           userData.setCity(new CityData());
-           userConverter.copyFromEntityToData(user, userData);
+            User user = userRepository.getUserByUsername(username);
+            if (user == null) {
+                return userData;
+            }
+            userData = new UserData();
+            userData.setCity(new CityData());
+            userConverter.copyFromEntityToData(user, userData);
         }
         return userData;
     }
@@ -79,27 +79,31 @@ public class UserServiceImpl implements UserService {
         if (image == null) {
             image = "NULL";
         }
-        User user = userRepository.updateUser(dataUser.getUsername(), dataUser.getFirstname(), dataUser.getLastname(),
+        City city = cityRepository.getCityByName(userData.getCity().getName());
+        userDAO.updateUser(dataUser.getUsername(), dataUser.getFirstname(), dataUser.getLastname(),
                 dataUser.getPassword(), dataUser.getAge(), dataUser.getGender(), image,
-                dataUser.getEmail());
+                dataUser.getEmail(), userData.getCity().getName());
+        User user = userRepository.getUserByUsername(dataUser.getUsername());
+        user.setCity(city);
+
         userConverter.copyFromEntityToData(user, userData);
         return userData;
     }
 
     @Override
     @Transactional(readOnly = true)
-    public UserData authenticateUser(String username)throws RuntimeException {
-        User user = userRepository.getUserByUsername(username);        
+    public UserData authenticateUser(String username) throws RuntimeException {
+        User user = userRepository.getUserByUsername(username);
         if (user != null) {
             UserData userData = new UserData();
             userData.setCity(new CityData());
             LivesInCity livesInCity = livesInCityRepository.getUserByUsername(username);
-            if (livesInCity!=null && livesInCity.getCity()!=null) {
+            if (livesInCity != null && livesInCity.getCity() != null) {
                 user.setCity(livesInCity.getCity());
             }
             userConverter.copyFromEntityToData(user, userData);
             return userData;
-        }        
+        }
         throw new RuntimeException("Authentication for user failed, user is null.");
     }
 

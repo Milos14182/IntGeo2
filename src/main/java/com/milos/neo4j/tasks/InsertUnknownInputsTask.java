@@ -5,9 +5,7 @@
  */
 package com.milos.neo4j.tasks;
 
-import com.milos.neo4j.services.GameService;
-import java.util.Calendar;
-import java.util.Date;
+import com.milos.neo4j.services.UnknownInputsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -17,16 +15,14 @@ import org.springframework.stereotype.Component;
  * @author milos
  */
 @Component
-public class LockGameTask {
+public class InsertUnknownInputsTask {
     
     @Autowired
-    private GameService gameService;
+    private UnknownInputsService inputsService;
     
-    @Scheduled(fixedDelayString = "5000")
-    public void lockUnlockedGames() {        
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(new Date());
-        calendar.add(Calendar.MINUTE, -1);
-        gameService.lockStartedGames(calendar.getTime());
+    //900000
+    @Scheduled(fixedDelayString = "10000")
+    public void insert() {
+        inputsService.saveUnknownIntoDatabase();
     }
 }

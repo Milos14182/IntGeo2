@@ -5,65 +5,69 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="sec"
            uri="http://www.springframework.org/security/tags"%>
-<body>
-    <div style="width: 99.2%">
-        <div class="row createGame">
-            <div class="col-lg-2">
-                <a href="<c:url value="/game/createGame" />"> <img
-                        class="img-circle"
-                        src="<c:url value="/resources/images/play.png" />" alt="Play image"
-                        width="100" height="100">
-                </a>
-            </div>
-            <div class="col-lg-1">
-                <h2>
-                    <spring:message code="game.label.createNew" />
-                </h2>
-            </div>
-        </div>
-        <br />
-        <br />        
-        <div>
-            <c:if test="${not empty startedGames}">
-                <div class="gameRow"><spring:message code="game.label.startedGames" /></div>
-                <c:forEach var="game" items="${startedGames}">
-                    <div class="col-lg-3 gameRow">
-                        <div class="col-md-3">
-                            <spring:message code="game.label.inactiveGame" />${game.id}
-                        </div>
-                        <div class="col-md-1">${game.numberOfPlayers}</div>
-                        <div class="gameLink">
-                            <a href="<c:url value="/game/joinGame/${game.id}" />"> <img
-                                    class="img-circle"
-                                    src="<c:url value="/resources/images/play.png" />"
-                                    alt="Join game" width="40" height="40">
-                            </a>
-                        </div>
-                    </div>
-                </c:forEach>
-            </c:if>
-        </div>
-        <br />
-        <br />
-        <div>
-            <c:if test="${not empty inactiveGames}">
-                <div class="gameRow"><spring:message code="game.label.inactiveGames" /></div>
-                <c:forEach var="game" items="${inactiveGames}">
-                    <div class="col-lg-3 gameRow">
-                        <div class="col-md-3">
-                            <spring:message code="game.label.inactiveGame" />${game.id}
-                        </div>
-                        <div class="col-md-1">${game.numberOfPlayers}</div>
-                        <div class="gameLink">
-                            <a href="<c:url value="/game/joinGame/${game.id}" />"> <img
-                                    class="img-circle"
-                                    src="<c:url value="/resources/images/play.png" />"
-                                    alt="Join game" width="40" height="40">
-                            </a>
-                        </div>
-                    </div>
-                </c:forEach>
-            </c:if>
+<div class="body-content">
+    <div class="row create-game-row">
+        <form:form class="col-lg-5 col-md-5 col-sm-5 create-game-column" method="get" action="/game/createGame">
+            <button class="create-game-button" type="submit">
+                <img
+                    class="img-circle"
+                    src="<c:url value="/resources/images/play.png" />" alt="Play image"
+                    width="100" height="100">
+            </button>
+            <input class="form-control create-game-input" name="gamePoints" value="300">
+        </form:form>
+        <div class="col-lg-5 col-md-5 col-sm-5 create-game-column">
+            <h2>
+                <spring:message code="game.label.createNew" />
+            </h2>
         </div>
     </div>
-</body>
+    <br />
+    <br />     
+    <c:if test="${not empty startedGames}">
+        <h2 class="row create-game-row">
+            <spring:message code="game.label.startedGames" />
+        </h2>
+        <br />
+        <br />
+        <c:forEach var="game" items="${startedGames}">
+            <div class="row col-lg-4">
+                <div class="col-md-3">
+                    <spring:message code="game.label.inactiveGame" />${game.id}
+                </div>
+                <div class="col-md-1">${game.numberOfPlayers}</div>
+                <div class="col-md-3 gameLink">
+                    <a href="<c:url value="/game/joinGame/${game.id}" />"> <img
+                            class="img-circle"
+                            src="<c:url value="/resources/images/play.png" />"
+                            alt="Join game" width="40" height="40">
+                    </a>
+                </div>
+            </div>
+        </c:forEach>
+    </c:if>
+    <br />
+    <br />
+    <c:if test="${not empty inactiveGames}">
+        <h2 class="row create-game-row">
+            <spring:message code="game.label.inactiveGames" />
+        </h2>
+        <br />
+        <br />
+        <c:forEach var="game" items="${inactiveGames}">
+            <div class="row col-lg-4">
+                <div class="col-md-3">
+                    <spring:message code="game.label.inactiveGame" />${game.id}
+                </div>
+                <div class="col-md-1">${game.numberOfPlayers}</div>
+                <div class="col-md-3 gameLink">
+                    <a href="<c:url value="/game/joinGame/${game.id}" />"> <img
+                            class="img-circle"
+                            src="<c:url value="/resources/images/play.png" />"
+                            alt="Join game" width="40" height="40">
+                    </a>
+                </div>
+            </div>
+        </c:forEach>
+    </c:if>
+</div>

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.milos.neo4j.converter.GameConverter;
 import com.milos.neo4j.converter.UserConverter;
 import com.milos.neo4j.converter.UserGameConverter;
+import com.milos.neo4j.dao.UserGameScoresDAO;
 import com.milos.neo4j.data.GameData;
 import com.milos.neo4j.data.UserData;
 import com.milos.neo4j.data.UserGameData;
@@ -16,17 +17,12 @@ import com.milos.neo4j.domain.nodes.Game;
 import com.milos.neo4j.domain.nodes.User;
 import com.milos.neo4j.domain.nodes.UserGameScores;
 import com.milos.neo4j.domain.relations.GameRelation;
-import com.milos.neo4j.domain.relations.GameScores;
-import com.milos.neo4j.domain.relations.UserScores;
 import com.milos.neo4j.enums.LatinAlfabet;
 import com.milos.neo4j.repository.GameRepository;
 import com.milos.neo4j.repository.UserGameScoresRepository;
 import com.milos.neo4j.repository.UserRepository;
 import com.milos.neo4j.repository.relations.GameRelationRepository;
-import com.milos.neo4j.repository.relations.GameScoresRepository;
-import com.milos.neo4j.repository.relations.UserScoreRepository;
 import com.milos.neo4j.services.GameService;
-import com.milos.neo4j.services.PlayService;
 import java.util.Calendar;
 import java.util.Date;
 import org.slf4j.Logger;
@@ -38,7 +34,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(propagation = Propagation.MANDATORY)
 public class GameServiceImpl implements GameService {
 
-    private static Logger GEOGRAPHY_LOGGER = LoggerFactory.getLogger("GEOGRAPHY");
+    private static final Logger GEOGRAPHY_LOGGER = LoggerFactory.getLogger("GEOGRAPHY");
+    private static final Integer defaultPoints = 300;
 
     @Autowired
     GameRepository gameRepository;
@@ -53,20 +50,16 @@ public class GameServiceImpl implements GameService {
     @Autowired
     private UserConverter userConverter;
     @Autowired
-    private PlayService playService;
-    @Autowired
     private UserGameConverter userGameConverter;
-    @Autowired 
-    private GameScoresRepository gameScoresRepository;
     @Autowired
-    private UserScoreRepository userScoreRepository;
+    private UserGameScoresDAO gameScoresDAO;
 
     @Transactional(readOnly = true)
     @Override
     public GameData getGameById(Long id) {
         GameData gameData = new GameData();
         try {
-            gameConverter.copyFromEntityToData(gameRepository.findOne(id), gameData, "creationDate", "roundStartDate");
+            gameConverter.copyFromEntityToData(gameRepository.findOne(id), gameData);
         } catch (RuntimeException ex) {
             GEOGRAPHY_LOGGER.error("getGameById throws error.", ex);
             throw ex;
@@ -76,7 +69,7 @@ public class GameServiceImpl implements GameService {
 
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     @Override
-    public GameData createNewGame(UserData userData) {
+    public GameData createNewGame(UserData userData, Integer gamePoints) {
         GameData gameData = null;
         try {
             User user = userRepository.findOne(userData.getId());
@@ -94,7 +87,10 @@ public class GameServiceImpl implements GameService {
                 Date creationDate = new Date();
                 game.setCreationDate(creationDate.getTime());
                 game.setLocked(Boolean.FALSE);
+                game.setEnded(Boolean.FALSE);
                 game.setCurrentRoundNumber(1);
+                Integer points = gamePoints!=null ? gamePoints : defaultPoints;
+                game.setEndPoints(points);
                 Calendar cal = Calendar.getInstance();
                 cal.setTime(creationDate);
                 cal.add(Calendar.MINUTE, 1);
@@ -144,6 +140,7 @@ public class GameServiceImpl implements GameService {
                 game.setPlayers(players);
                 game.setNumberOfPlayers(Long.valueOf(game.getPlayers().size()));
                 game = gameRepository.save(game);
+                createNewUserGame(gameData.getId(), userData.getUsername(), userData.getGameScore());
             }
             gameConverter.copyFromEntityToData(game, gameData);
         } catch (RuntimeException ex) {
@@ -181,19 +178,9 @@ public class GameServiceImpl implements GameService {
 
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     @Override
-    public void createNewUserGame(UserData userData, GameData game) {
-        UserGameScores gameScores = new UserGameScores();
+    public void createNewUserGame(Long gameId, String username, Long score) {
         try {
-            gameScores.setGameId(game.getId());
-            gameScores.setScore(userData.getGameScore());
-            gameScores.setUsername(userData.getUsername());
-            userGameScoresRepository.save(gameScores);
-            Game gameEntity = new Game();
-            User user = new User();
-            gameConverter.copyFromDataToEntity(game, gameEntity);
-            userConverter.copyFromDataToEntity(userData, user);
-            gameScoresRepository.save(new GameScores(gameEntity, gameScores));
-            userScoreRepository.save(new UserScores(user, gameScores));
+            gameScoresDAO.createNewUserGame(gameId, username, score);
         } catch (RuntimeException ex) {
             GEOGRAPHY_LOGGER.error("createNewUserGame throws error.", ex);
             throw ex;
@@ -343,7 +330,7 @@ public class GameServiceImpl implements GameService {
             throw ex;
         }
     }
-    
+
     @Transactional(readOnly = true)
     @Override
     public void deleteUserGameScoresBeforeDate(Date beforeDate) {

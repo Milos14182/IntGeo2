@@ -21,6 +21,14 @@ public class RiverData {
     private List<Long> stateIds = new ArrayList<>();
     private LakeData lake;
 
+    public RiverData(String name) {
+        this.name = name;
+        this.active = false;
+    }
+
+    public RiverData() {
+    }
+
     public List<Long> getStateIds() {
         return stateIds;
     }

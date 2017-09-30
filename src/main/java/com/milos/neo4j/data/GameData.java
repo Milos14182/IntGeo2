@@ -19,7 +19,8 @@ public class GameData {
     private Integer currentRoundNumber;
     private String previouslySelectedLetters;
     private Boolean ended;
-
+    private Integer endPoints;
+    
     public Long getId() {
         return id;
     }
@@ -100,4 +101,12 @@ public class GameData {
         this.ended = ended;
     }
 
+    public Integer getEndPoints() {
+        return endPoints;
+    }
+
+    public void setEndPoints(Integer endPoints) {
+        this.endPoints = endPoints;
+    }
+    
 }

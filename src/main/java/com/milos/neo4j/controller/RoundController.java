@@ -86,6 +86,9 @@ public class RoundController {
         if (!roundBroker.waitForAllUsersToAnswer(games, gameId.longValue(), answersTmp.isCollectAll())) {
             return objectMapper.writeValueAsString(getSubmitedUsers(games));
         }
+        for (SubmitAnswersTmp game : games) {
+            game.setCharacter(roundBroker.getLetter());
+        }
         return objectMapper.writeValueAsString(games);
     }
 

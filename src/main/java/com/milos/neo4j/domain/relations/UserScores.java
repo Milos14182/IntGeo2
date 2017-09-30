@@ -5,7 +5,6 @@
  */
 package com.milos.neo4j.domain.relations;
 
-import com.milos.neo4j.domain.nodes.Game;
 import com.milos.neo4j.domain.nodes.User;
 import com.milos.neo4j.domain.nodes.UserGameScores;
 import org.neo4j.ogm.annotation.EndNode;

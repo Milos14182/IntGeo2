@@ -2,49 +2,59 @@ package com.milos.neo4j.domain.nodes;
 
 import java.util.HashSet;
 import java.util.Set;
+import javax.validation.constraints.NotNull;
 
 import org.neo4j.ogm.annotation.GraphId;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Property;
 import org.neo4j.ogm.annotation.Relationship;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.milos.neo4j.domain.relations.GameScores;
-
 @NodeEntity
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class Game {
 
     private @GraphId
     Long id;
 
+    @NotNull
     @Property(name = "numberOfPlayers")
     private Long numberOfPlayers;
 
+    @NotNull
     @Relationship(type = "GAME_RELATION", direction = Relationship.OUTGOING)
     private Set<User> players = new HashSet<>();
 
+    @NotNull
     @Property(name = "firstLetter")
     private String firstLetter;
 
+    @NotNull
     @Property(name = "creationDate")
     private Long creationDate;
 
+    @NotNull
     @Property(name = "locked")
     private Boolean locked;
 
+    @NotNull
     @Property(name = "roundStartDate")
     private Long roundStartDate;
 
+    @NotNull
     @Property(name = "currentRound")
     private Integer currentRoundNumber;
 
+    @NotNull
     @Property(name = "previouslySelectedLetters")
     private String previouslySelectedLetters;
 
+    @NotNull
     @Property(name = "ended")
     private Boolean ended;
-    
+
+    @NotNull
+    @Property(name = "endPoints")
+    private Integer endPoints;
+
     @Relationship(type = "GAME_SCORE_RELATION", direction = Relationship.OUTGOING)
     private Set<UserGameScores> userGameScores = new HashSet<>();
 
@@ -134,5 +144,13 @@ public class Game {
 
     public void setUserGameScores(Set<UserGameScores> userGameScores) {
         this.userGameScores = userGameScores;
+    }
+
+    public Integer getEndPoints() {
+        return endPoints;
+    }
+
+    public void setEndPoints(Integer endPoints) {
+        this.endPoints = endPoints;
     }
 }

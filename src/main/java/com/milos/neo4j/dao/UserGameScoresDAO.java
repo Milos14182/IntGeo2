@@ -5,16 +5,11 @@
  */
 package com.milos.neo4j.dao;
 
-import com.milos.neo4j.data.Scoreboard;
-import java.util.List;
-
 /**
  *
  * @author milos
  */
-public interface ScoreboardDAO {
+public interface UserGameScoresDAO {
     
-    Iterable<Scoreboard> getFullScoreboard(Long startTime, Long endTime);
-    
-    List<Scoreboard> getWinningsScoreboard(Long startTime, Long endTime);
+    void createNewUserGame(Long gameId, String username, Long score);
 }

@@ -5,7 +5,6 @@ import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.milos.neo4j.domain.nodes.State;
-import java.util.List;
 
 @JsonIgnoreProperties("meta")
 public class PlantData {
@@ -17,6 +16,14 @@ public class PlantData {
     private State state;
     private String synonims;
     private Set<CityData> cities = new HashSet<CityData>();
+
+    public PlantData() {
+    }
+
+    public PlantData(String name) {
+        this.name = name;
+        this.active = false;
+    }
 
     public boolean isActive() {
         return active;

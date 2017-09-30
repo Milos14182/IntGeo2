@@ -5,16 +5,14 @@
  */
 package com.milos.neo4j.dao;
 
-import com.milos.neo4j.data.Scoreboard;
-import java.util.List;
+import com.milos.neo4j.domain.nodes.User;
 
 /**
  *
  * @author milos
  */
-public interface ScoreboardDAO {
+public interface UserDAO {
     
-    Iterable<Scoreboard> getFullScoreboard(Long startTime, Long endTime);
-    
-    List<Scoreboard> getWinningsScoreboard(Long startTime, Long endTime);
+    void updateUser(String username, String firstname, String lastname, String password, String age,
+            String gender, String image, String email, String cityName);
 }

@@ -4,7 +4,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import java.util.List;
 
 @JsonIgnoreProperties("meta")
 public class LakeData {
@@ -17,6 +16,14 @@ public class LakeData {
     private String synonims;
     private Set<RiverData> rivers = new HashSet<RiverData>();
     private Set<AnimalData> animals = new HashSet<AnimalData>();
+
+    public LakeData(String name) {
+        this.name = name;
+        this.active = false;
+    }
+
+    public LakeData() {
+    }
 
     public StateData getStateData() {
         return stateData;

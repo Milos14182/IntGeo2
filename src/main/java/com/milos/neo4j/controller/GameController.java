@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.milos.neo4j.data.GameData;
 import com.milos.neo4j.data.UserData;
-import com.milos.neo4j.data.UserGameData;
 import com.milos.neo4j.services.GameService;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class GameController {
@@ -34,13 +34,13 @@ public class GameController {
     }
 
     @RequestMapping("/game/createGame")
-    public String createNewGame(HttpServletRequest request) {
+    public String createNewGame(HttpServletRequest request, @RequestParam Integer gamePoints) {
         UserData userData = (UserData) request.getSession().getAttribute("userDetails");
-        GameData gameData = gameService.createNewGame(userData);
-        UserGameData userGameData = gameService.getUserGameData(userData.getUsername(), gameData.getId());
-        if (userGameData == null) {
-            gameService.createNewUserGame(userData, gameData);
-        }
+        GameData gameData = gameService.createNewGame(userData, gamePoints);
+//        UserGameData userGameData = gameService.getUserGameData(userData.getUsername(), gameData.getId());
+//        if (userGameData == null) {
+            gameService.createNewUserGame(gameData.getId(), userData.getUsername(), userData.getGameScore());
+//        }
         return "redirect:/play/" + gameData.getId();
     }
 
@@ -48,10 +48,10 @@ public class GameController {
     public String joinGame(HttpServletRequest request, @PathVariable Long gameId, Model model) {
         UserData userData = (UserData) request.getSession().getAttribute("userDetails");
         GameData gameData = gameService.addPlayer(userData, gameId);
-        UserGameData userGameData = gameService.getUserGameData(userData.getUsername(), gameData.getId());
-        if (userGameData == null) {
-            gameService.createNewUserGame(userData, gameData);
-        }
+//        UserGameData userGameData = gameService.getUserGameData(userData.getUsername(), gameData.getId());
+//        if (userGameData == null) {
+//            gameService.createNewUserGame(gameData.getId(), userData.getUsername(), userData.getGameScore());
+//        }
         return "redirect:/play/" + gameData.getId();
     }
 }

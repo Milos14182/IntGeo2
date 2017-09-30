@@ -46,6 +46,7 @@ function startRound() {
     });
     stompClient.subscribe('/topic/play/answers/' + pathnames[pathnames.length - 1], function (
             data) {
+        answersSend = false;
         roundSync(stompClient);
         showAllResults(data);
     });
@@ -130,20 +131,24 @@ function showAllResults(calResult) {
                 setIUserAnswers(answers[i], i)
             }
         }
+        $(".user-score").css("display", "flex");
         resetTimer();
+        setTimeout(function () {
+            $(".user-score").css("display", "none");
+        }, 10000);
     }
 }
 function setMyAnswers(answers) {
     $('#character').html(answers.character);
     $('#scorePerRound').html(answers.score);
 
-    $('#stateResult-' + answers.username).html(answers.state.toUpperCase());
-    $('#cityResult-' + answers.username).html(answers.city.toUpperCase());
-    $('#mountainResult-' + answers.username).html(answers.mountain.toUpperCase());
-    $('#lakeResult-' + answers.username).html(answers.lake.toUpperCase());
-    $('#plantResult-' + answers.username).html(answers.plant.toUpperCase());
-    $('#animalResult-' + answers.username).html(answers.animal.toUpperCase());
-    $('#riverResult-' + answers.username).html(answers.river.toUpperCase());
+    $('#stateResult-5').html(answers.state.toUpperCase());
+    $('#cityResult-5').html(answers.city.toUpperCase());
+    $('#mountainResult-5').html(answers.mountain.toUpperCase());
+    $('#lakeResult-5').html(answers.lake.toUpperCase());
+    $('#plantResult-5').html(answers.plant.toUpperCase());
+    $('#animalResult-5').html(answers.animal.toUpperCase());
+    $('#riverResult-5').html(answers.river.toUpperCase());
 
     $('#input_state').val('');
     $('#input_city').val('');
@@ -155,7 +160,7 @@ function setMyAnswers(answers) {
     enableInputs();
 }
 function setIUserAnswers(answers, int) {
-    $('#scorePerRound-').html(answers.score);
+    $('#scorePerRound-' + int).html(answers.score);
     $('#stateResult-' + int).html(answers.state.toUpperCase());
     $('#cityResult-' + int).html(answers.city.toUpperCase());
     $('#mountainResult-' + int).html(answers.mountain.toUpperCase());
@@ -197,6 +202,9 @@ function loginPlayerTimer() {
     return false;
 }
 function resetTimer(time) {
+    if (time<=0) {
+        time=60;
+    }
     count = time;
     clearInterval(counter);
     counter = setInterval(roundTimer, 1000);

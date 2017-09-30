@@ -11,7 +11,7 @@ public interface GameService {
 
     public GameData getGameById(Long id);
 
-    public GameData createNewGame(UserData userData);
+    public GameData createNewGame(UserData userData, Integer gamePoints);
 
     public Set<GameData> getAllInactiveGames();
 
@@ -21,7 +21,7 @@ public interface GameService {
 
     public UserGameData getUserGameData(String username, Long gameId);
 
-    public void createNewUserGame(UserData userData, GameData game);
+    public void createNewUserGame(Long gameId, String username, Long score);
 
     public void updateUserGame(String username, Long gameId, Long score);
 

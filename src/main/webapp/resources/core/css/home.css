@@ -46,7 +46,7 @@ body {
     border-radius: 50%;
 }*/
 .img-circle-player {
-    height: 10vh;
+    height: 8vh;
     border-radius: 50%;
 }
 
@@ -54,9 +54,9 @@ body {
     background-image: url("../../resources/images/IGTable.png");
     background-repeat: no-repeat;
     background-position: center;
-    background-size: 45vw 30vw;
-    width: 85vw;
-    height: 30vw;
+    background-size: 40vw 25vw;
+    width: 40vw;
+    height: 25vw;
 }
 .answersSend{
     display: none;
@@ -78,16 +78,16 @@ body {
 
 #roundTimer {
     position: absolute;
-    margin-left: 75%;
-    margin-top: 8.5%;
+    margin-left: 45%;
+    margin-top: 12%;
     font-size: 120px;
 }
 
 #character {
     position: absolute;
-    margin-top: 8.5%;
+    margin-top: 4.5%;
     font-size: 120px;
-    margin-left: 6%;
+    margin-left: 45%;
 }
 
 #scorePerRound {
@@ -95,16 +95,21 @@ body {
     border-color: black;
     border-radius: 20px;
     position: absolute;
-    margin-left: 75%;
+    margin-left: 45%;
     font-size: 60px;
     width: 130px;
     text-align: center;
 }
-.createGame {
-    margin-left: 42%;
+.create-game-row {
+    width: 50%;
+    margin-left: 25%;
 }
 .playContainer {
-    width: 84%;
+    width: 80%;
+    float: right !important;
+}
+.play-form{
+    width: 20%;
 }
 .gameRow {
     width: 25%;
@@ -114,11 +119,11 @@ body {
     margin-top: -10px;
 }
 #playerImage {
-    width: 5vw;
-    height: 5vw;
+    width: 8vw;
+    height: 8vw;
     position: absolute;
-    margin-left: 33.75vw;
-    margin-top: 50vh;
+    margin-left: 12.4vw;
+    margin-top: 41.4vh;
 }
 .riverStatesWraper {
     overflow:auto; 
@@ -158,49 +163,6 @@ body {
     transition: opacity 0.6s;
     margin-bottom: 15px;
 }
-
-#user-0 {
-    margin-left: 300px;
-    width: 20vh;
-    height: 17vh;
-    margin-top: 300px;
-    position: absolute;
-}
-#user-1 {
-    margin-left: 350px;
-    width: 20vh;
-    height: 17vh;
-    margin-top: -40px;
-    position: absolute;
-}
-#user-2 {
-    margin-left: 800px;
-    width: 20vh;
-    height: 17vh;
-    margin-top: -40px;
-    position: absolute;
-}
-#scorePerRound-1 {
-    width: 50px;
-    height: 20px;
-    position: absolute;
-    margin-top: 60px;
-    margin-left: 620px;
-}
-#scorePerRound-2 {
-    width: 50px;
-    height: 20px;
-    position: absolute;
-    margin-top: 60px;
-    margin-left: 800px;
-}
-#scorePerRound-0{
-    width: 50px;
-    height: 20px;
-    position: absolute;
-    margin-top: 280px;
-    margin-left: 360px;
-}
 .scoreboard-tab {
     width: 100%;
 }
@@ -224,4 +186,125 @@ body {
 }
 .scoreboard-line {
     margin-left: 25%;
+}
+.user-score{
+    width: 5vw;
+    height: 16vh;
+    text-align: center;
+    position: relative; 
+    -moz-border-radius: 10px; 
+    -webkit-border-radius: 10px; 
+    border-radius: 10px; 
+    border: solid 2px;
+    display: none;
+}
+.score-0{
+}
+.score-0:before{
+    content:""; 
+    position: absolute; 
+    right: 50%; 
+    top: 100%; 
+    width: 0; 
+    height: 0; 
+    border-left: 7px solid transparent; 
+    border-right: 7px solid transparent; 
+    border-top: 14px solid black; 
+}
+.score-1{
+    margin-left: 6vw;
+    margin-top: -22vh;
+}
+.score-1:before { 
+    content:""; 
+    position: absolute; 
+    left: 100%; 
+    top: 12vh; 
+    width: 0; 
+    height: 0; 
+    border-top: 7px solid transparent; 
+    border-left: 14px solid black; 
+    border-bottom: 7px solid transparent; 
+}
+.score-2{
+    margin-left: 28.5vw;
+    margin-top: -16vh;
+}
+.score-2:before { 
+    content:""; 
+    position: absolute; 
+    right: 100%; 
+    top: 12vh; 
+    width: 0; 
+    height: 0; 
+    border-top: 7px solid transparent; 
+    border-right: 14px solid black; 
+    border-bottom: 7px solid transparent; 
+}
+.score-3{
+    margin-left: 35vw;
+    margin-top: -7.5vh;
+}
+.score-3:before{
+    content:""; 
+    position: absolute; 
+    right: 50%; 
+    top: 100%; 
+    width: 0; 
+    height: 0; 
+    border-left: 7px solid transparent; 
+    border-right: 7px solid transparent; 
+    border-top: 14px solid black; 
+}
+.score-4{
+    margin-left: 28vw;
+    margin-top: 24vh;
+}
+.score-4:before{
+    content:""; 
+    position: absolute; 
+    right: 100%; 
+    top: 4vh; 
+    width: 0; 
+    height: 0; 
+    border-top: 7px solid transparent; 
+    border-right: 14px solid black; 
+    border-bottom: 7px solid transparent; 
+}
+.score-5{
+    margin-left: 5.5vw;
+    margin-top: -14vh;
+}
+.score-5:before{
+    content:""; 
+    position: absolute; 
+    left: 100%; 
+    top: 4vh; 
+    width: 0; 
+    height: 0; 
+    border-top: 7px solid transparent; 
+    border-left: 14px solid black; 
+    border-bottom: 7px solid transparent; 
+}
+.body-content-play {
+    width: 80vw;
+    margin-left: 15vw;
+    height: 55vh;
+}
+.create-game-button{
+    background: none;
+    border: none;
+}
+.create-game-input {
+    width: 3vw;
+    float: right;
+}
+.scoreboard-image{
+    width: 5vw;
+}
+.input-place {
+    width: 100% !important;
+}
+.anwers-group {
+    width: 100%;
 }

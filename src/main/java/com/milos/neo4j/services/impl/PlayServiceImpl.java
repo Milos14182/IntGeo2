@@ -1,5 +1,12 @@
 package com.milos.neo4j.services.impl;
 
+import com.milos.neo4j.data.AnimalData;
+import com.milos.neo4j.data.CityData;
+import com.milos.neo4j.data.LakeData;
+import com.milos.neo4j.data.MountainData;
+import com.milos.neo4j.data.PlantData;
+import com.milos.neo4j.data.RiverData;
+import com.milos.neo4j.data.StateData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +35,10 @@ import com.milos.neo4j.repository.relations.MountainIsInStateRepository;
 import com.milos.neo4j.repository.relations.RiverFlowsThroughStateRepository;
 import com.milos.neo4j.services.GameService;
 import com.milos.neo4j.services.PlayService;
+import com.milos.neo4j.services.UnknownInputsService;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -38,37 +49,31 @@ public class PlayServiceImpl implements PlayService {
     private static final long uniqueRightResult = 10;
     private static final long extraPoints = 3;
     @Autowired
-    CityRepository cityRepository;
-
+    private CityRepository cityRepository;
     @Autowired
-    StateRepository stateRepository;
-
+    private StateRepository stateRepository;
     @Autowired
-    RiverRepository riverRepository;
-
+    private RiverRepository riverRepository;
     @Autowired
-    MountainRepository mountainRepository;
-
+    private MountainRepository mountainRepository;
     @Autowired
-    LakeRepository lakeRepository;
-
+    private LakeRepository lakeRepository;
     @Autowired
-    PlantRepository plantRepository;
-
+    private PlantRepository plantRepository;
     @Autowired
-    AnimalRepository animalRepository;
-
+    private AnimalRepository animalRepository;
     @Autowired
-    MountainIsInStateRepository mountainIsInStateRepository;
-
+    private MountainIsInStateRepository mountainIsInStateRepository;
     @Autowired
-    CityIsInStateRepository cityIsInStateRepository;
-
+    private CityIsInStateRepository cityIsInStateRepository;
     @Autowired
-    RiverFlowsThroughStateRepository riverFlowsThroughStateRepository;
-
+    private RiverFlowsThroughStateRepository riverFlowsThroughStateRepository;
     @Autowired
     private GameService gameService;
+    @Autowired
+    private UnknownInputsService unknownInputsService;
+
+    private Map<Integer, String> letters = generateLetterMap();
 
     @Transactional(readOnly = true)
     @Override
@@ -80,8 +85,10 @@ public class PlayServiceImpl implements PlayService {
             answers.setScore(Long.valueOf(0));
         }
         if (!answers.getState().equals("") && answers.getState().startsWith(answers.getCharacter())) {
-            State state = stateRepository.getStateByNameOrSynonim(answers.getState(), answers.getState());
-            if (state != null && state.isActive()) {
+            State state = stateRepository.getStateByNameOrSynonim(answers.getState(), answers.getState() + ",");
+            if (state == null) {
+                unknownInputsService.getStates().put(answers.getState(), new StateData(answers.getState()));
+            } else if (state.isActive()) {
                 if (userData.getCity() != null) {
                     cityIsInState = cityIsInStateRepository.getStateOfCity(userData.getCity().getName(),
                             state.getName());
@@ -90,14 +97,18 @@ public class PlayServiceImpl implements PlayService {
             }
         }
         if (!answers.getAnimal().equals("") && answers.getAnimal().startsWith(answers.getCharacter())) {
-            Animal animal = animalRepository.getAnimalByNameOrSynonim(answers.getAnimal(), answers.getAnimal());
-            if (animal != null && animal.isActive()) {
+            Animal animal = animalRepository.getAnimalByNameOrSynonim(answers.getAnimal(), answers.getAnimal() + ",");
+            if (animal == null) {
+                unknownInputsService.getAnimals().put(answers.getAnimal(), new AnimalData(answers.getAnimal()));
+            } else if (animal.isActive()) {
                 answers.setScore(answers.getScore() + uniqueRightResult);
             }
         }
         if (!answers.getCity().equals("") && answers.getCity().startsWith(answers.getCharacter())) {
-            City city = cityRepository.getCityByNameOrSynonim(answers.getCity(), answers.getCity());
-            if (city != null && city.isActive()) {
+            City city = cityRepository.getCityByNameOrSynonim(answers.getCity(), answers.getCity() + ",");
+            if (city == null) {
+                unknownInputsService.getCitys().put(answers.getCity(), new CityData(answers.getCity()));
+            } else if (city.isActive()) {
                 if (cityIsInState != null) {
                     CityIsInState cityIsInStateAnswers = cityIsInStateRepository.getStateOfCity(city.getName(),
                             cityIsInState.getState().getName());
@@ -112,14 +123,18 @@ public class PlayServiceImpl implements PlayService {
             }
         }
         if (!answers.getLake().equals("") && answers.getLake().startsWith(answers.getCharacter())) {
-            Lake lake = lakeRepository.getLakeByNameOrSynonim(answers.getLake(), answers.getLake());
-            if (lake != null && lake.isActive()) {
+            Lake lake = lakeRepository.getLakeByNameOrSynonim(answers.getLake(), answers.getLake() + ",");
+            if (lake == null) {
+                unknownInputsService.getLakes().put(answers.getLake(), new LakeData(answers.getLake()));
+            } else if (lake.isActive()) {
                 answers.setScore(answers.getScore() + uniqueRightResult);
             }
         }
         if (!answers.getMountain().equals("") && answers.getMountain().startsWith(answers.getCharacter())) {
-            Mountain mountain = mountainRepository.getMountainByNameOrSynonim(answers.getMountain(), answers.getMountain());
-            if (mountain != null && mountain.isActive()) {
+            Mountain mountain = mountainRepository.getMountainByNameOrSynonim(answers.getMountain(), answers.getMountain() + ",");
+            if (mountain == null) {
+                unknownInputsService.getMountains().put(answers.getMountain(), new MountainData(answers.getMountain()));
+            } else if (mountain.isActive()) {
                 if (cityIsInState != null) {
                     mountainIsInState = mountainIsInStateRepository.getMountainInState(answers.getMountain(),
                             cityIsInState.getState().getName());
@@ -131,14 +146,18 @@ public class PlayServiceImpl implements PlayService {
             }
         }
         if (!answers.getPlant().equals("") && answers.getPlant().startsWith(answers.getCharacter())) {
-            Plant plant = plantRepository.getPlantByNameOrSynonim(answers.getPlant(), answers.getPlant());
-            if (plant != null && plant.isActive()) {
+            Plant plant = plantRepository.getPlantByNameOrSynonim(answers.getPlant(), answers.getPlant() + ",");
+            if (plant == null) {
+                unknownInputsService.getPlants().put(answers.getPlant(), new PlantData(answers.getPlant()));
+            } else if (plant.isActive()) {
                 answers.setScore(answers.getScore() + uniqueRightResult);
             }
         }
         if (!answers.getRiver().equals("") && answers.getRiver().startsWith(answers.getCharacter())) {
-            River river = riverRepository.getRiverByNameOrSynonim(answers.getRiver(), answers.getRiver());
-            if (river != null && river.isActive()) {
+            River river = riverRepository.getRiverByNameOrSynonim(answers.getRiver(), answers.getRiver() + ",");
+            if (river == null) {
+                unknownInputsService.getRivers().put(answers.getRiver(), new RiverData(answers.getRiver()));
+            } else if (river.isActive()) {
                 answers.setScore(answers.getScore() + uniqueRightResult);
                 if (cityIsInState != null) {
                     riverFlowsThroughState = riverFlowsThroughStateRepository.getRiverStateRelation(answers.getRiver(),
@@ -152,7 +171,6 @@ public class PlayServiceImpl implements PlayService {
         if (userData.getCity() != null && userData.getCity().getName() != null && userData.getCity().getName().equals(answers.getCity())) {
             answers.setScore(answers.getScore() + uniqueRightResult);
         }
-        checkAndSaveIntoDatabase(answers);
         return answers.getScore();
     }
 
@@ -160,12 +178,14 @@ public class PlayServiceImpl implements PlayService {
     @Override
     public String choseLetter(Long gameId) {
         String prevouslySelectedLetters = gameService.getPreviousLetters(gameId);
+        int count = prevouslySelectedLetters.split(",").length;
         boolean selected = false;
         String letter = "";
         while (!selected) {
-            int letterNumber = (int) (Math.random() * 23 + 1);
-            letter = LatinAlfabet.values()[letterNumber].toString();
-            if (!prevouslySelectedLetters.contains(letter)) {
+            Random r = new Random();
+            int result = r.nextInt(24 - 0) + 0;
+            letter = letters.get(result);
+            if (!prevouslySelectedLetters.contains(letter) || count > 20) {
                 selected = true;
             }
         }
@@ -174,64 +194,14 @@ public class PlayServiceImpl implements PlayService {
         return letter;
     }
 
-    @Transactional(readOnly = false)
-    public void checkAndSaveIntoDatabase(SubmitAnswersTmp submitAnswersTmp) {
-        if (!submitAnswersTmp.getCity().equals("")) {
-            if (cityRepository.getCityByName(submitAnswersTmp.getCity()) == null) {
-                City city = new City();
-                city.setName(submitAnswersTmp.getCity());
-                city.setActive(false);
-                cityRepository.save(city);
-            }
+    @Transactional(readOnly = true)
+    private Map<Integer, String> generateLetterMap() {
+        Map<Integer, String> map = new HashMap<>();
+        for (int i = 0; i < 24; i++) {
+            String letter = LatinAlfabet.values()[i].toString();
+            map.put(i, letter);
         }
-        if (!submitAnswersTmp.getMountain().equals("")) {
-            if (mountainRepository.getMountainByName(submitAnswersTmp.getMountain()) == null) {
-                Mountain mountain = new Mountain();
-                mountain.setName(submitAnswersTmp.getMountain());
-                mountain.setActive(false);
-                mountainRepository.save(mountain);
-            }
-        }
-        if (!submitAnswersTmp.getAnimal().equals("")) {
-            if (animalRepository.getAnimalByName(submitAnswersTmp.getAnimal()) == null) {
-                Animal animal = new Animal();
-                animal.setName(submitAnswersTmp.getAnimal());
-                animal.setActive(false);
-                animalRepository.save(animal);
-            }
-        }
-        if (!submitAnswersTmp.getLake().equals("")) {
-            if (lakeRepository.getLakeByName(submitAnswersTmp.getLake()) == null) {
-                Lake lake = new Lake();
-                lake.setName(submitAnswersTmp.getLake());
-                lake.setActive(false);
-                lakeRepository.save(lake);
-            }
-        }
-        if (!submitAnswersTmp.getPlant().equals("")) {
-            if (plantRepository.getPlantByName(submitAnswersTmp.getPlant()) == null) {
-                Plant plant = new Plant();
-                plant.setName(submitAnswersTmp.getPlant());
-                plant.setActive(false);
-                plantRepository.save(plant);
-            }
-        }
-        if (!submitAnswersTmp.getRiver().equals("")) {
-            if (riverRepository.getRiverByName(submitAnswersTmp.getRiver()) == null) {
-                River river = new River();
-                river.setName(submitAnswersTmp.getRiver());
-                river.setActive(false);
-                riverRepository.save(river);
-            }
-        }
-        if (!submitAnswersTmp.getState().equals("")) {
-            if (stateRepository.getStateByName(submitAnswersTmp.getState()) == null) {
-                State state = new State();
-                state.setName(submitAnswersTmp.getState());
-                state.setActive(false);
-                stateRepository.save(state);
-            }
-        }
+        return map;
     }
 
 }

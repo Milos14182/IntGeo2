@@ -4,7 +4,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import java.util.List;
 
 @JsonIgnoreProperties("meta")
 public class MountainData {
@@ -17,6 +16,14 @@ public class MountainData {
     private String synonims;
     private Set<CityData> cities = new HashSet<CityData>();
     private Set<AnimalData> animals = new HashSet<AnimalData>();
+
+    public MountainData(String name) {
+        this.name = name;
+        this.active = false;
+    }
+
+    public MountainData() {
+    }
 
     public StateData getStateData() {
         return stateData;
