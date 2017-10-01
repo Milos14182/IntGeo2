@@ -9,9 +9,6 @@ import com.milos.neo4j.domain.nodes.Game;
 
 public interface GameRepository extends GraphRepository<Game> {
 
-    @Query("MATCH (n:Game) WHERE n.locked = false RETURN n")
-    public Set<Game> findAllInactiveGames(Boolean flag);
-
     @Query("MATCH (n:Game) WHERE ID(n) = {1} SET n.firstLetter = {0}, n.currentRound = {2}, n.roundStartDate = {3} RETURN n")
     public Game updateGameLetter(String letter, Long id, Integer round, Long date);
     
@@ -21,7 +18,7 @@ public interface GameRepository extends GraphRepository<Game> {
     @Query("MATCH (n:Game) WHERE ID(n) = {0} SET n.locked = true RETURN n")
     public Game lockGame(Long id);
     
-    @Query("MATCH (n:Game) WHERE n.locked = false RETURN n")
+    @Query("MATCH (n:Game) WHERE n.locked = false and n.ended = false RETURN n")
     public Set<Game> getUnlockedGames();
     
     @Query("MATCH (n:Game) WHERE n.locked = false AND n.creationDate < {0} SET n.locked = true RETURN n")

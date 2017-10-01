@@ -5,9 +5,9 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <body onload="connect(stompClient)">
     <div class="body-content-play">
-        <audio autoplay loop>
+<!--        <audio autoplay loop>
             <source src="<c:url value="/resources/images/music.mp3" />">
-        </audio>
+        </audio>-->
         <div class="playContainer">
             <input id="input_username" type="hidden" value="${userDetails.username}"/>
             <div id="character" class="pull-left character">${character}</div>
@@ -44,49 +44,49 @@
         </div>
         <div class="form-inline play-form">
             <div class="form-group anwers-group">
-                <div class="col-md-12 answer-input">
+                <div class="col-md-12 col-xs-6 answer-input">
                     <label for="input_state" class="form-control -fill"><spring:message code="play.label.state" /></label>
                     <input id="input_state" type="text" class="form-control input-place" />
                 </div>
             </div>
             <div class="form-group anwers-group">
-                <div class="col-md-12 answer-input">
+                <div class="col-md-12 col-xs-6 answer-input">
                     <label for="input_state" class="form-control -fill"><spring:message code="play.label.city" /></label>
                     <input id="input_city" type="text" class="form-control input-place" />
                 </div>
             </div>
             <div class="form-group anwers-group">
-                <div class="col-md-12 answer-input">
+                <div class="col-md-12 col-xs-6 answer-input">
                     <label for="input_state" class="form-control -fill"><spring:message code="play.label.mountain" /></label>
                     <input id="input_mountain" type="text" class="form-control input-place" />
                 </div>
             </div>
             <div class="form-group anwers-group">
-                <div class="col-md-12 answer-input">
+                <div class="col-md-12 col-xs-6 answer-input">
                     <label for="input_state" class="form-control -fill"><spring:message code="play.label.river" /></label>
                     <input id="input_river" type="text" class="form-control input-place" />
                 </div>
             </div>
             <div class="form-group anwers-group">
-                <div class="col-md-12 answer-input">
+                <div class="col-md-12 col-xs-6 answer-input">
                     <label for="input_state" class="form-control -fill"><spring:message code="play.label.lake" /></label>
                     <input id="input_lake" type="text" class="form-control input-place" />
                 </div>
             </div>
             <div class="form-group anwers-group">
-                <div class="col-md-12 answer-input">
+                <div class="col-md-12 col-xs-6 answer-input">
                     <label for="input_state" class="form-control -fill"><spring:message code="play.label.animal" /></label>
                     <input id="input_animal" type="text" class="form-control input-place" />
                 </div>
             </div>
             <div class="form-group anwers-group">
-                <div class="col-md-12 answer-input">
+                <div class="col-md-12 col-xs-6 answer-input">
                     <label for="input_state" class="form-control -fill"><spring:message code="play.label.plant" /></label>
                     <input id="input_plant" type="text" class="form-control input-place" />
                 </div>
             </div>
             <div class="form-group anwers-group">
-                <div class="col-md-12">
+                <div class="col-md-12 col-xs-6">
                     <div class="btn btn-primary btn-block" onclick="sendNum(stompClient)">
                         <spring:message code="play.button.submit" />
                     </div>

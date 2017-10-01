@@ -6,7 +6,9 @@
 package com.milos.neo4j.services;
 
 import com.milos.neo4j.data.Scoreboard;
+import com.milos.neo4j.domain.nodes.UserGameScores;
 import java.util.List;
+import java.util.Set;
 
 /**
  *
@@ -14,13 +16,13 @@ import java.util.List;
  */
 public interface ScoreboardService {
     
-    Iterable<Scoreboard> getFullScoreboard();
+    Iterable<Scoreboard> getDailyScoreboard(Long points);
     
-    Iterable<Scoreboard> getMontlyScoreboard();
+    Iterable<Scoreboard> getMontlyScoreboard(Long points);
     
-    Iterable<Scoreboard> getWeeklyScoreboard();
+    Iterable<Scoreboard> getWeeklyScoreboard(Long points);
     
-    List<Scoreboard> getWinningsScoreboard();
+    List<Scoreboard> getWinningsScoreboard(Long points);
     
-    List<Scoreboard> getAllScoresForUser(String username);
+    Set<UserGameScores> getAllScoresForUser(String username);
 }

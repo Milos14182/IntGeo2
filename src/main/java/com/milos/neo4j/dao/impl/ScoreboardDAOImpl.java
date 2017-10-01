@@ -32,15 +32,17 @@ public class ScoreboardDAOImpl implements ScoreboardDAO {
 
     @Transactional(readOnly = true)
     @Override
-    public Iterable<Scoreboard> getFullScoreboard(Long startTime, Long endTime) {
-        String getScorboards = "MATCH (g:Game)--(n:UserGameScores)--(u:User)--(c:City) \n"
-                //                + "where g.creationDate > {startTime} and g.creationDate < {endTime}\n"
-                + "return n.username as username, u.firstname as firstname, u.lastname as lastname, ID(g) as gameId, \n"
-                + "n.score as score, c.name as city, \n"
-                + "u.userImage as userImage order by score desc";
+    public Iterable<Scoreboard> getFullScoreboard(Long startTime, Long endTime, Long points) {
+        String getScorboards = "MATCH (g:Game)--(n:UserGameScores)--(u:User)--(c:City) \n"                
+                + "where g.creationDate > {startTime} and g.creationDate < {endTime} \n"
+                + "and g.ended = true and n.score >= g.endPoints and g.endPoints = {points} \n"
+                + "with sum(n.score) as score, n.username as username, u.firstname as firstname, \n"
+                + "u.lastname as lastname, u.userImage as userImage, c.name as city, g.ended as ended \n"
+                + "return username, firstname, lastname, city, score, userImage order by score desc";
         Map<String, Long> params = new HashMap<>();
         params.put("startTime", startTime);
         params.put("endTime", endTime);
+        params.put("points", points);
 
         Result result = session.query(getScorboards, params, true);
         return new LinkedList<>(convertResultToList(result));
@@ -48,16 +50,17 @@ public class ScoreboardDAOImpl implements ScoreboardDAO {
 
     @Transactional(readOnly = true)
     @Override
-    public List<Scoreboard> getWinningsScoreboard(Long startTime, Long endTime) {
-        String getScorboards = "MATCH (g:Game)--(n:UserGameScores)--(u:User)--(c:City) \n"
-                //                + "where g.creationDate > {startTime} and g.creationDate < {endTime}\n"
-                + "with n.username as username, count(n.score) as score, n.score as countScore, u.firstname as firstname, \n"
-                + "u.lastname as lastname, u.userImage as userImage, c.name as city \n"
-                + "where countScore<500 \n"
+    public List<Scoreboard> getWinningsScoreboard(Long startTime, Long endTime, Long points) {
+        String getScorboards = "MATCH (g:Game)--(n:UserGameScores)--(u:User)--(c:City) \n"                
+                + "where g.creationDate > {startTime} and g.creationDate < {endTime} \n"
+                + "and g.ended = true and n.score >= g.endPoints and g.endPoints = {points} \n"
+                + "with count(g) as score, n.username as username, u.firstname as firstname, \n"
+                + "u.lastname as lastname, u.userImage as userImage, c.name as city, g.ended as ended \n"
                 + "return username, firstname, lastname, city, score, userImage order by score desc";
         Map<String, Long> params = new HashMap<>();
         params.put("startTime", startTime);
         params.put("endTime", endTime);
+        params.put("points", points);
 
         Result result = session.query(getScorboards, params, true);
         return new LinkedList<>(convertResultToList(result));
@@ -78,20 +81,6 @@ public class ScoreboardDAOImpl implements ScoreboardDAO {
             scoreboards.add(scoreboard);
         });
         return scoreboards;
-    }
-
-    @Transactional(readOnly = true)
-    @Override
-    public List<Scoreboard> getAllScoresForUser(String username) {
-        String getScorboards = "MATCH (g:Game)--(n:UserGameScores)--(u:User)--(c:City) \n"
-                + "where u.username = {username}\n"
-                + "return ID(g) as gameId, \n"
-                + "n.score as score order by score desc";
-        Map<String, String> params = new HashMap<>();
-        params.put("username", username);
-
-        Result result = session.query(getScorboards, params, true);
-        return new LinkedList<>(convertResultToList(result));
     }
 
 }

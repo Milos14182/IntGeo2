@@ -14,9 +14,7 @@ import java.util.List;
  */
 public interface ScoreboardDAO {
     
-    Iterable<Scoreboard> getFullScoreboard(Long startTime, Long endTime);
+    Iterable<Scoreboard> getFullScoreboard(Long startTime, Long endTime, Long points);
     
-    List<Scoreboard> getWinningsScoreboard(Long startTime, Long endTime);
-    
-    List<Scoreboard> getAllScoresForUser(String username);
+    List<Scoreboard> getWinningsScoreboard(Long startTime, Long endTime, Long points);
 }

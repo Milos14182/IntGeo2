@@ -6,8 +6,6 @@
 package com.milos.neo4j.tasks;
 
 import com.milos.neo4j.services.GameService;
-import java.util.Calendar;
-import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -17,13 +15,13 @@ import org.springframework.stereotype.Component;
  * @author milos
  */
 @Component
-public class DeleteOldGames {
+public class EndOldGamesTask {
     
     @Autowired
     private GameService gameService;
     
-    @Scheduled(cron = "0 0 23 * * SUN")
-    public void deleteOldGames() {
-        gameService.deleteOldGames();
+    @Scheduled(fixedDelayString = "3600000")
+    public void endOldGames() {
+        gameService.endOldGames();
     }
 }

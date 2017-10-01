@@ -19,13 +19,13 @@ public class SubmitAnswersTmp {
     private String lake;
     private String plant;
     private String animal;
-
     private String character;
     private Long score;
     private String username;
     private String gameId;
     private Boolean submitet;
     private boolean collectAll;
+    private boolean isEnded;
 
     public SubmitAnswersTmp() {
         super();
@@ -133,6 +133,14 @@ public class SubmitAnswersTmp {
 
     public void setCollectAll(boolean collectAll) {
         this.collectAll = collectAll;
+    }
+
+    public boolean isIsEnded() {
+        return isEnded;
+    }
+
+    public void setIsEnded(boolean isEnded) {
+        this.isEnded = isEnded;
     }
 
 }

@@ -1,10 +1,12 @@
 package com.milos.neo4j.roundbroker;
 
+import com.milos.neo4j.data.GameData;
 import java.util.Date;
 import java.util.List;
 
 import com.milos.neo4j.data.SubmitAnswersTmp;
 import com.milos.neo4j.data.UserData;
+import java.util.Map;
 
 public interface RoundBroker {
 
@@ -18,7 +20,7 @@ public interface RoundBroker {
 
     public Boolean getInitalLetter();
 
-    public Long countScore(SubmitAnswersTmp submitAnswersTmp, UserData userData);
+    public Map<String, Object> countScore(SubmitAnswersTmp submitAnswersTmp, UserData userData, GameData gameData);
     
     public Boolean gameCanStart(Long gameId);
 

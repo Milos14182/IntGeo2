@@ -27,7 +27,7 @@ public interface GameService {
 
     public void updateGameLetter(String letter, Long gameId, Integer round, Long date);
     
-    public void deleteOldGames(Date beforeDate);
+    public void deleteOldGames();
     
     public GameData lockGame(Long gameId);
     
@@ -43,7 +43,7 @@ public interface GameService {
     
     public void updatePreviousLetters(Long gameId, String previouslySelectedLetters);
     
-    void deleteUserGameScoresBeforeDate(Date beforeDate);
-    
     GameData endGame(Long gameId);
+    
+    void endOldGames();
 }

@@ -26,21 +26,21 @@
             <c:if test="${not empty cityDatas}">
                 <c:forEach var="city" items="${cityDatas}">
                     <div class="row admin-row" id="city${city.id}">
-                        <div class="col-md-4">${city.name}</div>
-                        <div class="col-md-2">${city.active}</div>
-                        <div class="col-md-2">
+                        <div class="col-md-4 col-xs-3">${city.name}</div>
+                        <div class="col-md-2 col-xs-2">${city.active}</div>
+                        <div class="col-md-2 col-xs-2">
                             <div class="btn btn-primary"
                                  onClick="acceptNode('${context}', 'city', ${city.id})">
                                 <spring:message code="admin.label.accept" />
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-2 col-xs-2">
                             <div class="btn btn-primary"
                                  onClick="rejectNode('${context}', 'city', ${city.id})">
                                 <spring:message code="admin.label.reject" />
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-2 col-xs-2">
                             <a class="btn btn-primary"
                                href='<c:url value="/admin/edit/city/${city.id}"/>'> <spring:message
                                     code="admin.label.edit" />
@@ -55,21 +55,21 @@
             <c:if test="${not empty stateDatas}">
                 <c:forEach var="state" items="${stateDatas}">
                     <div class="row admin-row" id="state${state.id}">
-                        <div class="col-md-4">${state.name}</div>
-                        <div class="col-md-2">${state.active}</div>
-                        <div class="col-md-2">
+                        <div class="col-md-4 col-xs-3">${state.name}</div>
+                        <div class="col-md-2 col-xs-2">${state.active}</div>
+                        <div class="col-md-2 col-xs-2">
                             <div class="btn btn-primary"
                                  onClick="acceptNode('${context}', 'state', ${state.id})">
                                 <spring:message code="admin.label.accept" />
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-2 col-xs-2">
                             <div class="btn btn-primary"
                                  onClick="rejectNode('${context}', 'state', ${state.id})">
                                 <spring:message code="admin.label.reject" />
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-2 col-xs-2">
                             <a class="btn btn-primary"
                                href='<c:url value="/admin/edit/state/${state.id}"/>'> <spring:message
                                     code="admin.label.edit" />
@@ -84,21 +84,21 @@
             <c:if test="${not empty mountainDatas}">
                 <c:forEach var="mountain" items="${mountainDatas}">
                     <div class="row admin-row" id="mountain${mountain.id}">
-                        <div class="col-md-4">${mountain.name}</div>
-                        <div class="col-md-2">${mountain.active}</div>
-                        <div class="col-md-2">
+                        <div class="col-md-4 col-xs-3">${mountain.name}</div>
+                        <div class="col-md-2 col-xs-2">${mountain.active}</div>
+                        <div class="col-md-2 col-xs-2">
                             <div class="btn btn-primary"
                                  onClick="acceptNode('${context}', 'mountain', ${mountain.id})">
                                 <spring:message code="admin.label.accept" />
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-2 col-xs-2">
                             <div class="btn btn-primary"
                                  onClick="rejectNode('${context}', 'mountain', ${mountain.id})">
                                 <spring:message code="admin.label.reject" />
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-2 col-xs-2">
                             <a class="btn btn-primary"
                                href='<c:url value="/admin/edit/mountain/${mountain.id}"/>'>
                                 <spring:message code="admin.label.edit" />
@@ -112,21 +112,21 @@
             <c:if test="${not empty lakeDatas}">
                 <c:forEach var="lake" items="${lakeDatas}">
                     <div class="row admin-row" id="lake${lake.id}">
-                        <div class="col-md-4">${lake.name}</div>
-                        <div class="col-md-2">${lake.active}</div>
-                        <div class="col-md-2">
+                        <div class="col-md-4 col-xs-3">${lake.name}</div>
+                        <div class="col-md-2 col-xs-2">${lake.active}</div>
+                        <div class="col-md-2 col-xs-2">
                             <div class="btn btn-primary"
                                  onClick="acceptNode('${context}', 'lake', ${lake.id})">
                                 <spring:message code="admin.label.accept" />
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-2 col-xs-2">
                             <div class="btn btn-primary"
                                  onClick="rejectNode('${context}', 'lake', ${lake.id})">
                                 <spring:message code="admin.label.reject" />
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-2 col-xs-2">
                             <a class="btn btn-primary"
                                href='<c:url value="/admin/edit/lake/${lake.id}"/>'> <spring:message
                                     code="admin.label.edit" />
@@ -141,21 +141,21 @@
             <c:if test="${not empty riverDatas}">
                 <c:forEach var="river" items="${riverDatas}">
                     <div class="row admin-row" id="river${river.id}">
-                        <div class="col-md-4">${river.name}</div>
-                        <div class="col-md-2">${river.active}</div>
-                        <div class="col-md-2">
+                        <div class="col-md-4 col-xs-3">${river.name}</div>
+                        <div class="col-md-2 col-xs-2">${river.active}</div>
+                        <div class="col-md-2 col-xs-2">
                             <div class="btn btn-primary"
                                  onClick="acceptNode('${context}', 'river', ${river.id})">
                                 <spring:message code="admin.label.accept" />
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-2 col-xs-2">
                             <div class="btn btn-primary"
                                  onClick="rejectNode('${context}', 'river', ${river.id})">
                                 <spring:message code="admin.label.reject" />
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-2 col-xs-2">
                             <a class="btn btn-primary"
                                href='<c:url value="/admin/edit/river/${river.id}"/>'> <spring:message
                                     code="admin.label.edit" />
@@ -171,21 +171,21 @@
 
                 <c:forEach var="plant" items="${plantDatas}">
                     <div class="row admin-row" id="plant${plant.id}">
-                        <div class="col-md-4">${plant.name}</div>
-                        <div class="col-md-2">${plant.active}</div>
-                        <div class="col-md-2">
+                        <div class="col-md-4 col-xs-3">${plant.name}</div>
+                        <div class="col-md-2 col-xs-2">${plant.active}</div>
+                        <div class="col-md-2 col-xs-2">
                             <div class="btn btn-primary"
                                  onClick="acceptNode('${context}', 'plant', ${plant.id})">
                                 <spring:message code="admin.label.accept" />
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-2 col-xs-2">
                             <div class="btn btn-primary"
                                  onClick="rejectNode('${context}', 'plant', ${plant.id})">
                                 <spring:message code="admin.label.reject" />
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-2 col-xs-2">
                             <a class="btn btn-primary"
                                href='<c:url value="/admin/edit/plant/${plant.id}"/>'> <spring:message
                                     code="admin.label.edit" />
@@ -201,21 +201,21 @@
 
                 <c:forEach var="animal" items="${animalDatas}">
                     <div class="row admin-row" id="animal${animal.id}">
-                        <div class="col-md-4">${animal.name}</div>
-                        <div class="col-md-2">${animal.active}</div>
-                        <div class="col-md-2">
+                        <div class="col-md-4 col-xs-3">${animal.name}</div>
+                        <div class="col-md-2 col-xs-2">${animal.active}</div>
+                        <div class="col-md-2 col-xs-2">
                             <div class="btn btn-primary"
                                  onClick="acceptNode('${context}', 'animal', ${animal.id})">
                                 <spring:message code="admin.label.accept" />
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-2 col-xs-2">
                             <div class="btn btn-primary"
                                  onClick="rejectNode('${context}', 'animal', ${animal.id})">
                                 <spring:message code="admin.label.reject" />
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-2 col-xs-2">
                             <a class="btn btn-primary"
                                href='<c:url value="/admin/edit/animal/${animal.id}"/>'> <spring:message
                                     code="admin.label.edit" />

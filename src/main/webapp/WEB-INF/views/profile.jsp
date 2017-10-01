@@ -36,7 +36,7 @@
                             ${userDetails.city.name}
                         </p>
                     </div>
-                    <div class="col-xs-12 col-sm-4 text-center">
+                    <div class="col-xs-4 col-sm-4 text-center">
                         <figure>
                             <c:if test="${not empty userDetails.base64Image}">
                                 <img src="data:image/png;base64,${userDetails.base64Image}"
@@ -63,20 +63,20 @@
         <div class="row">
             <div class="col-md-12"><h1><spring:message code="profile.header.scores" /></h1></div></div>
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-6 col-xs-6">
                 <div class="scoreboard-body-column"><spring:message code="scoreboard.header.gameId" /></div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 col-xs-6">
                 <div class="scoreboard-body-column"><spring:message code="scoreboard.header.score" /></div>
             </div>
         </div>
         <br />
         <c:forEach var="scoreboard" items="${scoreboards}">
             <div class="row profile-score">
-                <div class="col-md-6">
+                <div class="col-md-6 col-xs-6">
                     <div class="scoreboard-body-column">${scoreboard.gameId}</div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 col-xs-6">
                     <div class="scoreboard-body-column">${scoreboard.score}</div>
                 </div>
             </div>

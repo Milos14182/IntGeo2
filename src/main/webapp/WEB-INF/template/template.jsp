@@ -13,6 +13,7 @@
               rel="stylesheet" type="text/css" />-->
         <link href="<c:url value="/resources/images/how_to.png" />"  rel="icon">
         <c:url var="cssURL" value="/resources/css/home.css" />
+        <c:url var="mobileCssURL" value="/resources/css/mobile-design.css" />
 
         <link href="<c:url value="/resources/css/bootstrap.min.css" />"
               rel="stylesheet">
@@ -22,6 +23,7 @@
               rel="stylesheet">
 
         <link href="${cssURL}" rel="stylesheet" type="text/css" />
+        <link href="${mobileCssURL}" rel="stylesheet" type="text/css" />
 
         <!--<script src="<c:url value="/resources/js/jquery/jquery-1.11.3.js"/>"></script>-->
         <script src="<c:url value="/resources/js/main.js"/>"></script>

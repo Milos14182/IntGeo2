@@ -17,11 +17,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.milos.neo4j.data.CityData;
 import com.milos.neo4j.data.Scoreboard;
 import com.milos.neo4j.data.UserData;
+import com.milos.neo4j.domain.nodes.UserGameScores;
+import com.milos.neo4j.repository.UserGameScoresRepository;
 import com.milos.neo4j.services.CityService;
 import com.milos.neo4j.services.ScoreboardService;
 import com.milos.neo4j.services.UserService;
 import com.milos.neo4j.validators.EditUserProfileValidator;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 public class ProfileController {
@@ -43,7 +46,7 @@ public class ProfileController {
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
     public String profile(final HttpServletRequest request, Model model) {
         UserData userData = (UserData)request.getSession().getAttribute("userDetails");
-        List<Scoreboard> scoreboards = scoreboardService.getAllScoresForUser(userData.getUsername());
+        Set<UserGameScores> scoreboards = scoreboardService.getAllScoresForUser(userData.getUsername());
         model.addAttribute("scoreboards", scoreboards);
         return "profile";
     }

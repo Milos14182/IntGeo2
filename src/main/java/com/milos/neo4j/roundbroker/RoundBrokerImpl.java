@@ -13,6 +13,8 @@ import com.milos.neo4j.services.GameService;
 import com.milos.neo4j.services.PlayService;
 import com.milos.neo4j.services.UserService;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class RoundBrokerImpl implements RoundBroker {
@@ -83,12 +85,17 @@ public class RoundBrokerImpl implements RoundBroker {
     }
 
     @Override
-    public Long countScore(SubmitAnswersTmp submitAnswersTmp, UserData userData) {
+    public Map<String, Object> countScore(SubmitAnswersTmp submitAnswersTmp, UserData userData, GameData gameData) {
         Long score = playService.countScore(submitAnswersTmp, userData);
-        if (score.compareTo(Long.valueOf(300))>=0) {
+        Boolean isEnded = Boolean.FALSE;
+        if (score.compareTo(gameData.getEndPoints().longValue()) >= 0) {
             gameService.endGame(Long.valueOf(submitAnswersTmp.getGameId()));
-        }        
-        return score;
+            isEnded = Boolean.TRUE;
+        }
+        Map<String, Object> map = new HashMap<>();
+        map.put("score", score);
+        map.put("isEnded", isEnded);
+        return map;
     }
 
     @Override

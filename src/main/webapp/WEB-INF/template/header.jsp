@@ -113,7 +113,7 @@
                 <div class="container">
                     <div class="carousel-caption">
                         <p>
-                            <a class="btn btn-lg btn-primary" href="${home}" role="button"><spring:message
+                            <a class="btn btn-lg btn-primary" href="<c:url value="/"/>" role="button"><spring:message
                                     code="home.label.learnMore" /></a>
                         </p>
                     </div>
@@ -139,7 +139,7 @@
                 <div class="container">
                     <div class="carousel-caption">
                         <p>
-                            <a class="btn btn-lg btn-primary" href="${home}" role="button"><spring:message
+                            <a class="btn btn-lg btn-primary" href="<c:url value="/"/>" role="button"><spring:message
                                     code="home.label.learnMore" /></a>
                         </p>
                     </div>
@@ -165,7 +165,7 @@
                 <div class="container">
                     <div class="carousel-caption">
                         <p>
-                            <a class="btn btn-lg btn-primary" href="${home}" role="button"><spring:message
+                            <a class="btn btn-lg btn-primary" href="<c:url value="/"/>" role="button"><spring:message
                                     code="home.label.learnMore" /></a>
                         </p>
                     </div>

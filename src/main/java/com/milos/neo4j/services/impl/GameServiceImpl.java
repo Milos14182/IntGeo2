@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.milos.neo4j.converter.GameConverter;
 import com.milos.neo4j.converter.UserConverter;
 import com.milos.neo4j.converter.UserGameConverter;
+import com.milos.neo4j.dao.GameDAO;
 import com.milos.neo4j.dao.UserGameScoresDAO;
 import com.milos.neo4j.data.GameData;
 import com.milos.neo4j.data.UserData;
@@ -53,6 +54,8 @@ public class GameServiceImpl implements GameService {
     private UserGameConverter userGameConverter;
     @Autowired
     private UserGameScoresDAO gameScoresDAO;
+    @Autowired
+    private GameDAO gameDAO;
 
     @Transactional(readOnly = true)
     @Override
@@ -73,8 +76,7 @@ public class GameServiceImpl implements GameService {
         GameData gameData = null;
         try {
             User user = userRepository.findOne(userData.getId());
-            GameRelation gameRelation = gameRelationRepository.findGameRelationForUser(userData.getUsername());
-            if (user != null && gameRelation == null) {
+            if (user != null) {
                 Game game = new Game();
                 int letterNumber = (int) (Math.random() * 23 + 1);
                 String letter = LatinAlfabet.values()[letterNumber].toString();
@@ -111,7 +113,7 @@ public class GameServiceImpl implements GameService {
     public Set<GameData> getAllInactiveGames() {
         Set<GameData> inactiveGameDatas = new HashSet<>();
         try {
-            Set<Game> inactiveGames = gameRepository.findAllInactiveGames(false);
+            Set<Game> inactiveGames = gameRepository.getUnlockedGames();
             gameConverter.copyFromEntitySetToDataSet(inactiveGames, inactiveGameDatas, new GameData());
         } catch (RuntimeException ex) {
             GEOGRAPHY_LOGGER.error("getAllInactiveGames throws error.", ex);
@@ -228,9 +230,9 @@ public class GameServiceImpl implements GameService {
 
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     @Override
-    public void deleteOldGames(Date beforeDate) {
+    public void deleteOldGames() {
         try {
-            gameRepository.removeOldGames(beforeDate.getTime());
+            gameDAO.deleteOldGames();
         } catch (RuntimeException ex) {
             GEOGRAPHY_LOGGER.error("deleteOldGames throws error.", ex);
             throw ex;
@@ -331,20 +333,6 @@ public class GameServiceImpl implements GameService {
         }
     }
 
-    @Transactional(readOnly = true)
-    @Override
-    public void deleteUserGameScoresBeforeDate(Date beforeDate) {
-        try {
-            Set<Long> gameIds = gameRepository.getGameIdsForDelete(beforeDate.getTime());
-            for (Long gameId : gameIds) {
-                userGameScoresRepository.deleteUserGameScore(gameId);
-            }
-        } catch (RuntimeException ex) {
-            GEOGRAPHY_LOGGER.error("getGameIdsForDelete throws error.", ex);
-            throw ex;
-        }
-    }
-
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     @Override
     public GameData endGame(Long gameId) {
@@ -356,6 +344,17 @@ public class GameServiceImpl implements GameService {
                 return gameData;
             }
             return null;
+        } catch (RuntimeException ex) {
+            GEOGRAPHY_LOGGER.error("endGame throws error.", ex);
+            throw ex;
+        }
+    }
+
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+    @Override
+    public void endOldGames() {
+        try {
+            gameDAO.endOldGames();
         } catch (RuntimeException ex) {
             GEOGRAPHY_LOGGER.error("endGame throws error.", ex);
             throw ex;

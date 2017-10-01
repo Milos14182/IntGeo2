@@ -21,18 +21,6 @@ public class AnimalServiceImpl implements AnimalService {
     @Autowired
     AnimalConverter animalConverter;
 
-    @Transactional(readOnly = true)
-    @Override
-    public AnimalData getAnimalByName(String name) {
-        AnimalData animalData = null;
-        Animal animal = animalRepository.getAnimalByName(name);
-        if (animal != null) {
-            animalData = new AnimalData();
-            animalConverter.copyFromEntityToData(animal, animalData);
-        }
-        return animalData;
-    }
-
     @Transactional(readOnly = false)
     @Override
     public void saveAnimal(AnimalData animalData) {

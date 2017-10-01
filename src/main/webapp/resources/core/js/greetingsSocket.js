@@ -4,6 +4,7 @@ var answersSend = false;
 var collectAll = false;
 var count = 60;
 var counter = null;
+var isEnded = false;
 //1000 will  run it every 1 second
 function setConnected(connected) {
     document.getElementById('connect').disabled = connected;
@@ -34,22 +35,24 @@ function startRound() {
     var pathnames = window.location.pathname.split('/');
     roundSync(stompClient);
     clearInterval(counter);
-    enableInputs();
-    counter = setInterval(roundTimer, 1000); //1000 will  run it every 1 second
-    roundTimer();
-    stompClient.subscribe('/topic/play/roundSync/' + pathnames[pathnames.length - 1], function (
-            data) {
-        if (data.body !== "0") {
+    if (!isEnded) {
+        enableInputs();
+        counter = setInterval(roundTimer, 1000); //1000 will  run it every 1 second
+        roundTimer();
+        stompClient.subscribe('/topic/play/roundSync/' + pathnames[pathnames.length - 1], function (
+                data) {
+            if (data.body !== "0") {
+                answersSend = false;
+            }
+            resetTimer(data.body);
+        });
+        stompClient.subscribe('/topic/play/answers/' + pathnames[pathnames.length - 1], function (
+                data) {
             answersSend = false;
-        }
-        resetTimer(data.body);
-    });
-    stompClient.subscribe('/topic/play/answers/' + pathnames[pathnames.length - 1], function (
-            data) {
-        answersSend = false;
-        roundSync(stompClient);
-        showAllResults(data);
-    });
+            roundSync(stompClient);
+            showAllResults(data);
+        });
+    }
 }
 function disconnect(stompClient) {
     stompClient.disconnect();
@@ -157,7 +160,13 @@ function setMyAnswers(answers) {
     $('#input_river').val('');
     $('#input_plant').val('');
     $('#input_animal').val('');
-    enableInputs();
+    if (!answers.isEnded) {
+        enableInputs();
+    } else {
+        isEnded = true;
+        alert("Game ended.");
+        window.location = "/game";        
+    }
 }
 function setIUserAnswers(answers, int) {
     $('#scorePerRound-' + int).html(answers.score);
@@ -202,12 +211,14 @@ function loginPlayerTimer() {
     return false;
 }
 function resetTimer(time) {
-    if (time<=0) {
-        time=60;
+    if (time <= 0) {
+        time = 60;
     }
     count = time;
     clearInterval(counter);
-    counter = setInterval(roundTimer, 1000);
+    if (!isEnded) {
+        counter = setInterval(roundTimer, 1000);
+    }
 }
 function disableInputs() {
     $('#character').css("visibility", "hidden");

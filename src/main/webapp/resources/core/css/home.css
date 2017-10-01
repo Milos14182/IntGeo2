@@ -291,6 +291,10 @@ body {
     width: 50vw;
     margin-left: 25%;
 }
+.scoreboard-tabs {
+    width: 50vw;
+    margin-left: 25%;
+}
 .scoreboard-body-row:hover {
     background-color: #46b8da;
     border: 1px solid gray;

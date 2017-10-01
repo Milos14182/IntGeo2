@@ -29,24 +29,25 @@ public class ScoreboardController {
     @RequestMapping(value = "/scoreboard", method = RequestMethod.GET)
     public String getFullScoreboard(HttpServletRequest request, Model model) {
         String type = request.getParameter("type") !=null ? request.getParameter("type") : "";
+        Long score = request.getParameter("score") !=null ? Long.valueOf(request.getParameter("score")) : 1000l;
         Iterable<Scoreboard> scoreboards = new LinkedList<>();
         switch (type) {
             case "montly":
-                scoreboards = scoreboardService.getMontlyScoreboard();
+                scoreboards = scoreboardService.getMontlyScoreboard(score);
                 break;
             case "weekly":
-                scoreboards = scoreboardService.getWeeklyScoreboard();
+                scoreboards = scoreboardService.getWeeklyScoreboard(score);
                 break;
             case "daily":
-                scoreboards = scoreboardService.getFullScoreboard();
+                scoreboards = scoreboardService.getDailyScoreboard(score);
                 break;
             case "winnings":
-                List<Scoreboard> winnings = scoreboardService.getWinningsScoreboard();
+                List<Scoreboard> winnings = scoreboardService.getWinningsScoreboard(score);
                 scoreboards = new LinkedList<>(winnings);
                 break;
             default:
                 type = "montly";
-                scoreboards = scoreboardService.getMontlyScoreboard();
+                scoreboards = scoreboardService.getMontlyScoreboard(score);
                 break;
         }
         model.addAttribute("scoreboards", scoreboards);
