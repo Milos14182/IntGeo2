@@ -69,7 +69,7 @@
                     <div class="riverStatesWraper">                        
                         <c:forEach var="state" items="${states}">
                             <div class="row riverStatesName">
-                                <div class="riverStatesName col-md-6 col-xs-6">${state.name}</div>
+                                <div class="col-md-6 col-xs-6">${state.name}</div>
                                 <div class="col-md-6 col-xs-6">
                                     <form:checkbox id="state-${state.id}" path="stateIds" class="riverStatesCheckbox checkbox" value="${state.id}" />
                                 </div>

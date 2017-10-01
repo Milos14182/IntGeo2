@@ -32,7 +32,7 @@
         <c:set var="typePath" value='<%= 
             request.getQueryString() != null ? request.getQueryString().split("=")[1].split("&")[0] : "montly"%>' />
         <ul class="nav nav-tabs scoreboard-tabs">
-            <li class="active tab"><a class="tab-a" data-toggle="tab" href='<c:url value ="/scoreboard?type=${typePath}&score=1000"/>'>1000</a></li>
+            <li class="active tab"><a class="tab-a" href='<c:url value ="/scoreboard?type=${typePath}&score=1000"/>'>1000</a></li>
             <li class="tab"><a class="tab-a" href='<c:url value="/scoreboard?type=${typePath}&score=750" />'>750</a></li>
             <li class="tab"><a class="tab-a" href='<c:url value="/scoreboard?type=${typePath}&score=500" />'>500</a></li>
             <li class="tab"><a class="tab-a" href='<c:url value="/scoreboard?type=${typePath}&score=300" />'>300</a></li>
