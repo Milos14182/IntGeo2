@@ -1,5 +1,5 @@
 @CHARSET "ISO-8859-2";
-@media only screen and (max-width: 720px) {    
+@media only screen and (max-width: 1000px) {    
     html {
         position: relative;
         min-height: 100%;
@@ -8,6 +8,11 @@
         /* Margin bottom by footer height */
         margin-bottom: 45px;
         background-color: #f4f9f9;
+        background-image: url("../../resources/images/bck.jpg");
+        height: 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
     }
     .footer {
         position: absolute;
@@ -102,35 +107,13 @@
         background-image: url("../../resources/images/IGTable.png");
         background-repeat: no-repeat;
         background-position: center;
-        background-size: 70vw 40vw;
-        width: 70vw;
+        background-size: 60vw 40vw;
+        width: 60vw;
         height: 40vw;
         margin-left: 5vw;
     }
     .answersSend{
         display: none;
-    }
-    #roundTimer {
-        position: absolute;
-        margin-left: 80vw;
-        margin-top: 8vw;
-        font-size: 10vw;
-    }
-    #character {
-        position: absolute;
-        margin-top: 18vw;
-        font-size: 10vw;
-        margin-left: 80vw;
-    }
-    #scorePerRound {
-        border: solid 2px;
-        border-color: black;
-        border-radius: 5px;
-        position: absolute;
-        margin-left: 80vw;
-        font-size: 5vw;
-        width: 10vw;
-        text-align: center;
     }
     .playContainer {
         width: 100%;
@@ -139,6 +122,7 @@
     }
     .play-form{
         width: 100%;
+        display: -webkit-inline-box;
     }
     .gameRow {
         width: 25%;
@@ -151,7 +135,7 @@
         width: 7vw;
         height: 7vw;
         position: absolute;
-        margin-left: 26.5vw;
+        margin-left: 23vw;
         margin-top: 32vw;
     }
     .input-place {
@@ -166,17 +150,18 @@
         -webkit-flex-basis: 30%;
         flex-basis: 30%;
         line-height: 41px;
-        width: 30% !important;
+        width: 40% !important;
         padding: 0 16px;
         font-size: 13px;
         border: 0;
         flex: none;
         align-items: center;
         color: #535a60;
-        background-color: #eff0f1;
+        background-color: transparent;
     }
     .answer-input {
         display: flex;
+        height: 5em;
     }
     .user-score{
         width: 5vw;
@@ -355,5 +340,54 @@
         background-color: #46b8da;
         border: 1px solid gray;
         border-radius: 5px;
+    }
+    .score-header {
+        height: 7.5em;
+        padding: 1em;
+        width: 90%;
+        margin: auto;
+    }
+    .score-header-row {
+        background-color: #B7DF39;
+        height: 100%;
+        width: 100%;
+        display: flex;
+    }
+    .label-name{
+        display: inline;
+        font-size: 2em;
+        width: 90%;
+        padding: 1em;
+        vertical-align: bottom;
+    }
+    .label-icons {
+        width: 10%;
+        height: 3em;
+        margin-top: 1em;
+    }
+    .character {
+        width: 33%;
+        text-align: center;
+        display: flex; 
+    }
+    .character-name {
+        font-size: 2.5em;
+        width: 60%;
+    }
+    .character-value {
+        font-size: 4em;
+        width: 35%;
+        text-align: left;
+    }
+    .play-submit {
+        height: 5em;
+    }
+    .play-submit-row {
+        height: 100%;
+    }
+    .play-submit-button {
+        height: 100%;
+        text-align: center;
+        font-size: 3em;
     }
 }
