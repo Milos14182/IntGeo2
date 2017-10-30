@@ -40,19 +40,6 @@
                 </figure>
             </div>
             <div class="playTable">
-                <c:forEach var="i" begin="0" end="5">   
-                    <div class="user-score score-${i}">
-                        <div id="scorePerRound-${i}"></div>
-                        <div>
-                            <div id="stateResult-${i}"></div>
-                            <div id="cityResult-${i}"></div>
-                            <div id="mountainResult-${i}"></div>
-                            <div id="riverResult-${i}"></div>
-                            <div id="lakeResult-${i}"></div>
-                            <div id="animalResult-${i}"></div>
-                        </div>
-                    </div>
-                </c:forEach>
             </div>
             <div class="results">
                 <div class="results-tabs">
