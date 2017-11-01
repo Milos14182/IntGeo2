@@ -5,6 +5,7 @@ var collectAll = false;
 var count = 60;
 var counter = null;
 var isEnded = false;
+var roundResults = [];
 //1000 will  run it every 1 second
 function setConnected(connected) {
     document.getElementById('connect').disabled = connected;
@@ -128,10 +129,9 @@ function showAllResults(calResult) {
         for (var i in answers) {
             answersAlreadySend = false;
             $(".answersSend").hide();
+            setIUserAnswers(answers[i], i);
             if (answers[i].username == username) {
                 setMyAnswers(answers[i]);
-            } else {
-                setIUserAnswers(answers[i], i)
             }
         }
         $(".user-score").css("display", "flex");
@@ -145,14 +145,6 @@ function setMyAnswers(answers) {
     $('#character').html(answers.character);
     $('#scorePerRound').html(answers.score);
 
-    $('#stateResult-5').html(answers.state.toUpperCase());
-    $('#cityResult-5').html(answers.city.toUpperCase());
-    $('#mountainResult-5').html(answers.mountain.toUpperCase());
-    $('#lakeResult-5').html(answers.lake.toUpperCase());
-    $('#plantResult-5').html(answers.plant.toUpperCase());
-    $('#animalResult-5').html(answers.animal.toUpperCase());
-    $('#riverResult-5').html(answers.river.toUpperCase());
-
     $('#input_state').val('');
     $('#input_city').val('');
     $('#input_mountain').val('');
@@ -165,18 +157,18 @@ function setMyAnswers(answers) {
     } else {
         isEnded = true;
         alert("Game ended.");
-        window.location = "/game";        
+        window.location = "/game";
     }
 }
 function setIUserAnswers(answers, int) {
-    $('#scorePerRound-' + int).html(answers.score);
-    $('#stateResult-' + int).html(answers.state.toUpperCase());
-    $('#cityResult-' + int).html(answers.city.toUpperCase());
-    $('#mountainResult-' + int).html(answers.mountain.toUpperCase());
-    $('#lakeResult-' + int).html(answers.lake.toUpperCase());
-    $('#plantResult-' + int).html(answers.plant.toUpperCase());
-    $('#animalResult-' + int).html(answers.animal.toUpperCase());
-    $('#riverResult-' + int).html(answers.river.toUpperCase());
+    answers.state = answers.state != null ? answers.state.toUpperCase() : null;
+    answers.city = answers.city != null ? answers.city.toUpperCase() : null;
+    answers.mountain = answers.mountain != null ? answers.mountain.toUpperCase() : null;
+    answers.lake = answers.lake != null ? answers.lake.toUpperCase() : null;
+    answers.plant = answers.plant != null ? answers.plant.toUpperCase() : null;
+    answers.animal = answers.animal != null ? answers.animal.toUpperCase() : null;
+    answers.river = answers.river != null ? answers.river.toUpperCase() : null;
+    roundResults[int] = answers;
 }
 
 function roundTimer() {
@@ -239,4 +231,13 @@ function enableInputs() {
     $('#input_river').removeAttr("disabled");
     $('#input_plant').removeAttr("disabled");
     $('#input_animal').removeAttr("disabled");
+}
+function getResults(i) {
+    $('.state-result').html(roundResults[i] != null ? roundResults[i].state : "");
+    $('.city-result').html(roundResults[i] != null ? roundResults[i].city : "");
+    $('.mountain-result').html(roundResults[i] != null ? roundResults[i].mountain : "");
+    $('.lake-result').html(roundResults[i] != null ? roundResults[i].lake : "");
+    $('.plant-result').html(roundResults[i] != null ? roundResults[i].plant : "");
+    $('.animal-result').html(roundResults[i] != null ? roundResults[i].animal : "");
+    $('.river-result').html(roundResults[i] != null ? roundResults[i].river : "");
 }

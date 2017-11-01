@@ -429,6 +429,6 @@ body {
     color: white;
     margin: auto;
 }
-.result-tab-button:active {
+.result-tab-button:focus {
     background-color: #09ACC1;
 }

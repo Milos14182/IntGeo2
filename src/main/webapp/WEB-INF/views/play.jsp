@@ -39,17 +39,17 @@
                     </c:if>
                 </figure>
             </div>
-            <div class="playTable">
-            </div>
+            <div class="playTable"></div>
             <div class="results">
                 <div class="results-tabs">
-                    <div class="result-tab"><div class="result-tab-button">1</div></div>
-                    <div class="result-tab"><div class="result-tab-button">2</div></div>
-                    <div class="result-tab"><div class="result-tab-button">3</div></div>
-                    <div class="result-tab"><div class="result-tab-button">4</div></div>
-                    <div class="result-tab"><div class="result-tab-button">5</div></div>
-                    <div class="result-tab"><div class="result-tab-button">6</div></div>
+                    <div class="result-tab"><div class="result-tab-button" tabindex="1" onClick="getResults(0)">1</div></div>
+                    <div class="result-tab"><div class="result-tab-button" tabindex="2" onClick="getResults(1)">2</div></div>
+                    <div class="result-tab"><div class="result-tab-button" tabindex="3" onClick="getResults(2)">3</div></div>
+                    <div class="result-tab"><div class="result-tab-button" tabindex="4" onClick="getResults(3)">4</div></div>
+                    <div class="result-tab"><div class="result-tab-button" tabindex="5" onClick="getResults(4)">5</div></div>
+                    <div class="result-tab"><div class="result-tab-button" tabindex="6" onClick="getResults(5)">6</div></div>
                 </div>
+                <div
                 <div class="results-row">                    
                     <div class="results-rowdiv">
                         <div style="width: 20%">
@@ -57,7 +57,7 @@
                                 class="result-col-icon"
                                 src="<c:url value="/resources/images/icons/capitol.png" />">
                         </div>
-                        <div class="result-col-value"><spring:message code="play.label.state" /></div>
+                        <div class="result-col-value state-result"><spring:message code="play.label.state" /></div>
                     </div>
                     <hr class="result-row-line"/>
                     <div class="results-rowdiv">
@@ -66,16 +66,7 @@
                                 class="result-col-icon"
                                 src="<c:url value="/resources/images/icons/building.png" />">
                         </div>
-                        <div class="result-col-value"><spring:message code="play.label.city" /></div>
-                    </div>
-                    <hr class="result-row-line"/>
-                    <div class="results-rowdiv">
-                        <div style="width: 20%">
-                            <img
-                                class="result-col-icon"
-                                src="<c:url value="/resources/images/icons/leaf.png" />">
-                        </div>
-                        <div class="result-col-value"><spring:message code="play.label.plant" /></div>
+                        <div class="result-col-value city-result"><spring:message code="play.label.city" /></div>
                     </div>
                     <hr class="result-row-line"/>
                     <div class="results-rowdiv">
@@ -84,7 +75,7 @@
                                 class="result-col-icon"
                                 src="<c:url value="/resources/images/icons/mountain.png" />">
                         </div>
-                        <div class="result-col-value"><spring:message code="play.label.mountain" /></div>
+                        <div class="result-col-value mountain-result"><spring:message code="play.label.mountain" /></div>
                     </div>
                     <hr class="result-row-line"/>
                     <div class="results-rowdiv">
@@ -93,7 +84,7 @@
                                 class="result-col-icon"
                                 src="<c:url value="/resources/images/icons/river.png" />">
                         </div>
-                        <div class="result-col-value"><spring:message code="play.label.river" /></div>
+                        <div class="result-col-value river-result"><spring:message code="play.label.river" /></div>
                     </div>
                     <hr class="result-row-line"/>
                     <div class="results-rowdiv">
@@ -102,7 +93,16 @@
                                 class="result-col-icon"
                                 src="<c:url value="/resources/images/icons/waves.png" />">
                         </div>
-                        <div class="result-col-value"><spring:message code="play.label.lake" /></div>
+                        <div class="result-col-value lake-result"><spring:message code="play.label.lake" /></div>
+                    </div>                    
+                    <hr class="result-row-line"/>
+                    <div class="results-rowdiv">
+                        <div style="width: 20%">
+                            <img
+                                class="result-col-icon"
+                                src="<c:url value="/resources/images/icons/animal-paw-print.png" />">
+                        </div>
+                        <div class="result-col-value animal-result"><spring:message code="play.label.animal" /></div>
                     </div>
                     <hr class="result-row-line"/>
                     <div class="results-rowdiv">
@@ -111,7 +111,7 @@
                                 class="result-col-icon"
                                 src="<c:url value="/resources/images/icons/leaf.png" />">
                         </div>
-                        <div class="result-col-value"><spring:message code="play.label.plant" /></div>
+                        <div class="result-col-value plant-result"><spring:message code="play.label.plant" /></div>
                     </div>
                 </div>
             </div>
