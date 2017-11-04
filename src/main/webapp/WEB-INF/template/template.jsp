@@ -9,6 +9,8 @@
         <title><tiles:insertAttribute name="title" ignore="true" /></title>
         <meta name="description"
               content="<tiles:insertAttribute name="page_description" ignore="true"/>">
+        <meta name="viewport" 
+              content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <!--        <link href="<c:url value="/resources/css/template.css"/>"
               rel="stylesheet" type="text/css" />-->
         <link href="<c:url value="/resources/images/how_to.png" />"  rel="icon">

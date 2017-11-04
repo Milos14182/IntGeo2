@@ -4,6 +4,9 @@
         position: relative;
         min-height: 100%;
     }
+    .navbar {
+        margin-bottom: 0px;
+    }
     body {
         /* Margin bottom by footer height */
         margin-bottom: 45px;
@@ -39,7 +42,7 @@
         width: 100vw;
         margin-left: 0px;
         height: auto;
-        margin-top: -6vw;
+        margin-top: 8em;
     }
     .error {
         color:#960f13;
@@ -119,10 +122,12 @@
         width: 100%;
         float: right !important;
         height: 40vw;
+        margin-top: 5em;
     }
     .play-form{
         width: 100%;
         display: -webkit-inline-box;
+        margin-top: 4em;
     }
     .gameRow {
         width: 25%;
@@ -144,6 +149,9 @@
     }
     .anwers-group {
         width: 100%;
+        display: inline-block;
+        height: 3em;
+        margin-bottom: 0px !important;
     }
     .-fill {
         border-radius: 4px 0 0 4px;
@@ -161,7 +169,8 @@
     }
     .answer-input {
         display: flex;
-        height: 5em;
+        height: 3em;
+        padding: 0em;
     }
     .user-score{
         width: 5vw;
@@ -342,10 +351,12 @@
         border-radius: 5px;
     }
     .score-header {
-        height: 7.5em;
+        height: 5em;
         padding: 1em;
-        width: 90%;
+        width: 100%;
         margin: auto;
+        position: fixed;
+        z-index: 10;
     }
     .score-header-row {
         background-color: #B7DF39;
@@ -355,15 +366,16 @@
     }
     .label-name{
         display: inline;
-        font-size: 2em;
+        font-size: 1.2em;
         width: 90%;
-        padding: 1em;
+        padding: 0.5em;
         vertical-align: bottom;
     }
     .label-icons {
         width: 10%;
-        height: 3em;
-        margin-top: 1em;
+        height: 2em;
+        width: 2em;
+        margin-top: 0em;
     }
     .character {
         width: 33%;
@@ -371,11 +383,11 @@
         display: flex; 
     }
     .character-name {
-        font-size: 2.5em;
+        font-size: 1.2em;
         width: 60%;
     }
     .character-value {
-        font-size: 4em;
+        font-size: 2.5em;
         width: 35%;
         text-align: left;
     }
@@ -389,5 +401,49 @@
         height: 100%;
         text-align: center;
         font-size: 3em;
+    }
+    .result-col-icon {
+        width: 1em;
+        height: 1em;
+        margin: 0.1em;
+        opacity: .4;
+    }
+    .results-rowdiv {
+        width: 100%;
+        height: 1.7em;
+        background-color: #FAFAFA;
+        display: flex;
+    }
+    .results-row {
+        width: 80%;
+        float: right !important;
+        margin-top: 0em;    
+        border: 1px solid grey;
+        border-radius: 0.5em 0.5em 0.5em 0.5em;
+        background: white;
+    }
+    .results-tabs {
+        width: 20%;
+        float: left !important;
+        margin-top: 0.5em;  
+    }
+    .results {
+        width: 34%;
+    }
+    .result-tab-button {
+        width: 70%;
+        float: right;
+        background-color: #434143;
+        height: 1.5em;
+        text-align: center;
+        border: 1px solid #434143;
+        border-radius: 20% 0 0 20%;
+        color: white;
+        margin: auto;
+    }
+    .result-tab {
+        width: 100%;
+        text-align: right;
+        height: 1.8em;
     }
 }

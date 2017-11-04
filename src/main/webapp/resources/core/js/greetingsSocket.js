@@ -15,6 +15,9 @@ function setConnected(connected) {
     document.getElementById('calResponse').innerHTML = '';
 }
 function connect(stompClient) {
+    if ($(document).width() <= 1000) {
+        document.getElementById("myCarousel").style.display = 'none';
+    }
     var pathnames = window.location.pathname.split('/');
     disableInputs();
     stompClient.connect({}, function () {
@@ -59,11 +62,15 @@ function disconnect(stompClient) {
     stompClient.disconnect();
     setConnected(false);
     console.log("Disconnected");
+    if ($(document).width() <= 1000) {
+        document.getElementById("myCarousel").style.display = 'inherit';
+    }
 }
 function sendNum(stompClient) {
     var pathnames = window.location.pathname.split('/');
-
-    stompClient.send("/play/answers/" + pathnames[pathnames.length - 1], {}, getInputValuesJSON());
+    if (!answersSend) {
+        stompClient.send("/play/answers/" + pathnames[pathnames.length - 1], {}, getInputValuesJSON());
+    }
     answersSend = true;
     //deploy
 //    stompClient.send("/play/answers/" + pathnames[pathnames.length - 1], {}, getInputValuesJSON());
