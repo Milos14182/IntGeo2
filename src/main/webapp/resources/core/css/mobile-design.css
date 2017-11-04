@@ -7,6 +7,9 @@
     .navbar {
         margin-bottom: 0px;
     }
+    .navbar-wrapper {
+        position: fixed;
+    } 
     body {
         /* Margin bottom by footer height */
         margin-bottom: 45px;
