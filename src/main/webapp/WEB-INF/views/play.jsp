@@ -50,159 +50,164 @@
                     <div class="result-tab"><div class="result-tab-button" tabindex="6" onClick="getResults(5)">6</div></div>
                 </div>
                 <div
-                <div class="results-row">                    
-                    <div class="results-rowdiv">
-                        <div style="width: 20%">
+                    <div class="results-row">                    
+                        <div class="results-rowdiv">
+                            <div style="width: 20%">
+                                <img
+                                    class="result-col-icon"
+                                    src="<c:url value="/resources/images/icons/capitol.png" />">
+                            </div>
+                            <div class="result-col-value state-result"><spring:message code="play.label.state" /></div>
+                        </div>
+                        <hr class="result-row-line"/>
+                        <div class="results-rowdiv">
+                            <div style="width: 20%">
+                                <img
+                                    class="result-col-icon"
+                                    src="<c:url value="/resources/images/icons/building.png" />">
+                            </div>
+                            <div class="result-col-value city-result"><spring:message code="play.label.city" /></div>
+                        </div>
+                        <hr class="result-row-line"/>
+                        <div class="results-rowdiv">
+                            <div style="width: 20%">
+                                <img
+                                    class="result-col-icon"
+                                    src="<c:url value="/resources/images/icons/mountain.png" />">
+                            </div>
+                            <div class="result-col-value mountain-result"><spring:message code="play.label.mountain" /></div>
+                        </div>
+                        <hr class="result-row-line"/>
+                        <div class="results-rowdiv">
+                            <div style="width: 20%">
+                                <img
+                                    class="result-col-icon"
+                                    src="<c:url value="/resources/images/icons/river.png" />">
+                            </div>
+                            <div class="result-col-value river-result"><spring:message code="play.label.river" /></div>
+                        </div>
+                        <hr class="result-row-line"/>
+                        <div class="results-rowdiv">
+                            <div style="width: 20%">
+                                <img
+                                    class="result-col-icon"
+                                    src="<c:url value="/resources/images/icons/waves.png" />">
+                            </div>
+                            <div class="result-col-value lake-result"><spring:message code="play.label.lake" /></div>
+                        </div>                    
+                        <hr class="result-row-line"/>
+                        <div class="results-rowdiv">
+                            <div style="width: 20%">
+                                <img
+                                    class="result-col-icon"
+                                    src="<c:url value="/resources/images/icons/animal-paw-print.png" />">
+                            </div>
+                            <div class="result-col-value animal-result"><spring:message code="play.label.animal" /></div>
+                        </div>
+                        <hr class="result-row-line"/>
+                        <div class="results-rowdiv">
+                            <div style="width: 20%">
+                                <img
+                                    class="result-col-icon"
+                                    src="<c:url value="/resources/images/icons/leaf.png" />">
+                            </div>
+                            <div class="result-col-value plant-result"><spring:message code="play.label.plant" /></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-inline play-form">
+                <div class="form-group anwers-group">
+                    <div class="col-md-7 col-xs-5 answer-input">
+                        <div class="game-id"><spring:message code="play.label.gameId" /> ${gameData.id}</div>
+                    </div>
+                </div>
+                <div class="form-group anwers-group">
+                    <div class="col-md-12 col-xs-12 answer-input">
+                        <!--<div class="label-icons state-label-icon"></div>-->
+                        <label for="input_state" class="form-control -fill">
                             <img
-                                class="result-col-icon"
+                                class="label-icons state-label-icon label-icons-intent"
                                 src="<c:url value="/resources/images/icons/capitol.png" />">
-                        </div>
-                        <div class="result-col-value state-result"><spring:message code="play.label.state" /></div>
+                            <div class="label-name"><spring:message code="play.label.state" /></div>
+                        </label>
+                        <input id="input_state" type="text" class="form-control input-place" />
                     </div>
-                    <hr class="result-row-line"/>
-                    <div class="results-rowdiv">
-                        <div style="width: 20%">
+                </div>
+                <div class="form-group anwers-group">
+                    <div class="col-md-12 col-xs-12 answer-input">
+                        <label for="input_state" class="form-control -fill">
                             <img
-                                class="result-col-icon"
+                                class="label-icons state-label-icon label-icons-intent"
                                 src="<c:url value="/resources/images/icons/building.png" />">
-                        </div>
-                        <div class="result-col-value city-result"><spring:message code="play.label.city" /></div>
+                            <div class="label-name"><spring:message code="play.label.city" /></div>
+                        </label>
+                        <input id="input_city" type="text" class="form-control input-place" />
                     </div>
-                    <hr class="result-row-line"/>
-                    <div class="results-rowdiv">
-                        <div style="width: 20%">
+                </div>
+                <div class="form-group anwers-group">
+                    <div class="col-md-12 col-xs-12 answer-input">
+                        <label for="input_state" class="form-control -fill">
                             <img
-                                class="result-col-icon"
+                                class="label-icons state-label-icon label-icons-intent"
                                 src="<c:url value="/resources/images/icons/mountain.png" />">
-                        </div>
-                        <div class="result-col-value mountain-result"><spring:message code="play.label.mountain" /></div>
+                            <div class="label-name"><spring:message code="play.label.mountain" /></div>
+                        </label>
+                        <input id="input_mountain" type="text" class="form-control input-place" />
                     </div>
-                    <hr class="result-row-line"/>
-                    <div class="results-rowdiv">
-                        <div style="width: 20%">
+                </div>
+                <div class="form-group anwers-group">
+                    <div class="col-md-12 col-xs-12 answer-input">
+                        <label for="input_state" class="form-control -fill">
                             <img
-                                class="result-col-icon"
+                                class="label-icons state-label-icon label-icons-intent"
                                 src="<c:url value="/resources/images/icons/river.png" />">
-                        </div>
-                        <div class="result-col-value river-result"><spring:message code="play.label.river" /></div>
+                            <div class="label-name"><spring:message code="play.label.river" /></div>
+                        </label>
+                        <input id="input_river" type="text" class="form-control input-place" />
                     </div>
-                    <hr class="result-row-line"/>
-                    <div class="results-rowdiv">
-                        <div style="width: 20%">
+                </div>
+                <div class="form-group anwers-group">
+                    <div class="col-md-12 col-xs-12 answer-input">
+                        <label for="input_state" class="form-control -fill">
                             <img
-                                class="result-col-icon"
+                                class="label-icons state-label-icon label-icons-intent"
                                 src="<c:url value="/resources/images/icons/waves.png" />">
-                        </div>
-                        <div class="result-col-value lake-result"><spring:message code="play.label.lake" /></div>
-                    </div>                    
-                    <hr class="result-row-line"/>
-                    <div class="results-rowdiv">
-                        <div style="width: 20%">
+                            <div class="label-name"><spring:message code="play.label.lake" /></div>
+                        </label>
+                        <input id="input_lake" type="text" class="form-control input-place" />
+                    </div>
+                </div>
+                <div class="form-group anwers-group">
+                    <div class="col-md-12 col-xs-12 answer-input">
+                        <label for="input_state" class="form-control -fill">
                             <img
-                                class="result-col-icon"
+                                class="label-icons state-label-icon label-icons-intent"
                                 src="<c:url value="/resources/images/icons/animal-paw-print.png" />">
-                        </div>
-                        <div class="result-col-value animal-result"><spring:message code="play.label.animal" /></div>
+                            <div class="label-name"><spring:message code="play.label.animal" /></div>
+                        </label>
+                        <input id="input_animal" type="text" class="form-control input-place" />
                     </div>
-                    <hr class="result-row-line"/>
-                    <div class="results-rowdiv">
-                        <div style="width: 20%">
+                </div>
+                <div class="form-group anwers-group">
+                    <div class="col-md-12 col-xs-12 answer-input">
+                        <label for="input_state" class="form-control -fill">
                             <img
-                                class="result-col-icon"
+                                class="label-icons state-label-icon label-icons-intent"
                                 src="<c:url value="/resources/images/icons/leaf.png" />">
+                            <div class="label-name"><spring:message code="play.label.plant" /></div>
+                        </label>
+                        <input id="input_plant" type="text" class="form-control input-place" />
+                    </div>
+                </div>
+                <div class="form-group anwers-group play-submit">
+                    <div class="col-md-12 col-xs-12 play-submit-row">
+                        <div class="btn btn-primary btn-block play-submit-button" onclick="sendNum(stompClient)">
+                            <spring:message code="play.button.submit" />
                         </div>
-                        <div class="result-col-value plant-result"><spring:message code="play.label.plant" /></div>
                     </div>
                 </div>
             </div>
+            <div class="answersSend"><spring:message code="play.label.answersSend" /></div>
         </div>
-        <div class="form-inline play-form">
-            <div class="form-group anwers-group">
-                <div class="col-md-12 col-xs-12 answer-input">
-                    <!--<div class="label-icons state-label-icon"></div>-->
-                    <label for="input_state" class="form-control -fill">
-                        <img
-                            class="label-icons state-label-icon label-icons-intent"
-                            src="<c:url value="/resources/images/icons/capitol.png" />">
-                        <div class="label-name"><spring:message code="play.label.state" /></div>
-                    </label>
-                    <input id="input_state" type="text" class="form-control input-place" />
-                </div>
-            </div>
-            <div class="form-group anwers-group">
-                <div class="col-md-12 col-xs-12 answer-input">
-                    <label for="input_state" class="form-control -fill">
-                        <img
-                            class="label-icons state-label-icon label-icons-intent"
-                            src="<c:url value="/resources/images/icons/building.png" />">
-                        <div class="label-name"><spring:message code="play.label.city" /></div>
-                    </label>
-                    <input id="input_city" type="text" class="form-control input-place" />
-                </div>
-            </div>
-            <div class="form-group anwers-group">
-                <div class="col-md-12 col-xs-12 answer-input">
-                    <label for="input_state" class="form-control -fill">
-                        <img
-                            class="label-icons state-label-icon label-icons-intent"
-                            src="<c:url value="/resources/images/icons/mountain.png" />">
-                        <div class="label-name"><spring:message code="play.label.mountain" /></div>
-                    </label>
-                    <input id="input_mountain" type="text" class="form-control input-place" />
-                </div>
-            </div>
-            <div class="form-group anwers-group">
-                <div class="col-md-12 col-xs-12 answer-input">
-                    <label for="input_state" class="form-control -fill">
-                        <img
-                            class="label-icons state-label-icon label-icons-intent"
-                            src="<c:url value="/resources/images/icons/river.png" />">
-                        <div class="label-name"><spring:message code="play.label.river" /></div>
-                    </label>
-                    <input id="input_river" type="text" class="form-control input-place" />
-                </div>
-            </div>
-            <div class="form-group anwers-group">
-                <div class="col-md-12 col-xs-12 answer-input">
-                    <label for="input_state" class="form-control -fill">
-                        <img
-                            class="label-icons state-label-icon label-icons-intent"
-                            src="<c:url value="/resources/images/icons/waves.png" />">
-                        <div class="label-name"><spring:message code="play.label.lake" /></div>
-                    </label>
-                    <input id="input_lake" type="text" class="form-control input-place" />
-                </div>
-            </div>
-            <div class="form-group anwers-group">
-                <div class="col-md-12 col-xs-12 answer-input">
-                    <label for="input_state" class="form-control -fill">
-                        <img
-                            class="label-icons state-label-icon label-icons-intent"
-                            src="<c:url value="/resources/images/icons/animal-paw-print.png" />">
-                        <div class="label-name"><spring:message code="play.label.animal" /></div>
-                    </label>
-                    <input id="input_animal" type="text" class="form-control input-place" />
-                </div>
-            </div>
-            <div class="form-group anwers-group">
-                <div class="col-md-12 col-xs-12 answer-input">
-                    <label for="input_state" class="form-control -fill">
-                        <img
-                            class="label-icons state-label-icon label-icons-intent"
-                            src="<c:url value="/resources/images/icons/leaf.png" />">
-                        <div class="label-name"><spring:message code="play.label.plant" /></div>
-                    </label>
-                    <input id="input_plant" type="text" class="form-control input-place" />
-                </div>
-            </div>
-            <div class="form-group anwers-group play-submit">
-                <div class="col-md-12 col-xs-12 play-submit-row">
-                    <div class="btn btn-primary btn-block play-submit-button" onclick="sendNum(stompClient)">
-                        <spring:message code="play.button.submit" />
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="answersSend"><spring:message code="play.label.answersSend" /></div>
-    </div>
 </body>

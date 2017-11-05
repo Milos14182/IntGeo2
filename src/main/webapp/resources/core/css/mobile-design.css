@@ -130,7 +130,7 @@
     .play-form{
         width: 100%;
         display: -webkit-inline-box;
-        margin-top: 4em;
+        margin-top: 0.5em;
     }
     .gameRow {
         width: 25%;
@@ -448,5 +448,10 @@
         width: 100%;
         text-align: right;
         height: 1.8em;
+    }
+    .game-id {
+        font-size: 1.5em;
+        margin: auto;
+        font-weight: bold;
     }
 }

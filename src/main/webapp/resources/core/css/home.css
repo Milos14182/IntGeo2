@@ -122,7 +122,6 @@ body {
 }
 .play-form{
     width: 25%;
-    margin-top: 5em;
 }
 .gameRow {
     width: 25%;
@@ -380,8 +379,7 @@ body {
 }
 .results-row {
     width: 80%;
-    float: right !important;
-    margin-top: 5em;    
+    float: right !important;    
     border: 1px solid grey;
     border-radius: 0.5em 0.5em 0.5em 0.5em;
     background: white;
@@ -411,7 +409,7 @@ body {
 .results-tabs {
     width: 20%;
     float: left !important;
-    margin-top: 6em;  
+    margin-top: 1em;  
 }
 .result-tab {
     width: 100%;
@@ -431,4 +429,9 @@ body {
 }
 .result-tab-button:focus {
     background-color: #09ACC1;
+}
+.game-id {
+    font-size: 1.5em;
+    margin: auto;
+    font-weight: bold;
 }
