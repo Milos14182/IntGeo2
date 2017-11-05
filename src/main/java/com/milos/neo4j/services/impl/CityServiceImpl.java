@@ -47,14 +47,13 @@ public class CityServiceImpl implements CityService {
         List<CityData> sortedCityes = new ArrayList<>(cityDatas);
         Collections.sort(sortedCityes, (CityData a, CityData b) -> {
             if (a.getName() != null && b.getName() != null) {
-                return b.getName().compareTo(a.getName());
+                return a.getName().compareTo(b.getName());
             } else if (a.getName() != null && b.getName() == null) {
                 return 1;
             } else {
                 return -1;
             }
         });
-//        Collections.sort(sortedCityes, (a, b) -> b.getName().compareTo(a.getName()));
         return sortedCityes;
     }
 

@@ -11,7 +11,10 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import com.milos.neo4j.security.CustomUserDetails;
 import com.milos.neo4j.security.IntgeoAuthenticationErrorHandler;
 import com.milos.neo4j.security.IntgeoAuthenticationSuccessHandler;
-import java.util.logging.Level;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
@@ -19,12 +22,11 @@ import java.util.logging.Level;
 public class SpringSecurity extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    CustomUserDetails customUserDetails;
-
+    private CustomUserDetails customUserDetails;
     @Autowired
-    IntgeoAuthenticationSuccessHandler intgeoAuthenticationSuccessHandler;
+    private IntgeoAuthenticationSuccessHandler intgeoAuthenticationSuccessHandler;
     @Autowired
-    IntgeoAuthenticationErrorHandler authenticationErrorHandler;
+    private IntgeoAuthenticationErrorHandler authenticationErrorHandler;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -43,8 +45,20 @@ public class SpringSecurity extends WebSecurityConfigurerAdapter {
                 .logout().logoutSuccessUrl("/");
     }
 
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(customUserDetails);
+        auth.authenticationProvider(authProvider());
+    }
+
+    private DaoAuthenticationProvider authProvider() {
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+        authProvider.setUserDetailsService(customUserDetails);
+        authProvider.setPasswordEncoder(passwordEncoder());
+        return authProvider;
     }
 }

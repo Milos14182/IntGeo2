@@ -45,12 +45,12 @@ public class StateServiceImpl implements StateService {
         Iterable<State> states = stateRepository.findAll();
         Set<State> setStates = new HashSet<>();
         Set<StateData> stateDatas = new HashSet<>();
-        for (State state : states) {
+        states.forEach((state) -> {
             setStates.add(state);
-        }        
+        });
         stateConverter.copyFromEntitySetToDataSet(setStates, stateDatas, new StateData());
         List<StateData> sortedStateDatas = new ArrayList<>(stateDatas);
-        Collections.sort(sortedStateDatas, (a, b) -> b.getName().compareTo(a.getName()));
+        Collections.sort(sortedStateDatas, (a, b) -> a.getName().compareTo(b.getName()));
         return sortedStateDatas;
     }
 

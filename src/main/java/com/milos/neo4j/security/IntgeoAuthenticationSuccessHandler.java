@@ -21,7 +21,7 @@ import com.milos.neo4j.services.UserService;
 public class IntgeoAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 

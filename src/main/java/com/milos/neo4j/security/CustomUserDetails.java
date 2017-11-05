@@ -16,21 +16,23 @@ import com.milos.neo4j.repository.UserRepository;
 
 @Service
 public class CustomUserDetails implements UserDetailsService {
-	@Autowired
-	UserRepository userRepository;
 
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		com.milos.neo4j.domain.nodes.User user = userRepository.getUserByUsername(username);
-		if (user == null) {
-			throw new UsernameNotFoundException(username);
-		} 
-		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-		if (user.getAdmin().booleanValue() == true) {
-			authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
-		}
-		authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
-		User authUser = new User(user.getUsername(), user.getPassword(), true, true, true, true, authorities);
-		return authUser;
-	}
+    @Autowired
+    private UserRepository userRepository;
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        com.milos.neo4j.domain.nodes.User user = userRepository.getUserByUsername(username);
+        if (user == null) {
+            throw new UsernameNotFoundException(username);
+        }
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        if (user.getAdmin() == true) {
+            authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+        }
+        authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+        User authUser = new User(user.getUsername(), user.getPassword(), true, true, true, true, authorities);
+        return authUser;
+    }
 
 }
