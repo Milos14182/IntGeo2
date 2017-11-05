@@ -91,7 +91,7 @@ public class GameServiceImpl implements GameService {
                 game.setLocked(Boolean.FALSE);
                 game.setEnded(Boolean.FALSE);
                 game.setCurrentRoundNumber(1);
-                Integer points = gamePoints!=null ? gamePoints : defaultPoints;
+                Integer points = gamePoints != null ? gamePoints : defaultPoints;
                 game.setEndPoints(points);
                 Calendar cal = Calendar.getInstance();
                 cal.setTime(creationDate);
@@ -142,7 +142,7 @@ public class GameServiceImpl implements GameService {
                 game.setPlayers(players);
                 game.setNumberOfPlayers(Long.valueOf(game.getPlayers().size()));
                 game = gameRepository.save(game);
-                createNewUserGame(gameData.getId(), userData.getUsername(), userData.getGameScore());
+                createNewUserGame(gameId, userData.getUsername(), userData.getGameScore());
             }
             gameConverter.copyFromEntityToData(game, gameData);
         } catch (RuntimeException ex) {
@@ -159,17 +159,15 @@ public class GameServiceImpl implements GameService {
         try {
             if (userData != null) {
                 Set<Game> games = gameRelationRepository.findGamesForUser(userData.getUsername());
-                if (!games.isEmpty()) {
-                    for (Game game : games) {
-                        UserGameScores userGameScores = userGameScoresRepository.getUserGameScore(userData.getUsername(),
-                                game.getId());
-                        if (userGameScores != null) {
-                            UserGameData userGameData = new UserGameData();
-                            userGameConverter.copyFromEntityToData(userGameScores, userGameData);
-                            userGameDatas.add(userGameData);
-                        }
+                games.forEach((game) -> {
+                    UserGameScores userGameScores = userGameScoresRepository.getUserGameScore(userData.getUsername(),
+                            game.getId());
+                    if (userGameScores != null) {
+                        UserGameData userGameData = new UserGameData();
+                        userGameConverter.copyFromEntityToData(userGameScores, userGameData);
+                        userGameDatas.add(userGameData);
                     }
-                }
+                });
             }
         } catch (RuntimeException ex) {
             GEOGRAPHY_LOGGER.error("getAllGamesForPlayer throws error.", ex);
